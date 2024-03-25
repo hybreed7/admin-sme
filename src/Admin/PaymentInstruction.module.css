@@ -1,0 +1,46 @@
+
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            background-color:rgb(211, 208, 208);
+
+        }
+        .container{
+            width: 620px;
+            margin: 0px auto;
+            padding:40px;
+            padding-top: 85px;
+            background-color:white;
+        }
+        .address{
+            display: flex;
+            justify-content: space-between;
+            padding-right: 20px;
+        }
+        .PaymentInstructionTable table,
+        .PaymentInstructionTableth,
+        .PaymentInstructionTable td{
+            border: 1px black solid;
+            border-collapse: collapse;
+            text-align:center;
+            padding: 1px 10px;
+        }
+        .PaymentInstructionTable table{
+            width: 100%;
+        }
+        td{
+            height: 19px;
+        }
+        @media(max-width:550px){
+            .container{
+                padding: 80px 20px;
+                width:100%;
+
+            }
+            body{
+                font-size: 12px;
+
+            }
+
+        }

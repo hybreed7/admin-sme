@@ -1,0 +1,110 @@
+@font-face {
+    font-family: Millik;
+    src: url('../../LocalFont/Millik.ttf');
+}
+
+@font-face {
+    font-family: Nunito1;
+    src: url('../../LocalFont/Nunito-Italic-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: Nunito2;
+    src: url('../../LocalFont/Nunito-VariableFont_wght.ttf');
+}
+@font-face {
+    font-family: Aeonikregular;
+    src: url('../../LocalFont/AeonikTRIAL-Regular.otf');
+}
+@font-face {
+    font-family: Aeonikbold;
+    src: url('../../LocalFont/AeonikTRIAL-Bold.otf');
+}
+@font-face {
+    font-family: Aeoniklight;
+    src: url('../../LocalFont/AeonikTRIAL-Light.otf');
+}
+  
+  body {
+    background-color: #f2f2f2;
+  }
+  
+  .container {
+    max-width: 650px;
+    width: 100%;
+    margin-left: 310px;
+  }
+  
+  .wrapper {
+    border-bottom: 1px solid #eaecf0;
+    overflow: hidden;
+  }
+  
+  .wrapper .questionContainer {
+    width: 100%;
+    text-align: left;
+    padding: 20px 10px;
+    margin-top: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+    color: #101828;
+    font-size: 18px;
+    background: transparent;
+    /* letter-spacing: 0.1cap; */
+    border: none;
+    cursor: pointer;
+    font-family: Roboto;
+  }
+  
+  .questionContainer.active {
+    color: #1db954;
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 0, 0, 0.04),
+      transparent
+    );
+  }
+  
+  .wrapper .questionContainer:hover {
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 0, 0, 0.04),
+      transparent
+    );
+  }
+  
+  .wrapper .arrow {
+    font-size: 2rem;
+    transition: 0.5s ease-in-out;
+    color: #2F945C;
+  }
+  
+  .arrow.active {
+    rotate: 180deg;
+    color: #1db954;
+  }
+  
+  .wrapper .answerContainer {
+    padding: 0 1rem;
+    transition: height 0.7s ease-in-out;
+  }
+  
+  .wrapper .answerContent {
+    padding: 1rem 0;
+    font-size: 16px;
+    font-weight: 400;
+    color: #667085;
+    font-family: roboto;
+  }
+  
+
+  @media(max-width:800px){ 
+    .container {
+      margin-right: 105px !important;
+      margin-left: 5px !important;
+    }
+  }

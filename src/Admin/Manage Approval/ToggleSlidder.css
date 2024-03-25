@@ -1,0 +1,8 @@
+.big-switch .custom-control-input {
+  width: 60px; /* Set the width of the switch */
+  height: 30px; /* Set the height of the switch */
+}
+.big-switch .custom-control-label::before {
+  width: 30px; /* Set the width of the toggle thumb */
+  height: 30px; /* Set the height of the toggle thumb */
+}

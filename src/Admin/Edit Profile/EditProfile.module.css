@@ -1,0 +1,160 @@
+@font-face {
+    font-family: Millik;
+    src: url('../../LocalFont/Millik.ttf');
+}
+
+@font-face {
+    font-family: Nunito1;
+    src: url('../../LocalFont/Nunito-Italic-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: Nunito2;
+    src: url('../../LocalFont/Nunito-VariableFont_wght.ttf');
+}
+
+* {
+  
+}
+
+body {
+    background-color: #F7FDFA;
+}
+
+.ptag {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: Nunito2;
+}
+
+.adcmptag {
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inter;
+    margin-left: 35px;
+    text-align: left;
+    margin-bottom: 1px;
+    color: #2F945C;
+}
+
+.sndptg {
+    
+    display: flex;
+    flex-direction: column;
+}
+.goated {
+    background-color: #2F945C;
+    height: 1px;
+    width: 150px;
+}
+
+.headed {
+   margin-left: 95px;
+   margin-top: 68px;
+    
+}
+
+.goat{
+    width: 950px;
+    height: 1.5px;
+    display: flex;
+    align-items: center;
+    margin-right: 105px;
+    justify-content: center;
+    background-color: #E4E7EC;
+}
+
+.thehr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* input */
+
+.compform {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.cmpname {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.firsties {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cmpnamedup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.inputcmpnamedup {
+    width: 265px;
+    height: 56px;
+    border-radius: 6px;
+    border: 1.5px solid #D0D5DD;
+    background-color: #F0F2F5 !important;
+}
+
+.inputcmpnamedup::placeholder {
+    padding-left: 16px;
+    font-weight: 400;
+    font-size: 14px;
+    color: #98A2B3;
+}
+.inputcmpnamedupf {
+    width: 265px;
+    height: 56px;
+    border-radius: 6px;
+    border: 1.5px solid #D0D5DD;
+    background-color: #F0F2F5 !important;
+    margin-right: 10px;
+}
+
+.inputcmpnamedupf::placeholder {
+    padding-left: 16px;
+    font-weight: 400;
+    font-size: 14px;
+    color: #98A2B3;
+}
+
+.inptptg {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+ .inputcmpname {
+    width: 546px;
+    height: 56px;
+    border-radius: 6px;
+    border: 1.5px solid #D0D5DD;
+    background-color: #F0F2F5 !important;
+}
+
+.inputcmpname::placeholder {
+    padding-left: 16px;
+    font-weight: 400;
+    font-size: 14px;
+    color: #98A2B3;
+}
+
+.addcmpnybtn {
+    width: 554px;
+    height: 44px;
+    border-radius: 8px;
+    background-color: #2F945C;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: nunito2;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}

@@ -1,0 +1,189 @@
+.generalbd{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: ; */
+    background-color: rgb(216, 211, 211);
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 20px 0;
+}
+
+.bodyContent {
+    padding: 32px !important;
+    padding: 2rem !important;
+    padding-inline: 169px !important;
+    
+}
+
+@media print {
+    .bodyContent {
+        width: 1011px;
+        min-height: 21cm;
+        background-color: white;
+        font-size: 16px;
+        margin: 0; /* Remove margin for full width */
+        padding: 20px; /* Add padding for better readability */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; 
+        padding: 32px !important;
+    padding: 2rem !important;
+    padding-inline: 169px !important;
+      }
+
+      @page{
+        width: 1011px;
+      }
+  
+    .content-header {
+      display: none; 
+    }
+  
+    
+  
+    .header-title {
+      margin-top: 80px; 
+    }
+  
+    .cardFooter {
+      display: none; 
+    }
+  
+    .cardHeader {
+      display: none; 
+    }
+  
+  
+    
+  }
+  
+
+.cardFooter {
+    padding: 0 0 0 0 !important;
+    margin-right: -40px !important;
+    background-color: none;
+    border-top: none;
+}
+
+h1, h2, h3, h4, h5, h6{
+    margin: 10px;
+    margin-left: 0;
+}
+.a4{
+    width: 29cm;
+    min-height: 21cm;
+    background-color: white;
+    padding: 0.3in 0.5in 0.5in 0.5in;
+}
+.header{
+    width: 100%;
+    text-align: center;
+}
+.header p{
+    width: 100%;
+    text-align: center;
+    /* margin-top: 30px; */
+}
+.actTable{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.actTable td, .actTable th{
+    padding-left: 10px;
+}
+.actTable th{
+    /* color: balck; */
+    border-bottom: 2px solid black;
+    font-size: 15px;
+    padding-top: 10px;
+    text-align: left;
+}
+.actTable td{
+    height: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    padding-top: 10px;
+} 
+.actTable td:nth-child(3){
+    /* width: 25%; */
+    text-align: center;
+}
+td:nth-child(1){
+
+}
+td:nth-child(2){
+    /* width: 20%; */
+}
+
+td:nth-child(4){
+
+}
+
+.actTable td:nth-child(5){
+    text-align: left;
+}
+.actTable td:nth-child(6){
+    text-align: right;
+}
+
+td:nth-child(6){
+
+}
+
+td:nth-child(4){
+
+}
+.actTable td:nth-child(7),
+.actTable td:nth-child(8){
+    text-align: right;
+}
+
+.bold{
+    /* border-top: 2px solid black; */
+    font-weight: bold;
+}
+.actTable th:nth-child(6){
+    font-weight: bold;
+}
+
+
+/* .App {
+text-align: center;
+}
+
+.App-logo {
+height: 40vmin;
+pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+.App-logo {
+animation: App-logo-spin infinite 20s linear;
+}
+}
+
+.App-header {
+background-color: #282c34;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+font-size: calc(10px + 2vmin);
+color: white;
+}
+
+.App-link {
+color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+from {
+transform: rotate(0deg);
+}
+to {
+transform: rotate(360deg);
+}
+} */

@@ -1,0 +1,78 @@
+/* General Styles */
+.generalbd {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 30px 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 10px;
+    margin-left: 0;
+}
+
+/* A4 Styles */
+.a4 {
+    width: 29.7cm;
+    min-height: 21cm;
+    margin: 0 auto; /* Set margin-top to 0 */
+    padding: 1cm;
+    background-color: white;
+    padding: 0.5in;
+    page-break-after: always; 
+}
+
+/* Header Styles */
+.header {
+    width: 100%;
+    text-align: center;
+}
+
+.header p {
+    width: 100%;
+    text-align: center;
+}
+
+/* Table Styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table td, .table th {
+    padding-left: 10px;
+}
+
+.table th { 
+    font-size: 15px;
+    padding-top: 10px;
+    text-align: left;
+}
+.table .th {
+    border-bottom: 2px solid black;
+}
+.table .totalTh {
+    border-bottom: 2px solid black;
+    /* border-top: 2px solid black; */
+}
+
+.table td {
+    height: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    padding-top: 10px;
+}
+
+/* Bold Text */
+.bold {
+    font-weight: bold;
+}
+
+/* Print Styles */
+@media print {
+    .generalbd {
+        padding: 5px;
+    }
+}

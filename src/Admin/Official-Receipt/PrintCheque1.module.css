@@ -1,0 +1,182 @@
+
+/* *,
+::after,
+::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+} */
+.topMargin{
+    margin-top: 9rem;
+}
+
+.card{
+    background-color: white;
+    min-height: 7.69in;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+.Cheque{
+    width: 25cm;
+    height: 10cm;
+    background-color: rgba(127, 255, 212, 0.082);
+    padding: 0.5cm 0.1cm 0.1cm 1cm;
+    margin-bottom: 0.4cm;
+}
+.Cheque p,
+.Cheque h2,
+.Cheque h6,
+.Cheque h5{
+    margin: 0;
+    padding: 0;
+}
+.chequeHeader{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);    
+    align-items: center;
+    /* margin-top: 0; */
+    /* padding-top: 0; */
+}
+.refNO{
+    margin-left: 3cm;
+    text-align: center;
+    visibility: hidden;
+}
+.refNO h5{
+    font-size: 12px;
+    font-weight: bold;
+}
+.refNO h6{
+    font-size: 8px;
+}
+.dateSection span{
+    display: flex;
+    justify-content: end;
+    gap: 15px;
+    margin-right: 1cm;
+    align-items: start;
+}
+.dash{
+    font-weight: bold;
+    /* margin-top: //cm; */
+}
+.dateInput{
+    text-align: center;
+  
+}
+
+
+.dateInput .input{
+    background-color: white;
+    width: 0.5cm;
+    height: 0.5cm;
+}
+.dateInput .inputContainer{
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+.paydetails{
+    margin-top: 20px;
+    width: 80%;
+    margin-left: 2cm;
+}
+.paydetails .details div{
+    background-color: rgba(127, 255, 212, 0.205);
+    width: 90%;
+}
+.paydetails .details{
+    display: flex;
+    justify-content: space-between;
+    gap: 2px;
+}
+.paydetails .details p{
+    font-size: 10px;
+    text-align: right;
+    padding: 5px 0;
+    width: 8%;
+}
+.paydetails .paymentTo{
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    padding: 5px 0;
+}
+.paydetails .amount{
+    text-align: center;
+    font-size: 15px;
+    height: 80px;
+    line-height: 28px;
+}
+.nairaInput{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 2px;
+    margin-top: 30px;
+    margin-left: 15cm;
+}
+.amtInFig{
+    background-color: rgba(127, 255, 212, 0.205);
+    width: 200px;
+    /* height: 30px; */
+    padding: 10px !important;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 0;
+}
+.printCheque{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media print{
+    .card{
+        padding-top: 0 ;
+        justify-content: center;
+        
+    }
+    .Cheque{
+        padding-top: 0;
+        padding-right: 0.5cm;
+        margin-top: -0.4rem;
+        /* margin-top: -2rem; */
+    }
+    .chequeHeader{
+        margin-top: 0;
+        padding-top: 0;
+        /* padding-right: ; */
+        margin-right: 1rem;
+    }
+    .dateInput{
+        margin-top: 0.6cm;
+        /* margin-rig */
+    }
+    .paydetails{
+        margin-top: 10px;
+    }
+    .dateSection span{
+        /* margin-left: 3cm; */
+        justify-content: end;
+    }
+    .printHide{
+        visibility: hidden;
+    }
+    .printRemove{
+        display: none;
+    }
+    
+    .nairaInput{
+        margin-left: 15cm;
+        margin-top: 0.56cm;
+    }
+    .topMargin{
+        margin-top: 0;
+    }
+    .printCheque{
+        display: none;
+    }
+}
+

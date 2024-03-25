@@ -1,0 +1,201 @@
+@font-face {
+    font-family: Millik;
+    src: url('../../LocalFont/Millik.ttf');
+}
+
+@font-face {
+    font-family: Nunito1;
+    src: url('../../LocalFont/Nunito-Italic-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: Nunito2;
+    src: url('../../LocalFont/Nunito-VariableFont_wght.ttf');
+}
+@font-face {
+    font-family: Aeonikregular;
+    src: url('../../LocalFont/AeonikTRIAL-Regular.otf');
+}
+@font-face {
+    font-family: Aeonikbold;
+    src: url('../../LocalFont/AeonikTRIAL-Bold.otf');
+}
+@font-face {
+    font-family: Aeoniklight;
+    src: url('../../LocalFont/AeonikTRIAL-Light.otf');
+}
+
+* {
+    overflow-x: none;
+    max-width: 100%;
+}
+
+.entirebody {
+    background-color: #F7FDFA;
+    border-top: 1px solid #EAEAEA;
+    width: 1512px;
+    height: 336px;
+    display: flex;
+}
+
+.firstdiv {
+    margin-top: 64px;
+    margin-left: 85px;
+}
+
+
+.Logo {
+    width: 112px;
+    height: 32.26px;
+}
+
+.ig {
+    width: 32px;
+    height: 32px;
+}
+.twitter {
+    width: 32px;
+    height: 32px;
+}
+.linkedin {
+    width: 32px;
+    height: 32px;
+}
+.facebook {
+    width: 32px;
+    height: 32px;
+}
+
+.firstp{
+    font-weight: 400;
+    font-size: 14px;
+    font-family: Aeonikregular;
+    color:  #515251;
+    margin-top: 40px;
+    margin-bottom: -4px;
+}
+.firstpp{
+    font-weight: 400;
+    font-size: 14px;
+    font-family: Aeonikregular;
+    color:  #515251;
+   
+}
+
+
+.smediaicons {
+    display: flex;
+    justify-content: space-between;
+    /* width: 15%; */
+    margin-top: 40px;
+}
+
+.headp{
+    font-family: Aeonikbold;
+    font-weight: 500;
+    font-size: 20px;
+    color:  #292A29;
+   
+}
+
+.bodyp{
+    font-family: Aeonikregular;
+    font-weight: 400;
+    font-size: 16px;
+    color: #7C7C7C;
+}
+
+.fckngptags {
+    margin-top: 55px;
+    margin-left: 125px;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.seconddiv{
+    margin-right: 70px;
+}
+.thirddiv{
+    margin-right: 70px;
+}
+.fourthdiv{
+    margin-right: 70px;
+}
+.fifthdiv{
+   position: relative;
+}
+
+.fotrinput{
+    width: 255px;
+    height: 40px;
+    border-radius: 16px;
+    border: none;
+    background-color: #F2F1F1;
+}
+
+.fotrinput::placeholder {
+    padding-left: 16px;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: Aeonikregular;
+}
+
+
+.send {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    box-sizing:border-box;
+    top:55%;
+    right:27px;
+    transform: translateY(-50%);
+}
+
+a {
+    text-decoration: none;
+}
+
+@media(max-width:800px){ 
+    .entirebody {
+        width: 375px;
+        height: 1003px;
+        display: block;
+    }
+
+    .Logo {
+        width: 112px;
+        height: 32.26px;
+    }
+
+    .fckngptags {
+        display: block;
+        margin-left: 16px;
+    }
+
+    .yalfkngdiv {
+        display: flex;
+        margin-left: 16px;
+    }
+
+    .firstdiv {
+        margin-left: 16px;
+    }
+
+    .smediaicons {
+        width: 50%;
+    }
+
+    .fotrinput {
+        width: 255px;
+        height: 44.26px;
+    }
+
+    .send {
+        
+        top:85%;
+        right:120px;
+        transform: translateY(-50%);
+    }
+    
+}

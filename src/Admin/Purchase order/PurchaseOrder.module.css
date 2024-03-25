@@ -1,0 +1,180 @@
+.maincontr {
+margin: 5rem 14rem 10rem 14rem;
+width: 8.3in;
+height: 11.7in;
+background-color: white;
+padding: 0.3in 0.5in 0.5in 0.5in;
+ 
+}
+
+
+.Headr {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+h3 {
+font-size: 20px;
+font-weight: 700;
+}
+
+.topt {
+    display: flex;
+    justify-content: space-between;
+}
+
+.companydetails {
+    text-align: right;
+}
+
+.companyslogan {
+    font-style: italic;
+    color: grey;
+    margin-bottom: 0;
+}
+
+.address {
+    font-weight: 500 ;
+    margin-bottom: 0;
+}
+.phonetxt {
+    font-weight: 500 ;
+    margin-bottom: -4px;
+}
+.mailtxt {
+    font-weight: 500 ;
+    /* margin-bottom: 0; */
+}
+
+.phone {
+    font-weight: 600;
+    font-size: 15px;
+    
+}
+.mail{
+    font-weight: 600;
+    font-size: 15px;
+    
+}
+
+.tablemain{
+    width: 100%;
+    margin-top: 1rem;
+    border: 1px solid black;
+    height: auto;
+}
+
+div tr .th {
+ 
+    background-color: black;
+    color: white;
+}
+
+.purchasername {
+    font-weight: 600;
+    padding-top: 15px;
+    
+}
+
+.tablemain tr .th   {
+    padding-left: 1rem;
+    border-right: 1px solid black;
+    
+}
+.tablemain tr td  {
+    padding-left: 1rem;
+    border-right: 1px solid black;
+}
+
+.ponumb {
+    width: 30%;
+}
+
+.top {
+    margin-top: 35px;
+}
+
+
+.lastone td {
+    padding-bottom: 1rem;
+}
+
+.tabletwo {
+    margin-top: 3rem;
+}
+.tablethree {
+    margin-top: 3rem;
+}
+
+ .tablethree tr td {
+    padding-left: 1rem;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+tfoot tr .footr{
+    background-color: white !important;
+    color: black !important;
+}
+
+.footr {
+    border-bottom: 1px solid black;
+
+}
+
+ .footrspecial {
+    font-size: 13px;
+    font-weight: 700;
+    width: 25%;
+}
+
+.instruction {
+    font-size: 10px;
+    font-weight: 700;
+    width: 58.6%;
+    height: 25%;
+    background: white;
+    z-index: 8;
+    position: relative;
+    top: -12.7%;
+}
+.ps {
+    padding-top: 18px;
+   align-items: center;
+}
+.instruction p { 
+    margin-bottom: 0%;
+}
+
+.recvr {
+    margin-top: 1rem;
+}
+
+.ps {
+    margin-top: 2rem;
+}
+
+.signaturedate {
+    font-weight: 700;
+    display: flex;
+    justify-content: space-around;
+    align-items: right;
+    z-index: 9;
+    position: relative;
+    top: -16%;
+    padding-left: 322px;
+    
+    
+}
+
+.date {
+   margin-left: 25px; 
+   padding-right: -155px;
+   border-top: 1.3px solid black;
+   padding-top: 2px;
+}
+
+.auth {
+    border-top: 1.3px solid black;
+    padding-top: 2px;
+}

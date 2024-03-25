@@ -1,0 +1,210 @@
+@font-face {
+    font-family: Nunito2;
+    src: url('../../LocalFont/Nunito-VariableFont_wght.ttf');
+}
+@font-face {
+    font-family: Millik;
+    src: url('../../LocalFont/Millik.ttf');
+}
+
+
+.body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: ; */
+    background-color: rgb(216, 211, 211);
+    font-family: Nunito2;
+}
+.a4 {
+    width: 21cm;
+    height: 29.7cm;
+    background-color: white;
+    padding: 0.5in;
+  }
+  
+  @media print {
+    @page {
+      margin: 0;
+    }
+  
+    body {
+      margin: 0;
+    }
+  
+    .a4 {
+      padding: 0;
+    }
+  }
+  
+
+
+
+.header{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.logocont{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.logo{
+    width: 100px;
+}
+.header p{
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+.passport{
+    width: 150px;
+    height: 150px;
+    display: block;
+    /* background-color: gray; */
+    margin-top: 25px;
+    margin-bottom: 10px;
+
+}
+.passport img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.header h3,
+.header span{
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.header span{
+    font-weight: bold;
+    font-size: 20px;
+}
+.container,
+.container2{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    height: auto;
+    margin-bottom: 20px;
+}
+.container2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: auto;
+    margin-bottom: 40px;
+    gap: 3em;
+
+}
+.card1{
+    text-align: left;
+    /* background-color: gray; */
+}
+.container span,
+.container2 span{
+    display: flex;
+    /* gap: 20px; */
+    /* justify-content: start; */
+    align-items: center;
+    width: 100%;
+}
+.container2 span value{
+   padding-left: 40px;
+}
+.card1 label, 
+.card2 label{
+    width:30%;
+    color: rgb(94, 92, 92);
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+value{
+    width: 70%;
+    color: rgb(94, 92, 92);
+    font-size: 15px;
+    font-weight: bold;
+}
+.bold{
+    font-size: 17px ;
+    font-weight: bold;
+    color: black;
+}
+.tableSection{
+    width: 100%;
+    border-top: 2px solid rgb(124, 123, 123);
+    border-bottom: 2px solid rgb(124, 123, 123);
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    gap: 2em;
+    margin-bottom: 5px;
+}
+.tableSection h4{
+    width: 100%;
+    text-align: center;
+    font-size: 17px ;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 0;
+}
+ tr, td{
+    /* border: 1px solid black; */
+ }
+ .tableSection td{
+    width: 250px;
+    color: rgb(94, 92, 92);
+    font-size: 15px;
+    font-weight: bold;
+ }
+ .tableSection td:nth-child(3){
+    text-align: right;
+ }
+ .summaryContainer{
+    width: 100%;
+    border-bottom: 2px solid rgb(124, 123, 123);
+    /* display: flex; */
+    justify-content: space-between;
+ }
+ .summary{
+    /* float: right; */
+ }
+ .summary h6{
+    margin-bottom: 0;
+ }
+ .summary h6,
+ .summary span{
+    font-weight: 700;
+    color: black;
+    font-size: 16px;
+ }
+ .underline{
+    border-bottom: 2px solid black;
+    width:24.5%;
+    margin-bottom: 1rem;
+    justify-self: center;
+    text-align: center;
+    margin-top: 30px;
+    margin-left: 40%;
+ }
+ .mainSummary div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+ }
+ .mainSummary div span{
+    margin-left: 6rem;
+ }
+ .topRule{
+    border-top: 2px solid rgb(124, 123, 123);
+    padding-top: 5px;
+ }
+ .underRule{
+    border-bottom: 2px solid rgb(124, 123, 123);
+    padding-top: 5px;
+ }

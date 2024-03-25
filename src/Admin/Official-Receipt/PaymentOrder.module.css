@@ -1,0 +1,154 @@
+/* <style> */
+.officialBody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: ; */
+    /* background-color: rgb(216, 211, 211); */
+    font-family: Arial, Helvetica, sans-serif;
+    /* background-color: red; */
+    margin: 40px 0;
+}
+.officialBody h1, 
+.officialBody h2, 
+.officialBody h3, 
+.officialBody h4, 
+.officialBody h5, 
+.officialBody h6{
+    margin: 5px;
+    margin-left: 0;
+}
+.officialBody p{
+    margin: 5px;
+}
+.a4{
+    /* height: 8.3in; */
+    /* padding-top: 8rem; */
+    min-height:11.69in;
+    /* min-width: ; */
+    max-width: 8.27in;
+    background-color: white;
+    padding: 0.3in 0.5in 0.5in 0.5in;
+}
+.headerContainer{
+    padding-top: 5rem;    
+}
+
+.orderTable{
+    margin-bottom: 3rem;
+}
+.orderTable th{
+    width: 150px;
+    background-color: rgb(51, 49, 49);
+    color: white;
+    text-align: center;
+}
+.orderTable td:nth-child(5){
+    text-align: right;
+}
+.orderTable td,
+.orderTable th{
+    /* border:1px solid rgb(196, 192, 192); */
+    padding: 10px 5px;
+}
+.orderTable,
+.orderTable td,
+.orderTable th{
+    /* border:1px solid rgb(196, 192, 192); */
+    border: 1px solid black;
+    /* padding: 10px 5px; */
+}
+
+/* .orderTable,
+.orderTable th,
+.orderTable td, */
+.bodyTable th,
+.bodyTable td{
+border:1px solid rgb(196, 192, 192);
+    /* padding: 5px 15px; */
+}
+.bodyTable td,
+.bodyTable th{
+    /* border:1px solid gray; */
+    padding: 5px 10px;
+}
+
+@media print {
+    .printButton {
+      display: none;
+    }
+  }
+
+
+.bodyTable th{
+    width: 150px;
+    background-color: rgb(51, 49, 49);
+    color: white;
+    text-align: center;
+}
+.bodyTable td{
+    height: 20px;
+    font-size: 15px;
+}
+.bodyTable{
+    border-bottom: 1px dashed rgb(196, 192, 192) !important;
+}
+
+.bodyTable td:nth-child(4),
+.bodyTable td:nth-child(5){
+    text-align: right;
+}
+.right{
+    text-align: right;
+}
+.bodyTable td:nth-child(3){
+    text-align: center;
+}
+.bodyTable td:nth-child(2){
+    /* width: 50px; */
+}
+.bodyTable .spaned{
+    border: none;
+}
+
+.footerCont{
+    padding-top: 10px !important; 
+    border: none !important; 
+    /* border-left: none !important; 
+    border-right : none !important; 
+    border-bottom: ;   */
+}
+.footerCont .div1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.footerCont .div2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: wheat; */
+    width: 70%;
+}
+.div2 div{
+    display: flex;
+    justify-content: space-around;
+    /* gap: 12rem; */
+    width: 100%;
+    margin-top: 10px;
+}
+.div2 .span1{
+    width: 100%;
+    text-align: center;
+    padding: 5px 0 10px 0;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+
+}
+

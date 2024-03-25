@@ -1,0 +1,237 @@
+@font-face {
+    font-family: Millik;
+    src: url('../../LocalFont/Millik.ttf');
+  }
+  @font-face {
+    font-family: Nunito1; 
+    src: url('../../LocalFont/Nunito-Italic-VariableFont_wght.ttf');
+  }
+  @font-face {
+    font-family: Nunito2;
+    src: url('../../LocalFont/Nunito-VariableFont_wght.ttf');
+  }
+  
+  * {
+  overflow-x: none;
+  max-width: 100%;
+  
+  }
+  .signupHero {
+    background-color: #F7FDFA;
+    /* background-image: url(../../Images/background.png); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-position: center; */
+    /* width: 100%; */
+    /* max-width: 100%; */
+    /* height: 90%; */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .signupent {
+    margin-top: 55px;
+    background-color: #F7FDFA;
+    /* background-image: url(../../Images/background.png); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-position: center; */
+    /* width: 100%; */
+    max-width: 100%;
+    height: 90%;
+    /* position: relative; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center;  */
+     /* padding-bottom: -95rem; */
+     padding-bottom: 3rem;
+  }
+  
+  .content {
+  color: black;
+  margin-top: 5rem;
+  text-align: center;
+  /* margin-bottom: 50px; */
+  }
+  
+  
+  .pricebtn {
+   color: #6941C6;
+   font-size: 14px;
+   background-color: #F7FDFA;
+   border:none;
+   width: 87px;
+   height: 28px;
+   border-radius: 16px;
+   font-weight: 500;
+  }
+  
+  .herotext {
+   font-size: 48px;
+   font-weight: 600;
+   font-family: Nunito2;
+  }
+  
+  .pherotext{
+   font-size: 20px;
+   font-weight: 400;
+   color: #667085;
+   padding-bottom: 2rem;
+   font-family: Nunito2;
+  }
+  
+  .lowrherobtn {
+   margin-bottom: 3rem;
+   font-size: 18px;
+   font-weight: 600;
+   justify-content: space-between;
+   margin-right: 15px;
+   font-family: Nunito2;
+  }
+  
+  .myinput {
+  width: 360px;
+  height: 44px;
+  background-color: #F7FDFA;
+  border: 1.5px solid #2F945C;
+  border-radius: 8px;margin-top: 5px;
+  font-family: Nunito2;
+  background-color: #d1fadf79;
+  }
+  
+  .inputfield {
+  text-align: left;
+  font-family: Nunito2;
+  margin-right: 10px;
+  margin-left: 5px;
+  margin-top: 10px;
+  }
+  
+  .Check {
+    width: 24px;
+    height: 24px;
+    margin-right: 12PX;
+  }
+  
+  .myh1{
+    padding-top: 40px;
+    font-weight: 600;
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  .myp {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: -0.5px;
+    text-align: center;
+  }
+  
+  .my2p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: -4px;
+    color: #667085;
+    text-align: center;
+  }
+  
+  .mysubp {
+    text-align: left;
+    /* margin-left: 25px;  */
+  }
+  
+  .myhp {
+    margin-top: 32px;
+    margin-bottom: 40px;
+  }
+  
+  .mibtn{
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    background-color: #2F945C;
+    border: none;
+    color: white;
+    width: 295.33px;
+    height: 48px;
+  }
+  
+  .label {
+  margin-bottom: 2px;
+  font-family: Nunito2;
+  font-weight: 500;
+  font-size: 14px;
+  color: #344054;
+  }
+  
+  .theinputs {
+  /* display: flex; */
+  /* justify-content: space-around; */
+  /* align-items: center; */
+  /* width: 70%; */
+  }
+  
+  .pricingshi {
+    /* width: 30%; */
+  }
+  
+  .signupbody {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  
+  } 
+  
+  .prcdbtn {
+  width: 360px;
+  height: 44px;
+  background-color:#2F945C;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 54px;
+  position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15rem;
+    
+  }
+  
+  .prcdbtn a{
+    text-decoration: none;
+    color: white;
+  }
+  
+  .myinput::placeholder {
+  padding-left: 14px;
+  color: #667085;
+  font-weight: 400;
+  font-size: 16px;
+  }
+  
+  #compMail {
+  margin-top: 10px;
+  }
+  
+  @media(max-width:800px){
+  .signupbody{
+    flex-direction: column;
+    margin-top: unset !important;
+  }
+  
+  .inputfield {
+    margin-top: 10px;
+  }
+  
+  .prcdbtn {
+    margin-top: 1rem;
+    margin-left: 13px;
+    text-align: center;
+  }
+  }
