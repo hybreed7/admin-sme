@@ -26,8 +26,9 @@ function Applications() {
   const [user, setUser] = useState('');
   const [bearer, setBearer] = useState('');
   const [mycompanyName, setMyCompanyName] = useState('');
-  const [tableData, setTableData] = useState([]);
+  const [applications, setApplications] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [applicationsLoading, setApplicationsLoading] = useState(false);
   const [entriesPerPage, setEntriesPerPage] = useState(6);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
@@ -55,8 +56,8 @@ function Applications() {
     readData();
   }, []);
 
-  //   const filteredData = tableData.filter(item => item.gl_name.toLowerCase().includes(searchTerm.toLowerCase()));
-  let totalEntries = tableData.length;
+  // ??
+  let totalEntries = applications.length;
   const totalPages = Math.ceil(totalEntries / entriesPerPage);
 
 
@@ -70,12 +71,44 @@ function Applications() {
 
   const startIdx = (currentPage - 1) * entriesPerPage + 1;
   const endIdx = Math.min(startIdx + entriesPerPage - 1, totalEntries);
-  const displayedData = tableData.slice(startIdx - 1, endIdx);
+  const displayedData = applications.slice(startIdx - 1, endIdx);
 
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${bearer}`
   };
+
+  const fetchApplications = async () => {
+    setApplicationsLoading(true);
+    try {
+      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/fetch-all-applications', { headers });
+      const fetchedApplication = response.data?.data;
+      setApplications(fetchedApplication);
+  
+
+
+
+      console.log(fetchedApplication);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        
+        navigate('/login');
+      } else {
+      const errorStatus = error.response?.data?.message;
+      console.log(errorStatus);
+      setApplications([]);
+    }
+    } finally {
+      setApplicationsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (bearer) {
+      fetchApplications();
+        
+    }
+  }, [bearer]);
 
     
       
@@ -102,35 +135,55 @@ function Applications() {
                   <div className="col-sm-8 header-title p-0">
                     <div className="media">
                       {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div> */}
-                      <div className="media-body">
+                      {/* <div className="media-body">
                         <h1 className="font-weight-bold"> Welcome, {user} </h1>
                         <small>From now on you will start your activities.</small>
-                      </div>
+                      </div> */}
 
                     </div>
                   </div>
                 </div>
 
                 <div className="body-content">
-
-
-                  <div className="row" >
-                    <div className="col-lg-12 col-xl-12">
-                      <div className="card mb-12" >
-                        <div className="card-body" >
-                          <div className="table-resposive" >
-                            <div className="d-flex justify-content-between align-items-center" style={{ padding: '20px 0 0 0', marginBottom: 20, marginTop: -40 }}>
-                              <div className={classes.greenbtn} style={{ display: 'flex', }}>
-                                
-                                
-                              </div>
-                              <div className="text-right modal-effect ">
-                                
-                              </div>
+    <div className="row">
+        <div className="col-lg-12 col-xl-12">
+            <div className="card mb-4">
+                <div className="card-body">
+                    <div className="table-responsive">
+                        <div className="d-flex justify-content-between align-items-center" style={{ padding: '20px 0 0 0', marginBottom: 20, marginTop: -40 }}>
+                            <div className={classes.greenbtn} style={{ display: 'flex' }}>
+                                {/* Green button content */}
                             </div>
+                            <div className="text-right modal-effect">
+                                {/* Modal effect content */}
+                            </div>
+                        </div>
 
+                        <div className="row mb-3">
+                            <div className="col">
+                                <h4 className={classes.applyText}>Applications</h4>
+                            </div>
+                            <div className="col">
+                              {/* <Form.Label>Filter</Form.Label> */}
+                                <Form.Select aria-label="Select approval status">
+                                    <option value="">Select Approval Status</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="disapproved">Disapproved</option>
+                                </Form.Select>
+                            </div>
+                            <div className="col">
+                            {/* <Form.Label>Filter</Form.Label> */}
+                                <Form.Select aria-label="Select application type">
+                                    <option value="">Select Application type</option>
+                                    <option value="loans">Loans</option>
+                                    <option value="grants">Grants</option>
+                                </Form.Select>
+                            </div>
+                        </div>
 
-                            {isLoading ? (
+                        {/* Table and pagination */}
+                        {applicationsLoading ? (
                               <p>Fetching data...</p>
                             ) : (
                               <div className="table-responsive">
@@ -143,12 +196,22 @@ function Applications() {
                                       <th>APPLICATION TYPE</th>
                                       <th>STATUS</th>
                                       <th>AMOUNT</th>
-                                      <th>PAYMENT STATUS </th>
+                                      <th>ACTIONS </th>
                                      
                                     </tr>
                                   </thead>
                                   <tbody style={{ whiteSpace: 'nowrap' }}>
-                                    
+                                  {applications.map((item, index) => (
+                                      <tr key={index}>
+                                        <td>{index + 1}</td>
+                                        {/* <td>{item.gl_code}</td>
+                                        <td style={{textAlign: "left"}}>{item.gl_name}</td>
+                                        <td>{item.class?.description}</td>
+                                        <td>{item.category?.description}</td>
+                                        <td style={{textAlign: "left"}}>{item.subcategory?.description}</td> */}
+                                        
+                                      </tr>
+                                    ))}
                                   </tbody>
                                 </table>
                               </div>
@@ -203,16 +266,13 @@ function Applications() {
                                 </button>
                               </div>
                               </div>
-
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                  </div>
-
-
+                              </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
               </div>
             </div>
             {/* <!--/.body content--> */}
