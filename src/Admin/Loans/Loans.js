@@ -32,6 +32,9 @@ function Loans() {
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
 
+  const [applications, setApplications] = useState([]);
+  const [applicationsLoading, setApplicationsLoading] = useState(false);
+
 
   const readData = async () => {
     try {
@@ -76,6 +79,35 @@ function Loans() {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${bearer}`
   };
+
+  const fetchApplications = async () => {
+    setApplicationsLoading(true);
+    try {
+      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/get-loans', { headers });
+      const fetchedApplication = response.data?.data;
+      setApplications(fetchedApplication);
+
+      console.log(fetchedApplication);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        
+        navigate('/login');
+      } else {
+      const errorStatus = error.response?.data?.message;
+      console.log(errorStatus);
+      setApplications([]);
+    }
+    } finally {
+      setApplicationsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (bearer) {
+      fetchApplications();
+        
+    }
+  }, [bearer]);
 
     
     const viewAplicants = () =>{
