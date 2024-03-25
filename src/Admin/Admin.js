@@ -13,7 +13,7 @@ import { AdminHeadernavMainMenu } from './AdminHeadernavMainMenu';
 import { NavLink } from 'react-router-dom';
 import Footer from '../Pages/Footer/Footer';
 import { InfoFooter } from '../InfoFooter';
-import { Button, Modal, Form, Spinner } from 'react-bootstrap';
+import { Badge } from 'react-bootstrap';
 import classes from './Admin.module.css';
 import favicon from '../Images/faviconn.png'
 import PieChart1 from '../Images/Pie-Chart-1.png'
@@ -29,10 +29,12 @@ import Chart from 'chart.js/auto';
 function Admin() {
   const [user, setUser] = useState('');
   const [bearer, setBearer] = useState('');
+  const [applications, setApplications] = useState([]);
   const [mycompanyName, setMyCompanyName] = useState('');
   const [tableData, setTableData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [entriesPerPage, setEntriesPerPage] = useState(6);
+  const [applicationsLoading, setApplicationsLoading] = useState(false);
+  const [entriesPerPage, setEntriesPerPage] = useState(100);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
 
@@ -59,8 +61,41 @@ function Admin() {
     readData();
   }, []);
 
+  const fetchApplications = async () => {
+    setApplicationsLoading(true);
+    try {
+      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/fetch-all-applications', { headers });
+      const fetchedApplication = response.data?.data;
+      setApplications(fetchedApplication);
+  
+
+
+
+      console.log(fetchedApplication);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        
+        navigate('/login');
+      } else {
+      const errorStatus = error.response?.data?.message;
+      console.log(errorStatus);
+      setApplications([]);
+    }
+    } finally {
+      setApplicationsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (bearer) {
+      fetchApplications();
+        
+    }
+  }, [bearer]);
+
+
   //   const filteredData = tableData.filter(item => item.gl_name.toLowerCase().includes(searchTerm.toLowerCase()));
-  let totalEntries = tableData.length;
+  let totalEntries = applications.length;
   const totalPages = Math.ceil(totalEntries / entriesPerPage);
 
 
@@ -74,7 +109,7 @@ function Admin() {
 
   const startIdx = (currentPage - 1) * entriesPerPage + 1;
   const endIdx = Math.min(startIdx + entriesPerPage - 1, totalEntries);
-  const displayedData = tableData.slice(startIdx - 1, endIdx);
+  const displayedData = applications.slice(startIdx - 1, endIdx);
 
   const headers = {
     'Content-Type': 'application/json',
@@ -134,7 +169,7 @@ function Admin() {
                             </div>
 
 
-                            {isLoading ? (
+                            {applicationsLoading ? (
                               <p>Fetching data...</p>
                             ) : (
                               <div className="table-responsive">
@@ -152,7 +187,26 @@ function Admin() {
                                     </tr>
                                   </thead>
                                   <tbody style={{ whiteSpace: 'nowrap' }}>
-                                    
+                                  {applications.map((item, index) => (
+                                      <tr key={index}>
+                                        <td style={{textAlign: "left"}}>{index + 1}</td>
+                                        <td style={{textAlign: "left"}}>{item.user?.name}</td>
+                                        <td style={{textAlign: "left"}}>{item.type === 1 ? "Loan" : "Grant"}</td>
+                                        <td><Badge bg={item.status === "Pending" ? 'warning' : item.status === "Approved" ? 'success' : 'danger'}>
+                                        {item.status}
+                                        </Badge>
+                                        </td>
+                                        <td style={{textAlign: "right"}}>{parseFloat(item.amount).toLocaleString('en-US', {
+                                      minimumIntegerDigits: 1,
+                                      minimumFractionDigits: 2,
+                                      maximumFractionDigits: 2
+                                    })}</td>
+                                        <td><Badge bg={item.status === "Pending" ? 'warning' : item.status === "Approved" ? 'success' : 'danger'}>
+                                        {item.status}
+                                        </Badge>
+                                        </td>
+                                      </tr>
+                                    ))}
                                   </tbody>
                                 </table>
                               </div>
