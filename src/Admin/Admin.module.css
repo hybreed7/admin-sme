@@ -53,6 +53,10 @@ justify-content: space-around;
     margin-bottom: 1px;
 }
 
+.tableHeadAdmin{
+    background-color: green !important;
+}
+
 .dedpt {
     font-size: 13px;
     display: inline-block;

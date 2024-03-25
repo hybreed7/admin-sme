@@ -1,32 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import Happiness from '../../src/Images/happiness.svg';
-import "./assets/plugins/bootstrap/css/bootstrap.min.css";
-import "./assets/plugins/metisMenu/metisMenu.min.css";
-import "./assets/plugins/fontawesome/css/all.min.css";
-import "./assets/plugins/typicons/src/typicons.min.css";
-import "./assets/plugins/themify-icons/themify-icons.min.css";
-import happiness from "./assets/dist/img/happiness.svg";
-import "./assets/plugins/datatables/dataTables.bootstrap4.min.css";
-import "./style.css";
-import { AdminHeaderNav } from './AdminHeaderNav';
-import { AdminHeadernavMainMenu } from './AdminHeadernavMainMenu';
+
+import "../assets/plugins/bootstrap/css/bootstrap.min.css";
+import "../assets/plugins/metisMenu/metisMenu.min.css";
+import "../assets/plugins/fontawesome/css/all.min.css";
+import "../assets/plugins/typicons/src/typicons.min.css";
+import "../assets/plugins/themify-icons/themify-icons.min.css";
+
+import "../assets/plugins/datatables/dataTables.bootstrap4.min.css";
+import "../style.css";
+import { AdminHeaderNav } from '../AdminHeaderNav';
 import { NavLink } from 'react-router-dom';
-import Footer from '../Pages/Footer/Footer';
-import { InfoFooter } from '../InfoFooter';
+
+import { InfoFooter } from '../../InfoFooter';
 import { Button, Modal, Form, Spinner } from 'react-bootstrap';
-import classes from './Admin.module.css';
-import favicon from '../Images/faviconn.png'
-import PieChart1 from '../Images/Pie-Chart-1.png'
+import classes from './Applications.module.css';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Chart from 'chart.js/auto';
 
 
 
 
 
-function Admin() {
+function Applications() {
   const [user, setUser] = useState('');
   const [bearer, setBearer] = useState('');
   const [mycompanyName, setMyCompanyName] = useState('');
@@ -233,4 +229,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default Applications;

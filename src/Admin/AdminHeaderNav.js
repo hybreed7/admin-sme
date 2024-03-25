@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from '../Pages/Nav/Nav.module.css';
-import Logo from '../Images/Admin Logo.svg';
+import Logo from '../Images/log ad.svg';
 import Avater from '../Images/avatar33.png';
 import "./assets/plugins/bootstrap/css/bootstrap.min.css";
 import "./assets/plugins/metisMenu/metisMenu.min.css";
@@ -13,7 +13,6 @@ import "./style.css";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import LogoAdmin from '../Images/Admin Logo.svg'
 import Swal from 'sweetalert2';
 
 export const AdminHeaderNav = () => {
@@ -145,11 +144,12 @@ export const AdminHeaderNav = () => {
           </div>
 
           <div className="d-flex" style={{ justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            {/* <div style={{ display: 'flex', justifyContent: 'space-between' }}> */}
               <NavLink to={'/admin'} className="navbar-brand">
-                <img src={LogoAdmin} style={{ width: 210, height: 200}} className={classes.logoAdmin}  />
+                <img src={Logo} className={classes.Logo} style={{ height: 125, width: 200 }} />
               </NavLink>
-            </div>
+              
+            {/* </div> */}
 
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
@@ -170,9 +170,9 @@ export const AdminHeaderNav = () => {
                     <span>{email}</span>
                   </div>
 
-                  <NavLink to={'/admin_onboarding'} href="#" className="dropdown-item"><i className="typcn typcn-user-outline"></i> My Profile</NavLink>
+                  {/* <NavLink to={'/admin_onboarding'} href="#" className="dropdown-item"><i className="typcn typcn-user-outline"></i> My Profile</NavLink>
                   <NavLink to={'/EditProfile'} href="#" className="dropdown-item"><i className="typcn typcn-edit"></i> Edit Profile</NavLink>
-                  <NavLink to={'/manage_user'} className="dropdown-item"><i className="typcn typcn-user-outline"></i> Manage User</NavLink>
+                  <NavLink to={'/manage_user'} className="dropdown-item"><i className="typcn typcn-user-outline"></i> Manage User</NavLink> */}
                   {/* <NavLink to={'#'} href="#" className="dropdown-item"><i className="typcn typcn-arrow-shuffle"></i> Activity Logs</NavLink> */}
                   <NavLink to={'/ChangePassword'} href="#" className="dropdown-item"><i className="typcn typcn-cog-outline"></i> Change Password</NavLink>
                   <NavLink style={{cursor: "pointer"}} onClick={() => handleLogout()} className="dropdown-item"><i className="typcn typcn-key-outline"></i> Sign Out</NavLink>
@@ -228,33 +228,18 @@ export const AdminHeaderNav = () => {
   </li>
 {/* )} */}
 
-{/* {!isAdmin && (
-  <li className="nav-item dropdown">
-    <NavLink to={'#'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <i className="fa-solid fa-gear"></i> Setup
-    </NavLink>
-    <ul className="dropdown-menu">
-      {permittedHeaders.includes('view-role') && <li><NavLink to={"/role"} className="dropdown-item">Manage Roles</NavLink></li>}
-      {permittedHeaders.includes('view-approval-level') && <li><NavLink to={"/approval_level"} className="dropdown-item">Approval Levels</NavLink></li>}
-      {permittedHeaders.includes('view-user') && <li><NavLink to={"/manage_user"} className="dropdown-item">Manage User</NavLink></li>}
-      {permittedHeaders.includes('view-category') && <li><NavLink to={"/category"} className="dropdown-item">Manage Category</NavLink></li>}
-      {permittedHeaders.includes('manage-account') && <li><NavLink to={"/charts"} className="dropdown-item">Charts of Account</NavLink></li>}
-      {permittedHeaders.includes('view-loan-account') && <li><NavLink to={"/loan_account"} className="dropdown-item">Manage Loan Account</NavLink></li>}
-      {permittedHeaders.includes('view-savings-account') && <li><NavLink to={"/savings_account"} className="dropdown-item">Manage Savings Account</NavLink></li>}
-    </ul>
-  </li>
-)} */}
+
 
 
 
                     <li className="nav-item dropdown">
-                      <NavLink to={'/booking'} id="nav-toggle" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i className="fa-solid fa-file-invoice-dollar"></i> Registrations
+                      <NavLink to={'/applications'} id="nav-toggle" className="nav-link"   aria-expanded="false">
+                        <i className="fa-solid fa-file-invoice-dollar"></i> Applications
                       </NavLink>
                       
                     </li>
-                    <li className="nav-item dropdown">
-                      <NavLink to={'#'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <li className="nav-item">
+                      <NavLink to={'/login'} id="nav-toggle" className="nav-link"   aria-expanded="false">
                         <i className="fa-solid fa-file-invoice"></i> Loans
                       </NavLink>
                     </li>
@@ -274,70 +259,6 @@ export const AdminHeaderNav = () => {
                         <i className="fa-solid fa-file-invoice"></i> Disbursement
                       </NavLink>
                     </li>
-                    
-                    
-                    
-                    {/* <li className="nav-item dropdown">
-                       
-                       <NavLink to={'/Purchase_Delivery'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button"><i className="fa-solid fa-file-invoice"></i> Purchase Delivery</NavLink>
-                      
-                    </li> */}
-
-                    {/* <li className="nav-item dropdown">
-                      <NavLink to={'#'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg><span data-key="t-extra-pages">Transactions</span> <div className="arrow-down"></div>
-                      </NavLink>
-                      <ul className="dropdown-menu" aria-labelledby="topnav-more" >
-                        <li className="nav-item dropdown">
-                          <a className="dropdown-item dropdown-toggle arrow-none" href="#" id="nav-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span data-key="t-extra-pages" onClick={() => setShowPaymentsSubMenu(!showPaymentsSubMenu)}>Payments</span> <div className="arrow-down"></div>
-                          </a>
-                          {showPaymentsSubMenu && (
-                            <div className="dropdown-menu" aria-labelledby="topnav-pages">
-                              <a href="https://accounting.brookessoftware.com/admin/beneficiary" className="dropdown-item"> Manage Beneficiaries</a>
-                              <a href="https://accounting.brookessoftware.com/admin/payment/bank" className="dropdown-item"> Manage Banks</a>
-                              <a href="https://accounting.brookessoftware.com/admin/payment/voucher/payment_gazette" className="dropdown-item">Payment Gazette</a>
-
-                              <a href="https://accounting.brookessoftware.com/admin/payment/voucher" className="dropdown-item">View Payment Voucher</a>
-                              <a href="https://accounting.brookessoftware.com/admin/payment/schedule_of_payments" className="dropdown-item">Schedule Of Payments</a>
-
-                              <div className="dropdown">
-                                <a className="dropdown-item dropdown-toggle arrow-none" href="#" id="manage-payment" role="button">
-                                  <span data-key="t-forms">Manage Payment</span> <div className="arrow-down"></div>
-                                </a>
-                                <div className="dropdown-menu" aria-labelledby="manage-payment">
-                                  <a href="https://accounting.brookessoftware.com/admin/payment/voucher/pending_payment_list" className="dropdown-item">Pending</a>
-                                  <a href="https://accounting.brookessoftware.com/admin/payment/voucher/approved_payment_list" className="dropdown-item">Approved</a>
-                                </div>
-                              </div>
-                              <div className="dropdown">
-                                <a className="dropdown-item dropdown-toggle arrow-none" href="#" id="manage-Tax" role="button">
-                                  <span data-key="t-forms">Manage Tax</span> <div className="arrow-down"></div>
-                                </a>
-                                <div className="dropdown-menu" aria-labelledby="manage-Tax">
-                                  <a href="https://accounting.brookessoftware.com/admin/payment/tax" className="dropdown-item">Taxes</a>
-                                  <a href="https://accounting.brookessoftware.com/admin/payment/tax/tax_deduction" className="dropdown-item">Tax Deductions</a>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                        </li>
-                        <a href="https://accounting.brookessoftware.com/admin/receipts/school-income" className="dropdown-item" data-key="t-income">School Income </a>
-                        <a href="https://accounting.brookessoftware.com/admin/receipts" className="dropdown-item" data-key="t-income">Income &amp; Revenue</a>
-                        <a href="https://accounting.brookessoftware.com/admin/creditors" className="dropdown-item" data-key="t-school">Creditors List</a>
-                        <a href="https://accounting.brookessoftware.com/admin/debtors" className="dropdown-item" data-key="t-school">Debtors List</a>
-                        <div className="dropdown">
-                          <a className="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-auth" role="button">
-                            <span data-key="t-authentication">Bank Lodgement</span> <div className="arrow-down"></div>
-                          </a>
-                          <div className="dropdown-menu" aria-labelledby="topnav-auth">
-                            <a href="https://accounting.brookessoftware.com/admin/lodgement/pending" className="dropdown-item" data-key="t-login">Pending</a>
-                            <a href="https://accounting.brookessoftware.com/admin/lodgement/lodged" className="dropdown-item" data-key="t-register">Lodged</a>
-                          </div>
-                        </div>
-                      </ul>
-                    </li> */}
-
                   </ul>
                 </div>
               </ul>

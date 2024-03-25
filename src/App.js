@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 import ViewLoan from './Admin/Manage Booking/ViewLoan';
 import SignIn from './Pages/Sign in/SignIn';
+import Applications from './Admin/Applications/Applications';
 
 
 
@@ -75,6 +76,7 @@ function App() {
         <Route path='/'element={<SignIn/>}/>
         <Route path='/login'element={<SignIn/>}/>
         <Route path='/admin'element={<Admin/>}/>
+        <Route path='/applications'element={<Applications/>}/>
         <Route path='/view_applicant_loan'element={<ViewLoan/>}/>
       </Routes>
     </>

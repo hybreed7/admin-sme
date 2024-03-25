@@ -110,6 +110,18 @@ justify-content: space-around;
     background-color: #fff!important;
 }
 
+.styledTable{
+    border-collapse: collapse;
+    width: 100% ;
+}
+th,td{
+    border: 1px solid #ADB5BD;
+    height: 50px;
+    text-align: center;
+}
+th{
+    border-bottom: none;
+}
 
 .tableHead{
     background-color: #2D995F !important;
