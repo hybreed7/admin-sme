@@ -476,8 +476,8 @@ function ViewApplication() {
                                   <p>Relationship</p>
                                   <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
                                 </div>
-
                               </div>
+                              
                               <div style={{ color: '#6C757D', fontSize: '12px', fontWeight: '400' }}>
                                 <p>Home Address</p>
                                 <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
