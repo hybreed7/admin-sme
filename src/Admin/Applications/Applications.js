@@ -12,7 +12,7 @@ import { AdminHeaderNav } from '../AdminHeaderNav';
 import { NavLink } from 'react-router-dom';
 
 import { InfoFooter } from '../../InfoFooter';
-import { Button, Modal, Form, Spinner } from 'react-bootstrap';
+import { Button, Modal, Form, Spinner , Badge} from 'react-bootstrap';
 import classes from './Applications.module.css';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -29,8 +29,9 @@ function Applications() {
   const [applications, setApplications] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [applicationsLoading, setApplicationsLoading] = useState(false);
-  const [entriesPerPage, setEntriesPerPage] = useState(6);
+  const [entriesPerPage, setEntriesPerPage] = useState(100);
   const [currentPage, setCurrentPage] = useState(1);
+  
   const navigate = useNavigate();
 
 
@@ -200,16 +201,24 @@ function Applications() {
                                      
                                     </tr>
                                   </thead>
-                                  <tbody style={{ whiteSpace: 'nowrap' }}>
+                                  <tbody style={{ whiteSpace: 'nowrap',  }}>
                                   {applications.map((item, index) => (
                                       <tr key={index}>
-                                        <td>{index + 1}</td>
-                                        {/* <td>{item.gl_code}</td>
-                                        <td style={{textAlign: "left"}}>{item.gl_name}</td>
-                                        <td>{item.class?.description}</td>
-                                        <td>{item.category?.description}</td>
-                                        <td style={{textAlign: "left"}}>{item.subcategory?.description}</td> */}
-                                        
+                                        <td style={{textAlign: "left"}}>{index + 1}</td>
+                                        <td style={{textAlign: "left"}}>{item.user?.name}</td>
+                                        <td style={{textAlign: "left"}}>{item.type === 1 ? "Loan" : "Grant"}</td>
+                                        <td><Badge bg={item.status === "Pending" ? 'warning' : item.status === "Approved" ? 'success' : 'danger'}>
+                                        {item.status}
+                                        </Badge>
+                                        </td>
+                                        <td style={{textAlign: "right"}}>{parseFloat(item.amount).toLocaleString('en-US', {
+                                      minimumIntegerDigits: 1,
+                                      minimumFractionDigits: 2,
+                                      maximumFractionDigits: 2
+                                    })}</td>
+                                        <td><div   className="btn btn-success-soft btn-sm mr-1">
+                                        <i className="far fa-eye"></i>
+                                      </div></td>
                                       </tr>
                                     ))}
                                   </tbody>
