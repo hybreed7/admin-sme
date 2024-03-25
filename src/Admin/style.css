@@ -3700,6 +3700,8 @@ table code {
 
 .table th {
     font-family: "Sora";
+    background-color: #2D995F;
+    color: white;
 }
 
 .table td,

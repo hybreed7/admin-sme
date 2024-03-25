@@ -391,95 +391,97 @@ function ViewLoan() {
                           <div className="card-body">
                             <div className="card-body">
                               <small>Lara Lowson</small>
-                              <p style={{marginTop:'20px', fontWeight:'700',}}>Personal Details</p>
+                              <p style={{ marginTop: '20px', fontWeight: '700', }}>Personal Details</p>
+                              <div style={{ width: '138px', height: '3px', backgroundColor: '#2D995F', marginTop: '-15px', marginBottom: '20px' }} />
                               <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400' }}>
                                 <div>
-                                <p>First Name</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Lara</p>
+                                  <p>First Name</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lara</p>
                                 </div>
 
                                 <div>
-                                <p>Last Name</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Lawson</p>
+                                  <p>Last Name</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lawson</p>
                                 </div>
                                 <div>
-                                <p>Middle Name</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Morenikeji</p>
+                                  <p>Middle Name</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
                                 </div>
                                 <div>
-                                <p>Email Address</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>lawson@gmail.com</p>
+                                  <p>Email Address</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
                                 </div>
-                                
+
                               </div>
 
-                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400', marginTop:'20px' }}>
+                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400', marginTop: '20px' }}>
                                 <div>
-                                <p>Phone Number</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Lara</p>
+                                  <p>Phone Number</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lara</p>
                                 </div>
 
                                 <div>
-                                <p>Date of Birth</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Lawson</p>
+                                  <p>Date of Birth</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lawson</p>
                                 </div>
                                 <div>
-                                <p>Home Address</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Morenikeji</p>
+                                  <p>Home Address</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
                                 </div>
                                 <div>
-                                <p>Parmanent Address</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>lawson@gmail.com</p>
+                                  <p>Parmanent Address</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
                                 </div>
-                                
+
                               </div>
 
-                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400', marginTop:'20px'}}>
+                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400', marginTop: '20px' }}>
                                 <div>
-                                <p>Marital status</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Lara</p>
+                                  <p>Marital status</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lara</p>
                                 </div>
 
                                 <div>
-                                <p>state of origin</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Lawson</p>
+                                  <p>state of origin</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lawson</p>
                                 </div>
                                 <div>
-                                <p>Local govt</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Morenikeji</p>
+                                  <p>Local govt</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
                                 </div>
                                 <div>
-                                <p>NIN</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>lawson@gmail.com</p>
+                                  <p>NIN</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
                                 </div>
-                                
+
                               </div>
 
-                              <p style={{marginTop:'20px', fontWeight:'700',}}>Next of Kin details</p>
+                              <p style={{ marginTop: '20px', fontWeight: '700', }}>Next of Kin details</p>
+                              <div style={{ width: '138px', height: '3px', backgroundColor: '#2D995F', marginTop: '-15px', marginBottom: '20px' }} />
                               <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400' }}>
                                 <div>
-                                <p>Full name</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Lara</p>
+                                  <p>Full name</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lara</p>
                                 </div>
 
                                 <div>
-                                <p>Phone Number</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Lawson</p>
+                                  <p>Phone Number</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lawson</p>
                                 </div>
                                 <div>
-                                <p>Email Address</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Morenikeji</p>
+                                  <p>Email Address</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
                                 </div>
                                 <div>
-                                <p>Relationship</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>lawson@gmail.com</p>
+                                  <p>Relationship</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
                                 </div>
-                                
+
                               </div>
-                              <div style={{color: '#6C757D', fontSize: '12px', fontWeight: '400' }}>
+                              <div style={{ color: '#6C757D', fontSize: '12px', fontWeight: '400' }}>
                                 <p>Home Address</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Morenikeji</p>
-                                </div>
+                                <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
+                              </div>
 
                             </div>
                           </div>
@@ -500,61 +502,59 @@ function ViewLoan() {
                           <div className="card-body">
                             <div className="card-body">
 
-                            <p style={{marginTop:'30px', fontWeight:'700',}}>Business Details</p>
-                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400', marginTop:'-10px' }}>
+                              <p style={{ marginTop: '30px', fontWeight: '700', }}>Business Details</p>
+                              <div style={{ width: '138px', height: '3px', backgroundColor: '#2D995F', marginTop: '-15px', marginBottom: '20px' }} />
+                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400', marginTop: '-10px' }}>
                                 <div>
-                                <p>Business name</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Lara</p>
+                                  <p>Business name</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lara</p>
                                 </div>
 
                                 <div>
-                                <p>Business phone number</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Lawson</p>
+                                  <p>Business phone number</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lawson</p>
                                 </div>
                                 <div>
-                                <p>Business email address</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Morenikeji</p>
+                                  <p>Business email address</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
                                 </div>
                                 <div>
-                                <p>RC Number</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>lawson@gmail.com</p>
+                                  <p>RC Number</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
                                 </div>
-                                
+
                               </div>
                               <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400' }}>
                                 <div>
-                                <p>Date of commencement of business</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Lara</p>
+                                  <p>Date of commencement of business</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lara</p>
                                 </div>
 
                                 <div>
-                                <p>Sector of business</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Lawson</p>
+                                  <p>Sector of business</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lawson</p>
                                 </div>
                                 <div>
-                                <p>Ogun state Tax ID number</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Morenikeji</p>
+                                  <p>Ogun state Tax ID number</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
                                 </div>
                                 <div>
-                                <p>Business address</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>lawson@gmail.com</p>
+                                  <p>Business address</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
                                 </div>
-                                
+
                               </div>
-                              <div style={{color: '#6C757D', fontSize: '12px', fontWeight: '400' }}>
+                              <div style={{ color: '#6C757D', fontSize: '12px', fontWeight: '400' }}>
                                 <p>Number of employees</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Morenikeji</p>
-                                </div>
+                                <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
+                              </div>
 
                             </div>
 
-                            <p style={{marginTop:'30px', fontWeight:'700',}}>DOcuments</p>
-                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop:'-10px' }}>
-                                <div>
-                                    {/* <img src={fileIcon}/> */}
-                                </div>
-                                
-                              </div>
+                            <div style={{ marginLeft: '30px' }}>
+                              <p style={{ marginTop: '30px', fontWeight: '700' }}>Documents</p>
+                              <div style={{ width: '138px', height: '3px', backgroundColor: '#2D995F', marginTop: '-15px', marginBottom: '20px' }} />
+                            </div>
 
                           </div>
                         </div>
@@ -573,26 +573,28 @@ function ViewLoan() {
                         <div className="card">
                           <div className="card-body">
                             <div className="card-body">
-                            <p style={{marginTop:'30px', fontWeight:'700',}}>Bank details</p>
-                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400', marginTop:'-10px' }}>
+                              <p style={{ marginTop: '30px', fontWeight: '700', }}>Bank details</p>
+                              <div style={{ width: '138px', height: '3px', backgroundColor: '#2D995F', marginTop: '-15px', marginBottom: '20px' }} />
+
+                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400', marginTop: '-10px' }}>
                                 <div>
-                                <p>Bank name</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Fidelity</p>
+                                  <p>Bank name</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Fidelity</p>
                                 </div>
 
                                 <div>
-                                <p>Account number</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Lawson</p>
+                                  <p>Account number</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lawson</p>
                                 </div>
                                 <div>
-                                <p>Account name</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>Morenikeji</p>
+                                  <p>Account name</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
                                 </div>
                                 <div>
-                                <p>BVN</p>
-                                <p style={{display:'block', color:'#343A40', fontSize:'14px',marginTop:'-15px'}}>lawson@gmail.com</p>
+                                  <p>BVN</p>
+                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
                                 </div>
-                                
+
                               </div>
                             </div>
                           </div>
@@ -612,7 +614,7 @@ function ViewLoan() {
                         <div className="card">
                           <div className="card-body">
                             <div className="card-body">
-                              <table>
+                              <table className={classes.styledTable}>
                                 <thead className={classes.tableHead}>
                                   <th>
                                     S/N
@@ -636,6 +638,9 @@ function ViewLoan() {
                                   </td>
                                   <td>
                                     2nd April 2024
+                                  </td>
+                                  <td>
+
                                   </td>
                                 </tr>
                               </table>
