@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from '../Pages/Nav/Nav.module.css';
-import Logo from '../Images/logo-green.png';
+import Logo from '../Images/Admin Logo.svg';
 import Avater from '../Images/avatar33.png';
 import "./assets/plugins/bootstrap/css/bootstrap.min.css";
 import "./assets/plugins/metisMenu/metisMenu.min.css";
@@ -13,6 +13,7 @@ import "./style.css";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import LogoAdmin from '../Images/Admin Logo.svg'
 import Swal from 'sweetalert2';
 
 export const AdminHeaderNav = () => {
@@ -146,9 +147,8 @@ export const AdminHeaderNav = () => {
           <div className="d-flex" style={{ justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <NavLink to={'/admin'} className="navbar-brand">
-                <img src={Logo} className={classes.Logo} style={{ height: 25, width: 100 }} />
+                <img src={LogoAdmin} style={{ width: 210, height: 200}} className={classes.logoAdmin}  />
               </NavLink>
-              <p className={classes.companyName}>{myCompanyName.length > 15 ? myCompanyName.substring(0, 15) + '...' : myCompanyName}</p>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

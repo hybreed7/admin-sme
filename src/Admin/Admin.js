@@ -81,91 +81,6 @@ function Admin() {
         'Authorization': `Bearer ${bearer}`
       };
 
-      const fetchCharts = async () => {
-        setIsLoading(true);
-        try {
-          const response = await axios.get('https://api-sme.promixaccounting.com/api/v1/account', { headers });
-          const results = response.data?.data;
-         
-          setTableData(results);
-        //   console.log(results, "NIGERR");
-        } catch (error) {
-          if (error.response && error.response.status === 401) {
-            
-            navigate('/login');
-          } else {
-          const errorStatus = error.response?.data?.message;
-          console.log(errorStatus);
-          setTableData([]);
-        }
-        } finally {
-          setIsLoading(false);
-        }
-      };
-
-      useEffect(() => {
-        if (bearer) {
-          fetchCharts();
-        }
-      }, [bearer]);
-
-      useEffect(() => {
-        const ctx = document.getElementById('myPieChart').getContext('2d');
-        const myPieChart = new Chart(ctx, {
-          type: 'pie',
-          data: {
-            labels: ['Total Outstanding', 'Total Lodge'],
-            datasets: [{
-              label: 'My Dataset',
-              data: [60, 40],
-              backgroundColor: [
-                '#008A4B',
-                'rgb(54, 162, 235)'
-              ],
-              hoverOffset: 4
-            }]
-          },
-          options: {
-            plugins: {
-              legend: {
-                display: true,
-                align: 'start' 
-              },
-              afterDraw: function (chart) {
-                var width = chart.chart.width,
-                  height = chart.chart.height,
-                  ctx = chart.chart.ctx;
-      
-                // Position of labels
-                var fontSize = (height / 150).toFixed(2);
-                ctx.font = fontSize + "em Verdana";
-                ctx.textAlign = 'left';
-                ctx.textBaseline = 'middle';
-      
-                // Loop through each data in the dataset and draw the label to the right side
-                chart.data.datasets.forEach(function (dataset, i) {
-                  var meta = chart.getDatasetMeta(i);
-                  if (!meta.hidden) {
-                    meta.data.forEach(function (element, index) {
-                      // Draw the label
-                      var data = dataset.data[index];
-                      if (data !== 0) {
-                        var posX = element.tooltipPosition().x + (width * 0.02);
-                        var posY = element.tooltipPosition().y;
-                        ctx.fillStyle = dataset.backgroundColor[index];
-                        ctx.fillText(dataset.labels[index] + ": " + data + "%", posX, posY);
-                      }
-                    });
-                  }
-                });
-              }
-            }
-          }
-        });
-      
-        // Cleanup
-        return () => myPieChart.destroy();
-      }, []);
       
       
     return (
@@ -203,8 +118,8 @@ function Admin() {
 
 
                                 <div className="row">
-                                    <div className="col-lg-12 col-xl-6">
-                                        <div className="card mb-4" >
+                                    <div className="col-lg-12 col-xl-12">
+                                        <div className="card mb-12" >
                                         <div className="card-body" >
                           <div className="table-resposive">
                             <div className="d-flex justify-content-between align-items-center" style={{ padding: '20px 0 0 0', marginBottom: 20, marginTop: -40 }}>
@@ -342,58 +257,7 @@ function Admin() {
                         </div>
                                         </div>
                                     </div>
-                                    <div className="col-lg-12 col-xl-6">
-                                        <div className="row" >
-                                            <div className="col-md-6 col-lg-6">
-                                                
-                                                <div className="p-2 bg-white rounded p-3 mb-3">
-                                                    <div className="header-pretitle text-muted fs-11 font-weight-bold text-uppercase mb-2">
-                                                    Total Lodge
-                                                    </div>
-                                                    <div className="badge badge-success fs-26 text-monospace mx-auto">₦232,096,635<span className="opacity-50 small">.41</span></div>
-                                                    <div className="text-muted small mt-1">
-                                                        <span className="text-danger">
-                                                            <i className="fas fa fa-long-arrow-alt-down"></i>
-                                                            5%
-                                                        </span> vs average
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-6 col-lg-6">
-                                                {/* <!--Feedback--> */}
-                                                <div className="d-flex position-relative overflow-hidden flex-column p-3 mb-3 bg-white rounded">
-                                                    <div className="header-pretitle text-muted fs-11 font-weight-bold text-uppercase mb-2">Total Outstanding</div>
-                                                    <i className="fas fa fa-smile opacity-25 fa-5x text-warning decorative-icon"></i>
-                                                    <div className="d-flex">
-                                                        <div>
-                                                            {/* <img src={} alt='' className="d-block rounded-circle" width="32" /> */}
-                                                        </div>
-                                                        <div className="badge badge-success fs-26 text-monospace mx-auto">₦9,768,641<span className="opacity-50 small">.29</span></div>
-                                                        
-                                                    </div>
-                                                    <div className="text-muted small mt-1">
-                                                        <span className="text-danger">
-                                                            <i className="fas fa fa-long-arrow-alt-down"></i>
-                                                            5%
-                                                        </span> vs average
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-md-12 col-lg-12" style={{width:'100%', backgroundColor: "#fff", marginLeft: 12 }}>
-                                                <div className="card-body">
-                        <div className="row">
-                          <div className="col" style={{ height: 227,  marginLeft: 20 }}>
-
-                            <canvas id="myPieChart" ></canvas>
-                          </div>
-                        </div>
-                      </div>
-                                                </div>
-                                               
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
 
                                     

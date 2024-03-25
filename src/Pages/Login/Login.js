@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import {Spinner, Button} from 'react-bootstrap';
 import axios from "axios";
 import crossedEyeIcon from '../../Images/eye-slash.png';
+import Logo from '../../Images/Admin Logo.svg';
 
 
 function Login() {
@@ -132,8 +133,11 @@ const togglePasswordVisibility = () => {
 
   return (
     <div>
-        <Navigation/>
+        {/* <Navigation/> */}
         <div className={classes.body}>
+            <div className={classes.imageContainer}>
+              <img src={Logo} alt="Logo" />
+            </div>
             <div className={classes.main}>
                 <div className={classes.Login}>
                     <div className={classes.LoginHeader}>
@@ -194,10 +198,10 @@ const togglePasswordVisibility = () => {
 
 
                     </form>
-                    <span className={classes.dntHvAcct}>
+                    {/* <span className={classes.dntHvAcct}>
                         <p>Don’t have an account?</p>
                         <span onClick={SignUp}>Sign up</span>
-                    </span>
+                    </span> */}
                 </div>
             </div>
             

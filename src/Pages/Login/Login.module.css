@@ -24,14 +24,14 @@
     width: 100%; 
     /* background-image: url('../../Images/LoginBackground.png'); */
     display: flex;
-    background-color: #F7FDFA;;
+    background-color: #Ffff;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     font-family: Nunito2;
-    background-size: cover;
     height: 100vh;
   }
+  
   .main{
     max-width: 1216px;
     overflow: hidden;
@@ -49,15 +49,17 @@
     max-width: 360px;
     flex-direction: column;
     align-items: center;
-    margin-top: 4rem;
+    margin-top: 2rem;
     /* gap: 22px; */
   }
   .LoginHeader{
     text-align: center;
+    border-top: 0.5px solid rgb(247, 241, 241);
   }
   .LoginHeader h2{
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 600;
+    margin-top: 10px;
   }
   .LoginHeader p{
     font-size: 18px;
@@ -105,7 +107,7 @@
     font-weight: 600;
   }
   .SignInBtn{
-    background-color:  #2F945C;
+    background-color:  #2F945C !important;
     width: 100%;
     display: flex;
     padding: 10px 18px;
@@ -122,9 +124,9 @@
     box-shadow: none;
   }
   .SignInBtn:hover{
-    background-color: transparent;
-    border: 2px solid #2F945C;
-    color: #2F945C;
+    background-color: rgb(110, 179, 110) !important;
+    /* border: 2px solid #091a10; */
+    color: #fff;
   }
   .dntHvAcct{
     display: flex;

@@ -1,0 +1,242 @@
+body {
+    font-family: 'Inter', sans-serif;
+  }
+
+.signin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    gap: 30px;
+  }
+
+  .marketersImg{
+    width: 100%;
+    height: 100vh;
+    display: block;
+  }
+  .marketersImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .signin #sign-hero{
+    align-self: left;
+    text-align: left;
+    
+  }
+  .signin a{
+    text-decoration: none;
+    color: green;
+  }
+
+  .signContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    padding: 0 50px;
+  }
+
+  .headerText{
+    font-size: 28px;
+    font-weight: bold;
+    font-weight: 700;
+    text-align: center;
+    color: #000;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .subText{
+    text-align: center;
+    font-weight: 400;
+    font-size: 18px;
+    color: #000;
+  }
+
+  .buttonSignup{
+    height: 55px;
+    width: 400px;
+    border-radius: 4px;
+    background-color: #2D995F;
+  }
+
+  .buttonSignup2{
+    height: 55px;
+    width: 400px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #2D995F;
+    margin-top: 52px;
+  }
+
+  .buttonContainer{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+   margin-top: 50px;
+  }
+
+  .button1{
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    padding: 15px 10px 15px 10px;
+  }
+
+  .button2{
+    font-size: 15px;
+    font-weight: 700;
+    color: #2D995F;
+    text-align: center;
+    padding: 15px 10px 15px 10px;
+    
+  }
+
+  .formInput{
+    margin-top: 30px;
+  }
+
+  .snInput {
+    border: 1px solid #ADB5BD;
+    border-radius: 4px;
+    height: 55px;
+    width: 400px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    padding: 10px;
+  }
+
+  .forgotPassword{
+    font-size: 14px;
+    color: #2D995F;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .signUp{
+    font-size: 14px;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    
+  }
+  .register{
+    font-size: 14px;
+    color: #2D995F;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-weight: 500;
+   cursor: pointer; 
+  }
+
+  .register:hover{
+    color: #9ed3b7;
+  }
+ 
+
+  .bottom{
+    display: flex;
+    gap: 3px;
+    margin-top: 10px;
+  }
+
+  .signinButton{
+    border-radius: 4px;
+    height: 55px;
+    width: 400px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    background-color: #2D995F;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    padding: 10px 10px 15px 10px;
+    margin-top: 60px;
+  }
+
+  .passwordInputContainer {
+    /* display: flex;  */
+    align-items: center; 
+  }
+
+  .inputContainer {
+    flex: 1; 
+  }
+  
+
+  .stId{
+  
+  font-size: 14px;
+  padding-bottom: 0px;
+  color: #6C757D;
+  
+  }
+
+  .passwordToggleButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    float: right;
+                  left: -20px;
+                  margin-top: -45px;
+                  position: relative;
+                  z-index: 2;
+  
+  }
+
+  @media (max-width: 991px) {
+    .marketersImg {
+      display: none;
+    }
+
+    .signContainer {
+      /* margin-top: -17rem; */
+    }
+
+   
+      .headerText {
+        font-size: 20px;
+        font-weight: 700;
+      }
+    
+      .subText {
+        font-size: 12px;
+        font-weight: 400;
+        margin-top: 5px;
+        margin-bottom: 87px;
+      }
+  
+      .signin {
+        gap: 0;
+        margin-top: -28px;
+      }
+  
+      .snInput {
+        height: 43px;
+        width: 350px;
+            }
+           
+            .signinButton {
+              font-size: 16px;
+              font-weight: 400;
+              height: 43px;
+        width: 350px;
+              padding: 10px 10px 10px 10px;
+              margin-top: 35px;
+            }
+    }
+
+  
