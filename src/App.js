@@ -14,6 +14,7 @@ import Applications from './Admin/Applications/Applications';
 import Loans from './Admin/Loans/Loans';
 import Grants from './Admin/Grants/Grants';
 import ViewGrants from './Admin/Grants/ViewGrants';
+import ViewApplication from './Admin/Applications/ViewApplication';
 
 
 
@@ -82,6 +83,7 @@ function App() {
         <Route path='/login'element={<SignIn/>}/>
         <Route path='/admin'element={<Admin/>}/>
         <Route path='/applications'element={<Applications/>}/>
+        <Route path='/view_application'element={<ViewApplication/>}/>
         <Route path='/view_applicant_loan'element={<ViewLoan/>}/>
         <Route path='/view_applicant_grant'element={<ViewGrants/>}/>
         {/* <Route path='/view_grants'element={<ViewGrants/>}/> */}

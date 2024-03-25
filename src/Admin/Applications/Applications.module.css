@@ -26,6 +26,12 @@ display: flex;
 justify-content: space-around;
 }
 
+.applyText{
+    font-size: 20px;
+    color: #2D995F;
+    font-weight: 700;
+}
+
 .spiralimg {
     width: 55px;
     height: 55px;
