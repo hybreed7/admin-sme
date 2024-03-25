@@ -12,7 +12,7 @@ import { AdminHeaderNav } from '../AdminHeaderNav';
 import { NavLink } from 'react-router-dom';
 
 import { InfoFooter } from '../../InfoFooter';
-import { Button, Modal, Form, Spinner } from 'react-bootstrap';
+import { Button, Modal, Form, Spinner, Badge } from 'react-bootstrap';
 import classes from '../../Admin/Grants/Grants.module.css';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -31,6 +31,10 @@ function Grants() {
   const [entriesPerPage, setEntriesPerPage] = useState(6);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
+
+  const [grants, setGrants] = useState([]);
+  const [grantsLoading, setGrantsLoading] = useState(false);
+
 
 
   const readData = async () => {
@@ -76,6 +80,36 @@ function Grants() {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${bearer}`
   };
+
+  const fetchgrants = async () => {
+    setGrantsLoading(true);
+    try {
+      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/get-grants', { headers });
+      const fetchedApplication = response.data?.data;
+      setGrants(fetchedApplication);
+
+      console.log(fetchedApplication);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        
+        navigate('/login');
+      } else {
+      const errorStatus = error.response?.data?.message;
+      console.log(errorStatus);
+      setGrants([]);
+    }
+    } finally {
+      setGrantsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (bearer) {
+      fetchgrants();
+        
+    }
+  }, [bearer]);
+
 
     
     const viewAplicants = () =>{
@@ -148,22 +182,25 @@ function Grants() {
                                     </tr>
                                   </thead>
                                   <tbody style={{ whiteSpace: 'nowrap' }}>
-                                    <tr>
-                                      <td>1</td>
-                                      <td>Lara Lawanson</td>
-                                      <td>Paid</td>
-                                      <td>Approved</td>
-                                      <td>N100,000</td>
-                                        <td onClick={viewAplicants}>VIEW</td>
-                                    </tr>
-                                    {/* <tr>
-                                      <td>2</td>
-                                      <td>Ololade Olaniyi</td>
-                                      <td>Paid</td>
-                                      <td>Approved</td>
-                                      <td>N100,000</td>
-                                        <td>VIEW</td>
-                                    </tr> */}
+                                  {grants.map((item, index) => (
+                                      <tr key={index}>
+                                        <td style={{textAlign: "left"}}>{index + 1}</td>
+                                        <td style={{textAlign: "left"}}>{item.user?.name}</td>
+                                        <td style={{textAlign: "left"}}>{item.type === 1 ? "Loan" : "Grant"}</td>
+                                        <td><Badge bg={item.status === "Pending" ? 'warning' : item.status === "Approved" ? 'success' : 'danger'}>
+                                        {item.status}
+                                        </Badge>
+                                        </td>
+                                        <td style={{textAlign: "right"}}>{parseFloat(item.amount).toLocaleString('en-US', {
+                                      minimumIntegerDigits: 1,
+                                      minimumFractionDigits: 2,
+                                      maximumFractionDigits: 2
+                                    })}</td>
+                                        <td><div   className="btn btn-success-soft btn-sm mr-1">
+                                        <i className="far fa-eye"></i>
+                                      </div></td>
+                                      </tr>
+                                    ))}
                                   </tbody>
                                 </table>
                               </div>
