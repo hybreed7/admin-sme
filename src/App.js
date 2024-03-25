@@ -6,9 +6,14 @@ import Admin from './Admin/Admin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigate } from 'react-router-dom';
 
-import ViewLoan from './Admin/Manage Booking/ViewLoan';
+import ViewLoan from './Admin/Loans/ViewLoan';
 import SignIn from './Pages/Sign in/SignIn';
 import Applications from './Admin/Applications/Applications';
+// import ViewGrants from './Admin/Grants/ViewGrants';
+// import Grants from './Admin/Grants/Grants';
+import Loans from './Admin/Loans/Loans';
+import Grants from './Admin/Grants/Grants';
+import ViewGrants from './Admin/Grants/ViewGrants';
 
 
 
@@ -78,6 +83,11 @@ function App() {
         <Route path='/admin'element={<Admin/>}/>
         <Route path='/applications'element={<Applications/>}/>
         <Route path='/view_applicant_loan'element={<ViewLoan/>}/>
+        <Route path='/view_applicant_grant'element={<ViewGrants/>}/>
+        {/* <Route path='/view_grants'element={<ViewGrants/>}/> */}
+        {/* <Route path='/view_applicant_grant'element={<ViewGrant/>}/> */}
+        <Route path='/grants'element={<Grants/>}/>
+        <Route path='/loans'element={<Loans/>}/>
       </Routes>
     </>
   );

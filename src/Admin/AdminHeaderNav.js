@@ -239,13 +239,13 @@ export const AdminHeaderNav = () => {
                       
                     </li>
                     <li className="nav-item">
-                      <NavLink to={'/login'} id="nav-toggle" className="nav-link"   aria-expanded="false">
+                      <NavLink to={'/loans'} id="nav-toggle" className="nav-link"   aria-expanded="false">
                         <i className="fa-solid fa-file-invoice"></i> Loans
                       </NavLink>
                     </li>
 
                     <li className="nav-item dropdown">
-                      <NavLink to={'#'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <NavLink to={'/grants'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i className="fa-solid fa-file-invoice"></i> Grants
                       </NavLink>
                     </li>
