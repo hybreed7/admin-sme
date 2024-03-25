@@ -66,7 +66,7 @@ import PaymentVoucher from './Admin/Payment-Voucher/PaymentVoucher';
 import Schedule from './Admin/Payment-Voucher/Schedule';
 import ViewVoucher from './Admin/Payment-Voucher/ViewVoucher';
 import Booking from './Admin/Manage Booking/Booking';
-import CreateBooking from './Admin/Manage Booking/CreateBooking';
+
 import InvoicePayment from './Admin/Invoice-payment/InvoicePayment';
 // import NewInvoice from './Admin/Invoice-payment/NewInvoicePayment';
 import Deposit from './Admin/Deposit - lodgement/Deposit';
@@ -142,6 +142,7 @@ import BalanceSheetPrint from './Admin/Balance Sheet Print/BalanceSheetPrint';
 import EditBooking from './Admin/Manage Booking/EditBooking';
 import MonthlyIncome from './Admin/Monthly Income/MonthlyIncome';
 import MonthlyIncomeProcess from './Admin/Monthly Income & Expend/MonthlyIncomeProcess';
+import ViewLoan from './Admin/Manage Booking/ViewLoan';
 
 
 
@@ -231,7 +232,9 @@ function App() {
         <Route path='/process_general'element={<ProcessGeneral/>}/>
         <Route path='/create_company'element={<CrteCompny/>}/>
         <Route path='/booking'element={<Booking/>}/>
-        <Route path='/create_booking'element={<CreateBooking/>}/>
+
+        <Route path='/view_applicant_loan'element={<ViewLoan/>}/>
+
         <Route path='/invoice_payment'element={<InvoicePayment/>}/>
         <Route path='/savings_withdrawal'element={<SavingsWithdrawal/>}/>
         {/* <Route path='/invoiceprnt'element={<Invoiceprnt/>}/> */}

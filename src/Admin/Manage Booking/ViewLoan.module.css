@@ -104,6 +104,19 @@ justify-content: space-around;
     color: #37a000;
 }
 
+.personalDetails{
+    width: 1631px;
+    height: 750px;
+    background-color: #fff!important;
+}
+
+
+.tableHead{
+    background-color: #2D995F !important;
+    color: #fff;
+    height: 50px;
+}
+
 .card {
     display: flex;
     flex-direction: column;
