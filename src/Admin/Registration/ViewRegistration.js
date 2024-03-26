@@ -28,6 +28,7 @@ function ViewRegistration() {
   const navigate = useNavigate();
   const location = useLocation();
   const { selectedApplicant } = location.state || {};
+  console.log(selectedApplicant);
 
 
   const readData = async () => {
@@ -108,11 +109,21 @@ function ViewRegistration() {
 
                 <div className="content-header row align-items-center m-0">
 
+
                   <div className="col-sm-8 header-title p-0">
                     <div className="media">
                      <Button style={{borderRadius: 0, marginTop: 20}} variant='success' onClick={goBack}> Go Back</Button>
                     </div>
-
+                    <div style={{marginTop: 30}}/>
+              <div className="col-sm-8 header-title p-0">
+                <div className="media">
+                  {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div> */}
+                  <div className="media-body" >
+                    <h1 className="font-weight-bold">Details of {selectedApplicant[0].user?.name}</h1>
+                    <small>View applicant's details below...</small>
+                  </div>
+                </div>
+              </div>
                   </div>
                 </div>
               </div>
@@ -385,7 +396,7 @@ function ViewRegistration() {
         })}
       </td>
       <td style={{ textAlign: "left" }}>{formatDate(item.created_at)}</td>
-      <td style={{ textAlign: "left" }}>{item.type === 1 ? "Loan" : "Grant"}</td>
+      <td style={{ textAlign: "left" }}>{item.type?.name}</td>
       <td style={{ textAlign: "center" }}>
         <Form>
           <Form.Check

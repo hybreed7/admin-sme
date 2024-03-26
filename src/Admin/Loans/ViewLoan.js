@@ -6,28 +6,33 @@ import "../assets/plugins/typicons/src/typicons.min.css";
 import "../assets/plugins/themify-icons/themify-icons.min.css";
 import "../assets/plugins/datatables/dataTables.bootstrap4.min.css";
 import { AdminHeaderNav } from '../AdminHeaderNav';
-import Pdf from '../../Images/pdf.png'
 import { useLocation } from 'react-router-dom'
+import Pdf from '../../Images/pdf.png'
 import Select from 'react-select';
 import { InfoFooter } from '../../InfoFooter';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swal from 'sweetalert2';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Button, Spinner, Form  } from 'react-bootstrap';
+import { Button, Spinner, Form , Modal } from 'react-bootstrap';
 import favicon from '../../Images/faviconn.png'
 import CurrencyInput from 'react-currency-input-field';
 import classes from '../../Admin/Loans/ViewLoan.module.css'
 
 
-function ViewLoan(){
+function ViewLoan() {
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [createLoading, setCreateLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [bearer, setBearer] = useState('');
+  const [description, setDescription] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   const { selectedApplicant } = location.state || {};
+const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplicant) : [];
 
 
   const readData = async () => {
@@ -112,7 +117,16 @@ function ViewLoan(){
                     <div className="media">
                      <Button style={{borderRadius: 0, marginTop: 20}} variant='success' onClick={goBack}> Go Back</Button>
                     </div>
-
+                    <div style={{marginTop: 30}}/>
+              <div className="col-sm-8 header-title p-0">
+                <div className="media">
+                  {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div> */}
+                  <div className="media-body" >
+                    <h1 className="font-weight-bold">Details of {selectedApplicant[0].user?.name}</h1>
+                    <small>View applicant's details below...</small>
+                  </div>
+                </div>
+              </div>
                   </div>
                 </div>
               </div>
@@ -144,7 +158,7 @@ function ViewLoan(){
                       <td style={{ border: 'none', padding: '8px', textAlign: 'left' , width: "25%"}}>{item.user?.email} </td>
                       <td style={{ border: 'none', padding: '8px', textAlign: 'left', width: "25%" }}>{item.user?.phone_number} </td>
                       <td style={{ border: 'none', padding: '8px', textAlign: 'left', width: "25%" }}>{item.user?.dob} </td>
-                    </tr> 
+                    </tr>
                   ))}
                   </tbody>
                 </table>
@@ -258,46 +272,48 @@ function ViewLoan(){
   <p style={{  fontWeight: '700' }}>Documents</p>
   <div style={{ width: '138px', height: '3px', backgroundColor: '#2D995F', marginTop: '-15px', marginBottom: '20px' }} />
   <div style={{display: 'flex'}}>
-  {(selectedApplicant[0]?.user?.bank_statement || selectedApplicant[0]?.user?.bank_statement_loan) ? (
-    <>
-      {selectedApplicant[0]?.user?.bank_statement && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px', textAlign: 'center' }}>
-          <span title={selectedApplicant[0]?.user?.bank_statement}>
-            <img
-              src={Pdf}
-              alt="PDF Icon"
-              style={{ width: '50px', height: '50px', cursor: 'pointer' }}
-              onClick={() => window.open(selectedApplicant[0]?.user?.bank_statement, '_blank')}
-            />
-            <div style={{ marginTop: '5px' }}>
-              {selectedApplicant[0]?.user?.bank_statement.length > 20
-                ? `${selectedApplicant[0]?.user?.bank_statement.substring(0, 20)}...`
-                : selectedApplicant[0]?.user?.bank_statement}
-            </div>
-          </span>
-        </div>
-      )}
-      {selectedApplicant[0]?.user?.bank_statement_loan && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px', textAlign: 'center' }}>
-          <span title={selectedApplicant[0]?.user?.bank_statement_loan}>
-            <img
-              src={Pdf}
-              alt="PDF Icon"
-              style={{ width: '50px', height: '50px', cursor: 'pointer' }}
-              onClick={() => window.open(selectedApplicant[0]?.user?.bank_statement_loan, '_blank')}
-            />
-            <div style={{ marginTop: '5px' }}>
-              {selectedApplicant[0]?.user?.bank_statement_loan.length > 20
-                ? `${selectedApplicant[0]?.user?.bank_statement_loan.substring(0, 20)}...`
-                : selectedApplicant[0]?.user?.bank_statement_loan}
-            </div>
-          </span>
-        </div>
-      )}
-    </>
-  ) : (
-    <p>No documents uploaded</p>
-  )}
+  {(selectedApplicant[0]?.type?.id === 2 && selectedApplicant[0]?.user?.bank_statement) ||
+(selectedApplicant[0]?.type?.id === 1 && selectedApplicant[0]?.user?.bank_statement_loan) ? (
+  <>
+    {selectedApplicant[0]?.type?.id === 2 && selectedApplicant[0]?.user?.bank_statement && (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px', textAlign: 'center' }}>
+        <span title={selectedApplicant[0]?.user?.bank_statement}>
+          <img
+            src={Pdf}
+            alt="PDF Icon"
+            style={{ width: '50px', height: '50px', cursor: 'pointer' }}
+            onClick={() => window.open(selectedApplicant[0]?.user?.bank_statement, '_blank')}
+          />
+          <div style={{ marginTop: '5px' }}>
+            {selectedApplicant[0]?.user?.bank_statement.length > 20
+              ? `${selectedApplicant[0]?.user?.bank_statement.substring(0, 20)}...`
+              : selectedApplicant[0]?.user?.bank_statement}
+          </div>
+        </span>
+      </div>
+    )}
+    {selectedApplicant[0]?.type?.id === 1 && selectedApplicant[0]?.user?.bank_statement_loan && (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px', textAlign: 'center' }}>
+        <span title={selectedApplicant[0]?.user?.bank_statement_loan}>
+          <img
+            src={Pdf}
+            alt="PDF Icon"
+            style={{ width: '50px', height: '50px', cursor: 'pointer' }}
+            onClick={() => window.open(selectedApplicant[0]?.user?.bank_statement_loan, '_blank')}
+          />
+          <div style={{ marginTop: '5px' }}>
+            {selectedApplicant[0]?.user?.bank_statement_loan.length > 20
+              ? `${selectedApplicant[0]?.user?.bank_statement_loan.substring(0, 20)}...`
+              : selectedApplicant[0]?.user?.bank_statement_loan}
+          </div>
+        </span>
+      </div>
+    )}
+  </>
+) : (
+  <p>No documents uploaded</p>
+)}
+
 </div>
 </div>
 </div>
@@ -361,46 +377,9 @@ function ViewLoan(){
                         <div className="card">
                           <div className="card-body">
                             <div className="card-body">
-                            <div className="table-responsive">
-                            <table className="table display table-bordered table-striped table-hover bg-white m-0 card-table">
-
-                              <thead style={{ }}>
-                                <tr>
-                                  <th>S/N</th>
-                                  <th>Amount</th>
-                                  <th>Date</th>
-                                  <th>Type</th>
-                                  <th>Mark as Paid</th>
-                                </tr>
-                              </thead>
-                              <tbody style={{ textAlign: "left" }}>
-  {selectedApplicant.map((item, index) => (
-    <tr key={index}>
-      <td style={{ textAlign: "left" }}>{index + 1}</td>
-      <td style={{ textAlign: "right" }}>
-        {parseFloat(item.amount).toLocaleString("en-US", {
-          minimumIntegerDigits: 1,
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}
-      </td>
-      <td style={{ textAlign: "left" }}>{formatDate(item.created_at)}</td>
-      <td style={{ textAlign: "left" }}>{item.type === 1 ? "Loan" : "Grant"}</td>
-      <td style={{ textAlign: "center" }}>
-        <Form>
-          <Form.Check
-            type="switch"
-            id={`custom-switch-${index}`}
-            label=""
-           
-          />
-        </Form>
-      </td>
-    </tr>
-  ))}
-</tbody>;
-
-                            </table>
+                            <div style={{marginTop: 30}}>
+                           <Button variant='success' style={{borderRadius: 0, }}>Approve Loan</Button>
+                           <Button onClick={handleShow} variant='danger' style={{borderRadius: 0, marginLeft: 20}}>Disapprove Loan</Button>
                           </div>
                             </div>
                           </div>
@@ -410,6 +389,41 @@ function ViewLoan(){
                   </div>
                 </div>
               </div>
+              <Modal show={show} onHide={handleClose} animation={false}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Reason for Disapproving</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Form>
+                      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                          <Form.Label>Description</Form.Label>
+                          <textarea
+                          className="form-control"
+                          rows="3" 
+                          cols="50"
+                          placeholder="Enter reason here..."
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        />
+                      </Form.Group>
+                    </Form>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button style={{borderRadius: 0, }} variant="danger" onClick={handleClose}>
+                      Cancel
+                    </Button>
+                    <Button variant='success' style={{borderRadius: 0, }} >
+                    {isLoading ? (
+                      <>
+                      <Spinner  size='sm' /> 
+                      <span style={{ marginLeft: '5px' }}>Processing, Please wait...</span>
+                    </>
+                ) : (
+                "Disapprove Payment"
+                      )}
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
 
             </div>
 

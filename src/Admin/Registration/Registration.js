@@ -122,6 +122,8 @@ const navigate = useNavigate();
     try {
       const response = await axios.get(`https://api-smesupport.ogunstate.gov.ng/api/applicant/details?id=${id}`, { headers });
       const applyInfo = response.data?.data;
+     
+    
   
      navigate('/view_applicant', {state: {selectedApplicant: applyInfo} });
       setEyeClicked(true);
@@ -272,12 +274,12 @@ const navigate = useNavigate();
                       <div className="table-resposive">
                         <div className="d-flex justify-content-between align-items-center" style={{ padding: '20px 0 0 0', marginBottom: 20 }}>
                           <div className={classes.greenbtn} style={{ display: 'flex', }}>
-                            {/* <div>
+                            <div>
                               <button>Copy</button>
                               <button>Excel</button>
                               <button>PDF</button>
                               <button className={classes.diffbtn}>Column visibility</button>
-                            </div> */}
+                            </div>
                             <div>
                               <label className="d-flex justify-content-start align-items-center">
                                 Show
@@ -351,13 +353,16 @@ const navigate = useNavigate();
                                       maximumFractionDigits: 2
                                     })}</td> */}
                                     {/* <td style={{textAlign: "left"}}>{item.status}</td> */}
-                                    <td>
+                                    <td style={{whiteSpace: "nowrap"}}>
                                       <div onClick={() => handleView(item.id)}  className="btn btn-success-soft btn-sm mr-1">
                                         <i className="far fa-eye"></i>
                                       </div>
-                                      {/* <div onClick={() => handleTrashClick(item.id)} className="btn btn-danger-soft btn-sm">
+                                      <div  className="btn btn-danger-soft btn-sm">
                                         <i className="far fa-trash-alt"></i>
-                                      </div> */}
+                                      </div>
+                                      <div style={{marginLeft: 5}}  className="btn btn-primary-soft btn-sm">
+                                         Edit
+                                      </div>
                                     </td>
                                   </tr>
                                 ))}
