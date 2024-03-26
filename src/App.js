@@ -82,14 +82,14 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/'element={<AdminHome/>}/>
+        <Route path='/'element={<SignIn/>}/>
         <Route path='/login'element={<SignIn/>}/>
         <Route path='/admin'element={<Admin/>}/>
         <Route path='/applications'element={<Applications/>}/>
         <Route path='/view_application'element={<ViewApplication/>}/>
         <Route path='/view_applicant_loan'element={<ViewLoan/>}/>
         <Route path='/view_applicant_grant'element={<ViewGrants/>}/>
-        {/* <Route path='/view_grants'element={<ViewGrants/>}/> */}
+        <Route path='/admin_home'element={<AdminHome/>}/>
         {/* <Route path='/view_applicant_grant'element={<ViewGrant/>}/> */}
         <Route path='/grants'element={<Grants/>}/>
         <Route path='/loans'element={<Loans/>}/>

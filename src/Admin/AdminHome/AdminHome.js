@@ -52,8 +52,30 @@ export default function AdminHome() {
                 <div className={classes.gridBoxs}>
                     <img src={chart2} alt='chart'/>
                 </div>
-                <div className={classes.gridBoxs}>
-                    <img src={chart3} alt='chart'/>
+                <div className={classes.gridBoxs} style={{padding:'26px'}}>
+                    <div className={classes.head}>
+                        <h5>Grant disbursement</h5>
+                        <button >This month <i class='bx bx-chevron-down'></i></button>
+                    </div>
+                    <div className={classes.flex}>
+                        <div className={classes.content}>
+                            <div className={classes.contDetails}>
+                                <small>Total number of Loans paid out</small>
+                                <h2>564</h2>
+                            </div>
+                            <div className={classes.contDetails}>
+                                <small>Total amount of expected loan repayment this month</small>
+                                <h2>12,067,950</h2>
+                            </div>
+                            <div className={classes.contDetails}>
+                                <small>Total amount of loan repayment made this month</small>
+                                <h2>7,360,050</h2>
+                            </div>
+                        </div>
+                        <div className={classes.flexChart}>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

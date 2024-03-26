@@ -32,11 +32,14 @@ h1, h2, h3, h4, h5, h6{
     width: 100%;
     max-width: 785px;
     overflow: hidden;
+    background-color: var(--white);
+    border-radius: 20px;
 }
 .gridSubgrid{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 19px; 
+    background-color: transparent !important;
 }
 .subGridDetails{
     width: 100%;
@@ -44,6 +47,10 @@ h1, h2, h3, h4, h5, h6{
     background-color: var(--white);
     border-radius: 20px;
     padding: 15px 0 21px 22px;
+    transition: ease 0.3s
+}
+.subGridDetails:hover{
+
 }
 .subGridDetails .iconCont{
     width: 46px;
@@ -61,4 +68,27 @@ h1, h2, h3, h4, h5, h6{
 }
 small{
     color: var(--light-Black);
+}
+.head{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.head h5{
+    font-size: 18px;
+    font-weight: 800;
+}
+.head button{
+    border-radius: 8px;
+    background-color: transparent;
+    border:1px solid var(--light-Black);
+    padding:12px 20px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--light-Black);
+}
+.head button i{
+    font-size: 18px !important;
 }
