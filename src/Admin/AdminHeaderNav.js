@@ -243,6 +243,11 @@ export const AdminHeaderNav = () => {
                         <i className="fa-solid fa-file-invoice"></i> Loans
                       </NavLink>
                     </li>
+                    <li className="nav-item">
+                      <NavLink to={'/registration'} id="nav-toggle" className="nav-link"   aria-expanded="false">
+                        <i className="fa-solid fa-file-invoice"></i> Registrations
+                      </NavLink>
+                    </li>
                     
                     <li className="nav-item">
                       <NavLink to={'/grants'} id="nav-toggle" className="nav-link"   aria-expanded="false">
