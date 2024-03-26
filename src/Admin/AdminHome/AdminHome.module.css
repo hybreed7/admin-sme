@@ -1,0 +1,64 @@
+*,
+::after,
+::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --white: #FFFFFF;
+    --green: #2D995F;
+    --light-Black: #6C757D;
+}
+h1, h2, h3, h4, h5, h6{
+    font-weight: 700;
+}
+
+.adminbody{
+    width: 100%;
+    padding: 36px 55px;
+}
+.adminbody .label{
+    color: var(--green);
+    font-size: 20px;
+    margin-bottom: 33px;
+}
+.homecontents{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 37px;
+}
+.gridBoxs{
+    width: 100%;
+    max-width: 785px;
+    overflow: hidden;
+}
+.gridSubgrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 19px; 
+}
+.subGridDetails{
+    width: 100%;
+    max-width: 397px;
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 15px 0 21px 22px;
+}
+.subGridDetails .iconCont{
+    width: 46px;
+    height: 46px;
+    overflow: hidden;
+}
+.subGridDetails h1{
+    font-size: 40px;
+    font-weight: 800;
+}
+.img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+small{
+    color: var(--light-Black);
+}

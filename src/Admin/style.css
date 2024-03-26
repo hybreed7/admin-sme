@@ -1005,7 +1005,7 @@ table code {
 .navbar-custom-menu.navbar {
     background: #fff;
     border-radius: 0;
-    height: 68px;
+    height: 88px;
     width: 100%;
     margin-bottom: 2px !important;
     z-index: 9;
@@ -1035,6 +1035,12 @@ table code {
     /* position:fixed; */
     transition: all .3s;
     box-shadow: 0 -11.875rem 0rem rgba(0, 0, 0, .005)
+}
+.newNavLogo{
+    display: flex;
+    justify-content: right;
+    width: 100%;
+    gap: 16rem;
 }
 
 #nav-color {

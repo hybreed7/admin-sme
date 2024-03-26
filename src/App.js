@@ -15,6 +15,7 @@ import Loans from './Admin/Loans/Loans';
 import Grants from './Admin/Grants/Grants';
 import ViewGrants from './Admin/Grants/ViewGrants';
 import ViewApplication from './Admin/Applications/ViewApplication';
+import AdminHome from './Admin/AdminHome/AdminHome';
 import Booking from './Admin/Registration/Registration';
 import Registration from './Admin/Registration/Registration';
 import ViewRegistration from './Admin/Registration/ViewRegistration';
@@ -82,7 +83,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/'element={<SignIn/>}/>
+        <Route path='/'element={<AdminHome/>}/>
         <Route path='/login'element={<SignIn/>}/>
         <Route path='/admin'element={<Admin/>}/>
         <Route path='/applications'element={<Applications/>}/>
