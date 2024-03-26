@@ -17,6 +17,7 @@ import classes from '../../Admin/Loans/Loans.module.css';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Applications from '../Applications/Applications';
 // import { Button, Modal, Form, Spinner , Badge} from 'react-bootstrap';
 
 
@@ -29,7 +30,8 @@ function Loans() {
   const [mycompanyName, setMyCompanyName] = useState('');
   const [tableData, setTableData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [entriesPerPage, setEntriesPerPage] = useState(6);
+  const [entriesPerPage, setEntriesPerPage] = useState(100);
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
 
@@ -59,8 +61,8 @@ function Loans() {
     readData();
   }, []);
 
-  //   const filteredData = tableData.filter(item => item.gl_name.toLowerCase().includes(searchTerm.toLowerCase()));
-  let totalEntries = tableData.length;
+    const filteredData = loans.filter(item => item.user?.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  let totalEntries = loans.length;
   const totalPages = Math.ceil(totalEntries / entriesPerPage);
 
 
@@ -74,7 +76,7 @@ function Loans() {
 
   const startIdx = (currentPage - 1) * entriesPerPage + 1;
   const endIdx = Math.min(startIdx + entriesPerPage - 1, totalEntries);
-  const displayedData = tableData.slice(startIdx - 1, endIdx);
+  const displayedData = filteredData.slice(startIdx - 1, endIdx);
 
   const headers = {
     'Content-Type': 'application/json',
@@ -87,7 +89,7 @@ function Loans() {
       const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/get-loans', { headers });
       const fetchedApplication = response.data?.data;
       setLoans(fetchedApplication);
-
+console.log(fetchedApplication);
     
     } catch (error) {
       if (error.response && error.response.status === 401) {
@@ -165,14 +167,45 @@ function Loans() {
                       <div className="card mb-12" >
                         <div className="card-body" >
                           <div className="table-resposive" >
-                            <div className="d-flex justify-content-between align-items-center" style={{ padding: '20px 0 0 0', marginBottom: 20, marginTop: -40 }}>
+                            <div className="d-flex justify-content-between align-items-center" style={{ padding: '20px 0 0 0', marginBottom: 20,  }}>
                               <div className={classes.greenbtn} style={{ display: 'flex', }}>
-                                
+                              <div>
+                              <label className="d-flex justify-content-start align-items-center">
+                                Show
+                                <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" className="custom-select custom-select-sm form-control form-control-sm" value={entriesPerPage}
+                                  onChange={(e) => {
+                                    setEntriesPerPage(parseInt(e.target.value));
+                                    setCurrentPage(1);
+                                  }}>
+                                  <option value={10}>10</option>
+                                  <option value={25}>25</option>
+                                  <option value={50}>50</option>
+                                  <option value={100}>100</option>
+                                </select>
+                                entries
+                              </label>
+                            </div>
                                 
                               </div>
                               <div className="text-right modal-effect ">
-                                
+                            <div id="DataTables_Table_0_filter" className="dataTables_filter">
+                              <div className="d-flex justify-content-start align-items-center">
+                                <div className="mr-2">Search:</div>
+                                <input
+                                  type="search"
+                                  value={searchTerm}
+                                  className="form-control form-control-sm"
+                                  placeholder=""
+                                  aria-controls="DataTables_Table_0"
+                                  onChange={(e) => {
+                                    setSearchTerm(e.target.value);
+                                    // setCurrentPage(1);
+                                  }}
+                                />
                               </div>
+
+                            </div>
+                          </div>
                             </div>
 
 
@@ -193,7 +226,7 @@ function Loans() {
                                     </tr>
                                   </thead>
                                   <tbody style={{ whiteSpace: 'nowrap' }}>
-                                  {loans.map((item, index) => (
+                                  {displayedData.map((item, index) => (
                                       <tr key={index}>
                                         <td style={{textAlign: "left"}}>{index + 1}</td>
                                         <td style={{textAlign: "left"}}>{item.user?.name}</td>
