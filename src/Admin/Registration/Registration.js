@@ -71,7 +71,7 @@ const navigate = useNavigate();
       const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/fetch-all-applications', { headers });
       const fetchedApplication = response.data?.data;
       setApplications(fetchedApplication);
-  
+  console.log(fetchedApplication);
 
 
 
@@ -116,12 +116,19 @@ const navigate = useNavigate();
   }
 
 
-  const handleEyeClick = (id) => {
 
-    const foundBooking = tableData.find(item => item.id === id);
-    //  console.log(foundBooking);
-    navigate('/edit_booking', { state: { selectedBooking: foundBooking } });
-    setEyeClicked(true);
+  const handleView = async (id) => {
+   
+    try {
+      const response = await axios.get(`https://api-smesupport.ogunstate.gov.ng/api/applicant/details?id=${id}`, { headers });
+      const applyInfo = response.data?.data;
+  
+     navigate('/view_applicant', {state: {selectedApplicant: applyInfo} });
+      setEyeClicked(true);
+    } catch (error) {
+      const errorStatus = error.response?.data?.message;
+      console.log(errorStatus);
+    }
   };
 
   const handleTrashClick = async (id) => {
@@ -145,45 +152,7 @@ const navigate = useNavigate();
     }
   };
 
-  const editUser = async () => {
-    setLoading(true);
-
-    try {
-      const response = await axios.post(
-        'https://api-sme.promixaccounting.com/api/v1/update',
-        {
-          name: fullName1,
-          // id: deptId, 
-          email: email1,
-          phone_no: phone1,
-          role: selectedRole
-        },
-        { headers }
-      );
-
-      
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: response.data.message,
-      });
-
-      // console.log(response.data);
-    } catch (error) {
-      const errorStatus = error.response?.data?.message || 'An error occurred';
-
-      Swal.fire({
-        icon: 'error',
-        title: 'Failed',
-        text: errorStatus,
-      });
-
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+ 
 
   const filteredData = applications.filter(item => item.user?.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
@@ -240,10 +209,11 @@ const navigate = useNavigate();
                 </div>
 
               </nav> */}
+              <div style={{marginTop: 30}}/>
               <div className="col-sm-8 header-title p-0">
                 <div className="media">
                   {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div> */}
-                  <div className="media-body">
+                  <div className="media-body" >
                     <h1 className="font-weight-bold">Registrations</h1>
                     <small>View all registrations below...</small>
                   </div>
@@ -382,7 +352,7 @@ const navigate = useNavigate();
                                     })}</td> */}
                                     {/* <td style={{textAlign: "left"}}>{item.status}</td> */}
                                     <td>
-                                      <div onClick={() => handleEyeClick(item.id)}  className="btn btn-success-soft btn-sm mr-1">
+                                      <div onClick={() => handleView(item.id)}  className="btn btn-success-soft btn-sm mr-1">
                                         <i className="far fa-eye"></i>
                                       </div>
                                       {/* <div onClick={() => handleTrashClick(item.id)} className="btn btn-danger-soft btn-sm">

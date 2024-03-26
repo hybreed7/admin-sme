@@ -110,40 +110,7 @@ function Loans() {
     }
   }, [bearer]);
 
-  // const handleEyeClick = async (id) => {
-   
-  //   try {
-  //     const response = await axios.get(`https://api-smesupport.ogunstate.gov.ng/api/applicant/details?id=${id}`, { headers });
-  //     const roless = response.data?.data;
-
-  //     const permissionRoles = roless.permissions.map(item => item.id);
-  //     console.log(permissionRoles, "permission roles");
-  //     setPerm(permissionRoles);
-  //    navigate('/view_applicant_loan', {state: {selectedPermission: permissionRoles, selectedRoles: roless} });
-  //     setEyeClicked(true);
-
-
-
-  //     const selectedRole = tableData.find((role) => role.id === roleId);
-
-  //     if (selectedRole) {
-  //       const updatedToggleStates1 = Object.fromEntries(
-  //         permissions.map((permission) => [
-  //           permission.id,
-  //           permissionRoles.includes(permission.id),
-  //         ])
-  //       );
-
-  //       setToggleStates1(updatedToggleStates1);
-
-  //       setSelectedRoleId(roleId);
-       
-  //     }
-  //   } catch (error) {
-  //     const errorStatus = error.response?.data?.message;
-  //     console.log(errorStatus);
-  //   }
-  // };
+  
 
     
     const viewAplicants = () =>{

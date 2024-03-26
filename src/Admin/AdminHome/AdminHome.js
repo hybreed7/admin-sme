@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { AdminHeaderNav } from '../AdminHeaderNav'
 import chart1 from '../../smeImgs/chart1.svg';
 import chart2 from '../../smeImgs/chart2.svg';
@@ -8,13 +8,42 @@ import SubIcon2 from '../../smeImgs/SubIcon2.svg';
 import SubIcon3 from '../../smeImgs/SubIcon3.svg';
 import SubIcon4 from '../../smeImgs/SubIcon4.svg';
 import classes from '../../Admin/AdminHome/AdminHome.module.css'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function AdminHome() {
+    const [user, setUser] = useState('');
+    const [bearer, setBearer] = useState('');
+
+    const readData = async () => {
+        try {
+          const detail = await AsyncStorage.getItem('tobi');
+          const details = await AsyncStorage.getItem('userToken');
+    
+          if (detail !== null) {
+            setUser(detail);
+          }
+    
+    
+          if (details !== null) {
+            setBearer(details);
+          }
+        } catch (e) {
+          alert('Failed to fetch the input from storage');
+        }
+      };
+    
+      useEffect(() => {
+        readData();
+      }, []);
+
   return (
     <div style={{ marginTop: '10rem', }}>
         <AdminHeaderNav/>
         <div className={classes.adminbody}>
-            <h3 className={classes.label}>Analytics</h3>  
+        <div className="media-body">
+                        <h1 className={classes.label}> Welcome, {user} </h1>
+                        {/* <small>From now on you will start your activities.</small> */}
+                      </div> 
             <div className={classes.homecontents}>
                 <div className={classes.gridBoxs}>
                     <img src={chart1} alt='chart'/>

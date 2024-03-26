@@ -83,9 +83,9 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/'element={<AdminHome/>}/>
+        <Route path='/'element={<SignIn/>}/>
         <Route path='/login'element={<SignIn/>}/>
-        <Route path='/admin'element={<Admin/>}/>
+        <Route path='/admin'element={<AdminHome/>}/>
         <Route path='/applications'element={<Applications/>}/>
         <Route path='/view_application'element={<ViewApplication/>}/>
         <Route path='/view_applicant_loan'element={<ViewLoan/>}/>
