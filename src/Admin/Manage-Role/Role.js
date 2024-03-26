@@ -81,34 +81,34 @@ function Role() {
     'Authorization': `Bearer ${bearer}`
   };
 
-  const fetchRole = async () => {
-    setRoleLoading(true);
-    try {
-      const response = await axios.get('https://api-sme.promixaccounting.com/api/v1/role/get-roles', { headers });
-      const results = response.data?.data;
-      // console.log(results);
-      setTableData(results);
-    } catch (error) {
-          if (error.response && error.response.status === 401) {
-            // Redirect to login page if unauthorized
-            navigate('/login');
-          } else {
-          const errorStatus = error.response?.data?.message;
-          console.log(errorStatus);
-          setTableData([]);
-        }
-    } finally {
-      setRoleLoading(false);
-    }
-  };
+  // const fetchRole = async () => {
+  //   setRoleLoading(true);
+  //   try {
+  //     const response = await axios.get('https://api-sme.promixaccounting.com/api/v1/role/get-roles', { headers });
+  //     const results = response.data?.data;
+  //     // console.log(results);
+  //     setTableData(results);
+  //   } catch (error) {
+  //         if (error.response && error.response.status === 401) {
+  //           // Redirect to login page if unauthorized
+  //           navigate('/login');
+  //         } else {
+  //         const errorStatus = error.response?.data?.message;
+  //         console.log(errorStatus);
+  //         setTableData([]);
+  //       }
+  //   } finally {
+  //     setRoleLoading(false);
+  //   }
+  // };
 
   
 
-  useEffect(() => {
-    if (bearer) {
-      fetchRole();
-    }
-  }, [bearer]);
+  // useEffect(() => {
+  //   if (bearer) {
+  //     fetchRole();
+  //   }
+  // }, [bearer]);
 
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -195,31 +195,31 @@ function Role() {
       return; // User canceled, do nothing
     }
   
-    try {
-      const response = await axios.get(`https://api-sme.promixaccounting.com/api/v1/role/delete-role?role_id=${id}`, { headers });
-      fetchRole();
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: response.data.message,
-      });
-      setTrashClicked(true);
-    } catch (error) {
-      const errorStatus = error.response?.data?.message;
-      Swal.fire({
-        icon: 'error',
-        title: 'Failed',
-        text: errorStatus,
-      });
-      console.log(errorStatus);
-    }
+    // try {
+    //   const response = await axios.get(`https://api-sme.promixaccounting.com/api/v1/role/delete-role?role_id=${id}`, { headers });
+    //   fetchRole();
+    //   Swal.fire({
+    //     icon: 'success',
+    //     title: 'Success',
+    //     text: response.data.message,
+    //   });
+    //   setTrashClicked(true);
+    // } catch (error) {
+    //   const errorStatus = error.response?.data?.message;
+    //   Swal.fire({
+    //     icon: 'error',
+    //     title: 'Failed',
+    //     text: errorStatus,
+    //   });
+    //   console.log(errorStatus);
+    // }
   };
   
 
 
   return (
 
-    <div style={{ marginTop: '8rem', }}>
+    <div style={{ marginTop: '10rem', }}>
 
       <div className="wrapper">
         {/* <!-- Sidebar  --> */}
@@ -228,8 +228,8 @@ function Role() {
         {/* <!-- Page Content  --> */}
         <div className="content-wrapper">
           <div className="main-content">
-
-            <AdminHeaderNav />
+          <AdminHeaderNav />
+            {/* <AdminHeaderNav /> */}
             <div className='newBody'>
               <div className='newWidth'>
 

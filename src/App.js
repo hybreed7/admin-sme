@@ -19,6 +19,9 @@ import AdminHome from './Admin/AdminHome/AdminHome';
 import Booking from './Admin/Registration/Registration';
 import Registration from './Admin/Registration/Registration';
 import ViewRegistration from './Admin/Registration/ViewRegistration';
+import Role from './Admin/Manage-Role/Role';
+import ManageLevel from './Admin/Manage-level/ManageLevel';
+import ManageUser from './Admin/Manage-user/ManageUser';
 
 
 
@@ -96,6 +99,9 @@ function App() {
         <Route path='/loans'element={<Loans/>}/>
         <Route path='/registration'element={<Registration/>}/>
         <Route path='/view_applicant'element={<ViewRegistration/>}/>
+        <Route path='/role'element={<Role/>}/>
+        <Route path='/approval_level'element={<ManageLevel/>}/>
+        <Route path='/manage_user'element={<ManageUser/>}/>
       </Routes>
     </>
   );

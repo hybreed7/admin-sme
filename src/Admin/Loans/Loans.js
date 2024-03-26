@@ -35,6 +35,7 @@ function Loans() {
 
   const [loans, setLoans] = useState([]);
   const [loansLoading, setLoansLoading] = useState(false);
+  const [eyeClicked, setEyeClicked] = useState(false);
 
 
   const readData = async () => {
@@ -113,9 +114,9 @@ function Loans() {
   
 
     
-    const viewAplicants = () =>{
-        navigate('/view_applicant_loan')
-    }
+    // const viewAplicants = () =>{
+    //     navigate('/view_applicant_loan')
+    // }
 
     function formatDate(dateString) {
       const date = new Date(dateString);
@@ -126,6 +127,21 @@ function Loans() {
     function padZero(num) {
       return num < 10 ? `0${num}` : num;
     }
+
+    const handleView = async (id) => {
+   
+      try {
+        const response = await axios.get(`https://api-smesupport.ogunstate.gov.ng/api/loan-details?id=${id}`, { headers });
+        const applyInfo = response.data?.data;
+    console.log(applyInfo, "VIEW SECTOR");
+       navigate('/view_applicant_loan', {state: {selectedApplicant: applyInfo} });
+        setEyeClicked(true);
+      } catch (error) {
+        const errorStatus = error.response?.data?.message;
+        console.log(errorStatus);
+      }
+    };
+  
       
     return (
 
@@ -208,7 +224,7 @@ function Loans() {
                                         </Badge>
                                         </td>
                                         
-                                        <td><div   className="btn btn-success-soft btn-sm mr-1">
+                                      <td><div  onClick={() => handleView(item.id)} className="btn btn-success-soft btn-sm mr-1">
                                         <i className="far fa-eye"></i>
                                       </div></td>
                                       </tr>
