@@ -75,7 +75,7 @@ const navigate = useNavigate();
 
 
 
-      console.log(fetchedApplication);
+      
     } catch (error) {
       if (error.response && error.response.status === 401) {
         
@@ -103,41 +103,7 @@ const navigate = useNavigate();
   };
 
  
-  const createUser = async () => {
-    setLoading(true);
-
-    try {
-      const response = await axios.post(
-        'https://api-sme.promixaccounting.com/api/v1/create',
-        {
-          name: fullName,
-          email: email,
-          phone_no: phone,
-          role: selectedRole
-        },
-        { headers }
-      );
-      
-      handleClose();
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: response.data.message,
-      });
-      console.log(response.data);
-
-    } catch (error) {
-      const errorStatus = error.response.name;
-      Swal.fire({
-        icon: 'error',
-        title: 'Failed',
-        text: error.response.name,
-      });
-      console.error(errorStatus);
-    } finally {
-      setLoading(false);
-    }
-  };
+  
 
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -219,7 +185,7 @@ const navigate = useNavigate();
   };
 
 
-  const filteredData = tableData.filter(item => item.particulars.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredData = applications.filter(item => item.user?.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const totalPages = Math.ceil(filteredData.length / entriesPerPage);
 
@@ -236,13 +202,7 @@ const navigate = useNavigate();
   const endIndexx = Math.min(startIndexx + entriesPerPage - 1, totalEntries);
   const displayedData = filteredData.slice(startIndexx - 1, endIndexx);
 
-  const handleRoleChange = (e) => {
-    setSelectedRole(e.target.value);
-  };
-
-  const handleCreate = () => {
-    navigate('/create_booking');
-  };
+ 
   
 
   return (
@@ -387,33 +347,33 @@ const navigate = useNavigate();
                         </div>
 
 
-                        {isLoading ? (
-                          <p>Fetching bookings...</p>
+                        {applicationsLoading ? (
+                          <p>Fetching all registrations...</p>
                         ) : (
                           <div className="table-responsive">
                             <table className="table display table-bordered table-striped table-hover bg-white m-0 card-table">
 
-                              <thead style={{ whiteSpace: 'nowrap' }}>
+                              <thead style={{ }}>
                                 <tr>
                                   <th>S/N</th>
                                   <th>Name</th>
                                   <th>Date of birth</th>
                                   <th>Home Address</th>
                                   <th>Business Name</th>
-                                  <th>Bank Name</th>
+                                  {/* <th>Bank Name</th> */}
                                   {/* <th>Amount</th> */}
                                   {/* <th>Status</th> */}
                                   <th>Action</th>
                                 </tr>
                               </thead>
-                              <tbody style={{ whiteSpace: 'nowrap' }}>
-                                {applications.map((item, index) => (
+                              <tbody style={{textAlign: "left" }}>
+                                {displayedData.map((item, index) => (
                                   <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{item.user?.name}</td>
+                                    <td style={{textAlign: "left"}}>{index + 1}</td>
+                                    <td style={{textAlign: "left"}}>{item.user?.name}</td>
                                     <td style={{textAlign: "left"}}>{item.user?.dob}</td>
-                                    <td>{item.user?.home_address}</td>
-                                    <td>{item.user?.company_name}</td>
+                                    <td style={{textAlign: "left"}}>{item.user?.home_address}</td>
+                                    <td style={{textAlign: "left"}}>{item.user?.company_name}</td>
                                     {/* <td style={{textAlign: "left"}}>{item.user?.bank_name}</td> */}
                                     {/* <td style={{textAlign: "right"}}>{parseFloat(item.amount).toLocaleString('en-US', {
                                       minimumIntegerDigits: 1,

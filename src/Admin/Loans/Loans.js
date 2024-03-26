@@ -88,7 +88,7 @@ function Loans() {
       const fetchedApplication = response.data?.data;
       setLoans(fetchedApplication);
 
-      console.log(fetchedApplication);
+    
     } catch (error) {
       if (error.response && error.response.status === 401) {
         
