@@ -225,29 +225,24 @@ export const AdminHeaderNav = () => {
                       </li>
                     {/* )} */}
 
-
-
-
-
-                    <li className="nav-item dropdown">
-                      <NavLink to={'/applications'} id="nav-toggle" className="nav-link"   aria-expanded="false">
-                        <i className="fa-solid fa-file-invoice-dollar"></i> Applications
-                      </NavLink>
-                      
-                    </li>
-                    <li className="nav-item">
-                      <NavLink to={'/loans'} id="nav-toggle" className="nav-link"   aria-expanded="false">
-                        <i className="fa-solid fa-file-invoice"></i> Loans
-                      </NavLink>
-                    </li>
-                    
-                    <li className="nav-item">
-                      <NavLink to={'/grants'} id="nav-toggle" className="nav-link"   aria-expanded="false">
-                        <i className="fa-solid fa-file-invoice"></i> Grants
-                      </NavLink>
+<li className="nav-item">
+                      <NavLink to={'/registration'} id="nav-link dropdown-toggle" style={{ paddingLeft: '0' }} className="nav-link" ><i className="fa-solid fa-gear"></i> Registration</NavLink>
                     </li>
 
-                    
+
+
+
+<li className="nav-item dropdown">
+    <NavLink to={'#'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i className="fa-solid fa-gear"></i> Applications
+    </NavLink>
+    <ul className="dropdown-menu">
+      <li><NavLink to={"/loans"} className="dropdown-item">Loans</NavLink></li>
+      <li><NavLink to={"/grants"} className="dropdown-item">Grants</NavLink></li>
+      
+     
+    </ul>
+  </li>
                     <li className="nav-item dropdown">
                       <NavLink to={'#'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i className="fa-solid fa-file-invoice"></i> Approvals

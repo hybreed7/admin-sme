@@ -225,7 +225,7 @@ function Applications() {
                                 </table>
                               </div>
                             )}
-<div className={classes.endded}>
+                            <div className={classes.endded}>
                               <p>
                                 Showing {startIdx} to {endIdx} of {totalEntries } entries
                               </p>
