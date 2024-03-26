@@ -208,7 +208,7 @@ export const AdminHeaderNav = () => {
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul className="navbar-nav">
                     <li className="nav-item">
-                      <NavLink to={'/admin'} id="nav-color" style={{ paddingLeft: '0' }} className="nav-link active" aria-current="page" href="admin"><i className="fas fa-home"></i> Home</NavLink>
+                      <NavLink to={'/admin_home'} id="nav-color" style={{ paddingLeft: '0' }} className="nav-link active" aria-current="page" href="admin"><i className="fas fa-home"></i> Home</NavLink>
                     </li>
 
                     {/* {isAdmin && ( */}

@@ -268,7 +268,7 @@ function ManageLevel() {
         <div className="content-wrapper">
           <div className="main-content">
 
-            <AdminHeaderNav />
+          <AdminHeaderNav />
 
 
             {/* <!--Content Header (Page header)--> */}
@@ -292,7 +292,7 @@ function ManageLevel() {
               </nav>
               <div className="col-sm-8 header-title p-0">
                 <div className="media">
-                  <div className="header-icon text-success mr-3"><i className=""><img src={favicon} style={{height: 100, width: 100}} className={classes.favshi} alt="favicon" /></i></div>
+                  {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} style={{height: 100, width: 100}} className={classes.favshi} alt="favicon" /></i></div> */}
                   <div className="media-body">
                     <h1 className="font-weight-bold">Manage Level</h1>
                     <small>Create and update your level...</small>

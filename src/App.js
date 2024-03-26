@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import ViewLoan from './Admin/Loans/ViewLoan';
 import SignIn from './Pages/Sign in/SignIn';
 import Applications from './Admin/Applications/Applications';
-// import ViewGrants from './Admin/Grants/ViewGrants';
+
 // import Grants from './Admin/Grants/Grants';
 import Loans from './Admin/Loans/Loans';
 import Grants from './Admin/Grants/Grants';
@@ -19,6 +19,9 @@ import AdminHome from './Admin/AdminHome/AdminHome';
 import Booking from './Admin/Registration/Registration';
 import Registration from './Admin/Registration/Registration';
 import ViewRegistration from './Admin/Registration/ViewRegistration';
+import Role from './Admin/Manage-Role/Role';
+import ManageLevel from './Admin/Manage-level/ManageLevel';
+import ManageUser from './Admin/Manage-user/ManageUser';
 
 
 
@@ -90,12 +93,15 @@ function App() {
         <Route path='/view_application'element={<ViewApplication/>}/>
         <Route path='/view_applicant_loan'element={<ViewLoan/>}/>
         <Route path='/view_applicant_grant'element={<ViewGrants/>}/>
-        {/* <Route path='/view_grants'element={<ViewGrants/>}/> */}
+        <Route path='/admin_home'element={<AdminHome/>}/>
         {/* <Route path='/view_applicant_grant'element={<ViewGrant/>}/> */}
         <Route path='/grants'element={<Grants/>}/>
         <Route path='/loans'element={<Loans/>}/>
         <Route path='/registration'element={<Registration/>}/>
         <Route path='/view_applicant'element={<ViewRegistration/>}/>
+        <Route path='/role'element={<Role/>}/>
+        <Route path='/approval_level'element={<ManageLevel/>}/>
+        <Route path='/manage_user'element={<ManageUser/>}/>
       </Routes>
     </>
   );

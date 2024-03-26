@@ -8,6 +8,8 @@ import "../assets/plugins/datatables/dataTables.bootstrap4.min.css";
 import { AdminHeaderNav } from '../AdminHeaderNav';
 import Pdf from '../../Images/pdf.png'
 import { useLocation } from 'react-router-dom'
+import Pdf from '../../Images/pdf.png'
+import { useLocation } from 'react-router-dom'
 import Select from 'react-select';
 import { InfoFooter } from '../../InfoFooter';
 import axios from 'axios';
@@ -17,7 +19,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { Button, Spinner, Form , Modal } from 'react-bootstrap';
 import favicon from '../../Images/faviconn.png'
 import CurrencyInput from 'react-currency-input-field';
-import classes from './ViewLoan.module.css'
+import classes from '../../Admin/Loans/ViewLoan.module.css'
 
 
 function ViewLoan() {
