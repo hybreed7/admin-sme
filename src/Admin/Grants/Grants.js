@@ -31,7 +31,7 @@ function Grants() {
   const [entriesPerPage, setEntriesPerPage] = useState(6);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
-
+  const [eyeClicked, setEyeClicked] = useState(false);
   const [grants, setGrants] = useState([]);
   const [grantsLoading, setGrantsLoading] = useState(false);
 
@@ -111,10 +111,23 @@ function Grants() {
   }, [bearer]);
 
 
-    
-    const viewAplicants = () =>{
-        navigate('/view_applicant_grant')
+  const handleView = async (id) => {
+   
+    try {
+      const response = await axios.get(`https://api-smesupport.ogunstate.gov.ng/api/grant-details?id=${id}`, { headers });
+      const applyInfo = response.data?.data;
+  
+     navigate('/view_grants', {state: {selectedApplicant: applyInfo} });
+      setEyeClicked(true);
+    } catch (error) {
+      const errorStatus = error.response?.data?.message;
+      console.log(errorStatus);
     }
+  };
+    
+    // const viewAplicants = () =>{
+    //     navigate('/view_applicant_grant')
+    // }
       
     return (
 
@@ -133,18 +146,19 @@ function Grants() {
             {/* <!--Content Header (Page header)--> */}
             <div className='newBody'>
               <div className='newWidth'>
-                {/* <div className="content-header row align-items-center m-0">
+                <div className="content-header row align-items-center m-0">
 
                   <div className="col-sm-8 header-title p-0">
                     <div className="media">
                       <div className="media-body">
-                        <h1 className="font-weight-bold"> Welcome, {user} </h1>
-                        <small>From now on you will start your activities.</small>
+                        <h1 className="font-weight-bold"> All Grants </h1>
+                        <small>View all grants below.</small>
                       </div>
 
                     </div>
                   </div>
-                </div> */}
+                </div>
+                
 
                 <div className="body-content">
 
@@ -196,7 +210,7 @@ function Grants() {
                                       minimumFractionDigits: 2,
                                       maximumFractionDigits: 2
                                     })}</td>
-                                        <td><div   className="btn btn-success-soft btn-sm mr-1">
+                                        <td><div  onClick={() => handleView(item.id)} className="btn btn-success-soft btn-sm mr-1">
                                         <i className="far fa-eye"></i>
                                       </div></td>
                                       </tr>
