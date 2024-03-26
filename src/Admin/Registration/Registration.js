@@ -71,11 +71,11 @@ const navigate = useNavigate();
       const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/fetch-all-applications', { headers });
       const fetchedApplication = response.data?.data;
       setApplications(fetchedApplication);
-  
+  console.log(fetchedApplication);
 
 
 
-      console.log(fetchedApplication);
+      
     } catch (error) {
       if (error.response && error.response.status === 401) {
         
@@ -103,41 +103,7 @@ const navigate = useNavigate();
   };
 
  
-  const createUser = async () => {
-    setLoading(true);
-
-    try {
-      const response = await axios.post(
-        'https://api-sme.promixaccounting.com/api/v1/create',
-        {
-          name: fullName,
-          email: email,
-          phone_no: phone,
-          role: selectedRole
-        },
-        { headers }
-      );
-      
-      handleClose();
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: response.data.message,
-      });
-      console.log(response.data);
-
-    } catch (error) {
-      const errorStatus = error.response.name;
-      Swal.fire({
-        icon: 'error',
-        title: 'Failed',
-        text: error.response.name,
-      });
-      console.error(errorStatus);
-    } finally {
-      setLoading(false);
-    }
-  };
+  
 
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -150,12 +116,19 @@ const navigate = useNavigate();
   }
 
 
-  const handleEyeClick = (id) => {
 
-    const foundBooking = tableData.find(item => item.id === id);
-    //  console.log(foundBooking);
-    navigate('/edit_booking', { state: { selectedBooking: foundBooking } });
-    setEyeClicked(true);
+  const handleView = async (id) => {
+   
+    try {
+      const response = await axios.get(`https://api-smesupport.ogunstate.gov.ng/api/applicant/details?id=${id}`, { headers });
+      const applyInfo = response.data?.data;
+  
+     navigate('/view_applicant', {state: {selectedApplicant: applyInfo} });
+      setEyeClicked(true);
+    } catch (error) {
+      const errorStatus = error.response?.data?.message;
+      console.log(errorStatus);
+    }
   };
 
   const handleTrashClick = async (id) => {
@@ -179,47 +152,9 @@ const navigate = useNavigate();
     }
   };
 
-  const editUser = async () => {
-    setLoading(true);
+ 
 
-    try {
-      const response = await axios.post(
-        'https://api-sme.promixaccounting.com/api/v1/update',
-        {
-          name: fullName1,
-          // id: deptId, 
-          email: email1,
-          phone_no: phone1,
-          role: selectedRole
-        },
-        { headers }
-      );
-
-      
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: response.data.message,
-      });
-
-      // console.log(response.data);
-    } catch (error) {
-      const errorStatus = error.response?.data?.message || 'An error occurred';
-
-      Swal.fire({
-        icon: 'error',
-        title: 'Failed',
-        text: errorStatus,
-      });
-
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-
-  const filteredData = tableData.filter(item => item.particulars.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredData = applications.filter(item => item.user?.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const totalPages = Math.ceil(filteredData.length / entriesPerPage);
 
@@ -236,13 +171,7 @@ const navigate = useNavigate();
   const endIndexx = Math.min(startIndexx + entriesPerPage - 1, totalEntries);
   const displayedData = filteredData.slice(startIndexx - 1, endIndexx);
 
-  const handleRoleChange = (e) => {
-    setSelectedRole(e.target.value);
-  };
-
-  const handleCreate = () => {
-    navigate('/create_booking');
-  };
+ 
   
 
   return (
@@ -280,10 +209,11 @@ const navigate = useNavigate();
                 </div>
 
               </nav> */}
+              <div style={{marginTop: 30}}/>
               <div className="col-sm-8 header-title p-0">
                 <div className="media">
                   {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div> */}
-                  <div className="media-body">
+                  <div className="media-body" >
                     <h1 className="font-weight-bold">Registrations</h1>
                     <small>View all registrations below...</small>
                   </div>
@@ -387,33 +317,33 @@ const navigate = useNavigate();
                         </div>
 
 
-                        {isLoading ? (
-                          <p>Fetching bookings...</p>
+                        {applicationsLoading ? (
+                          <p>Fetching all registrations...</p>
                         ) : (
                           <div className="table-responsive">
                             <table className="table display table-bordered table-striped table-hover bg-white m-0 card-table">
 
-                              <thead style={{ whiteSpace: 'nowrap' }}>
+                              <thead style={{ }}>
                                 <tr>
                                   <th>S/N</th>
                                   <th>Name</th>
                                   <th>Date of birth</th>
                                   <th>Home Address</th>
                                   <th>Business Name</th>
-                                  <th>Bank Name</th>
+                                  {/* <th>Bank Name</th> */}
                                   {/* <th>Amount</th> */}
                                   {/* <th>Status</th> */}
                                   <th>Action</th>
                                 </tr>
                               </thead>
-                              <tbody style={{ whiteSpace: 'nowrap' }}>
-                                {applications.map((item, index) => (
+                              <tbody style={{textAlign: "left" }}>
+                                {displayedData.map((item, index) => (
                                   <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{item.user?.name}</td>
+                                    <td style={{textAlign: "left"}}>{index + 1}</td>
+                                    <td style={{textAlign: "left"}}>{item.user?.name}</td>
                                     <td style={{textAlign: "left"}}>{item.user?.dob}</td>
-                                    <td>{item.user?.home_address}</td>
-                                    <td>{item.user?.company_name}</td>
+                                    <td style={{textAlign: "left"}}>{item.user?.home_address}</td>
+                                    <td style={{textAlign: "left"}}>{item.user?.company_name}</td>
                                     {/* <td style={{textAlign: "left"}}>{item.user?.bank_name}</td> */}
                                     {/* <td style={{textAlign: "right"}}>{parseFloat(item.amount).toLocaleString('en-US', {
                                       minimumIntegerDigits: 1,
@@ -422,7 +352,7 @@ const navigate = useNavigate();
                                     })}</td> */}
                                     {/* <td style={{textAlign: "left"}}>{item.status}</td> */}
                                     <td>
-                                      <div onClick={() => handleEyeClick(item.id)}  className="btn btn-success-soft btn-sm mr-1">
+                                      <div onClick={() => handleView(item.id)}  className="btn btn-success-soft btn-sm mr-1">
                                         <i className="far fa-eye"></i>
                                       </div>
                                       {/* <div onClick={() => handleTrashClick(item.id)} className="btn btn-danger-soft btn-sm">

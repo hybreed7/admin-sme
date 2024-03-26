@@ -18,6 +18,7 @@ import ViewApplication from './Admin/Applications/ViewApplication';
 import AdminHome from './Admin/AdminHome/AdminHome';
 import Booking from './Admin/Registration/Registration';
 import Registration from './Admin/Registration/Registration';
+import ViewRegistration from './Admin/Registration/ViewRegistration';
 
 
 
@@ -84,7 +85,7 @@ function App() {
       <Routes>
         <Route path='/'element={<SignIn/>}/>
         <Route path='/login'element={<SignIn/>}/>
-        <Route path='/admin'element={<Admin/>}/>
+        <Route path='/admin'element={<AdminHome/>}/>
         <Route path='/applications'element={<Applications/>}/>
         <Route path='/view_application'element={<ViewApplication/>}/>
         <Route path='/view_applicant_loan'element={<ViewLoan/>}/>
@@ -94,6 +95,7 @@ function App() {
         <Route path='/grants'element={<Grants/>}/>
         <Route path='/loans'element={<Loans/>}/>
         <Route path='/registration'element={<Registration/>}/>
+        <Route path='/view_applicant'element={<ViewRegistration/>}/>
       </Routes>
     </>
   );
