@@ -6,10 +6,8 @@ import "../assets/plugins/typicons/src/typicons.min.css";
 import "../assets/plugins/themify-icons/themify-icons.min.css";
 import "../assets/plugins/datatables/dataTables.bootstrap4.min.css";
 import { AdminHeaderNav } from '../AdminHeaderNav';
-import Pdf from '../../Images/pdf.png'
 import { useLocation } from 'react-router-dom'
 import Pdf from '../../Images/pdf.png'
-import { useLocation } from 'react-router-dom'
 import Select from 'react-select';
 import { InfoFooter } from '../../InfoFooter';
 import axios from 'axios';
