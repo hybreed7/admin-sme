@@ -110,9 +110,55 @@ function Loans() {
     }
   }, [bearer]);
 
+  const handleEyeClick = async (id) => {
+   
+    try {
+      const response = await axios.get(`https://api-smesupport.ogunstate.gov.ng/api/applicant/details?id=${id}`, { headers });
+      const roless = response.data?.data;
+
+      const permissionRoles = roless.permissions.map(item => item.id);
+      console.log(permissionRoles, "permission roles");
+      setPerm(permissionRoles);
+     navigate('/view_applicant_loan', {state: {selectedPermission: permissionRoles, selectedRoles: roless} });
+      setEyeClicked(true);
+
+
+
+      const selectedRole = tableData.find((role) => role.id === roleId);
+
+      if (selectedRole) {
+        // Set the selected role's permissions as true in toggleStates1
+        const updatedToggleStates1 = Object.fromEntries(
+          permissions.map((permission) => [
+            permission.id,
+            permissionRoles.includes(permission.id),
+          ])
+        );
+
+        setToggleStates1(updatedToggleStates1);
+
+        setSelectedRoleId(roleId);
+        // setTrashClicked(true);
+      }
+    } catch (error) {
+      const errorStatus = error.response?.data?.message;
+      console.log(errorStatus);
+    }
+  };
+
     
     const viewAplicants = () =>{
         navigate('/view_applicant_loan')
+    }
+
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      const formattedDate = `${date.getFullYear()}-${padZero(date.getMonth() + 1)}-${padZero(date.getDate())} `;
+      return formattedDate;
+    }
+  
+    function padZero(num) {
+      return num < 10 ? `0${num}` : num;
     }
       
     return (
@@ -132,18 +178,18 @@ function Loans() {
             {/* <!--Content Header (Page header)--> */}
             <div className='newBody'>
               <div className='newWidth'>
-                {/* <div className="content-header row align-items-center m-0">
+                <div className="content-header row align-items-center m-0">
 
                   <div className="col-sm-8 header-title p-0">
                     <div className="media">
                       <div className="media-body">
-                        <h1 className="font-weight-bold"> Welcome, {user} </h1>
-                        <small>From now on you will start your activities.</small>
+                        <h1 className="font-weight-bold">Loan Applications </h1>
+                        <small>View all loan applications....</small>
                       </div>
 
                     </div>
                   </div>
-                </div> */}
+                </div>
 
                 <div className="body-content">
 
@@ -164,7 +210,7 @@ function Loans() {
                             </div>
 
 
-                            {isLoading ? (
+                            {loansLoading ? (
                               <p>Fetching data...</p>
                             ) : (
                               <div className="table-responsive">
@@ -173,11 +219,11 @@ function Loans() {
                                   <thead className='admin-table-head'  style={{ whiteSpace: 'nowrap'}}>
                                     <tr>
                                       <th>S/N</th>
-                                      <th>NAME</th>
-                                      <th>PAID/NOTPAID</th>
-                                      <th>STATUS</th>
-                                      <th>AMOUNT</th>
-                                      <th>ACTION</th>
+                                      <th>Name of Applicant</th>
+                                      <th>Date of Application</th>
+                                      <th>Amount</th>
+                                      <th>Approval Status</th>
+                                      <th>Actions</th>
                                     </tr>
                                   </thead>
                                   <tbody style={{ whiteSpace: 'nowrap' }}>
@@ -185,16 +231,17 @@ function Loans() {
                                       <tr key={index}>
                                         <td style={{textAlign: "left"}}>{index + 1}</td>
                                         <td style={{textAlign: "left"}}>{item.user?.name}</td>
-                                        <td style={{textAlign: "left"}}>{item.type === 1 ? "Loan" : "Grant"}</td>
-                                        <td><Badge bg={item.status === "Pending" ? 'warning' : item.status === "Approved" ? 'success' : 'danger'}>
-                                        {item.status}
-                                        </Badge>
-                                        </td>
+                                        <td style={{textAlign: "left"}}>{formatDate(item.created_at)}</td>
                                         <td style={{textAlign: "right"}}>{parseFloat(item.amount).toLocaleString('en-US', {
                                       minimumIntegerDigits: 1,
                                       minimumFractionDigits: 2,
                                       maximumFractionDigits: 2
                                     })}</td>
+                                        <td><Badge bg={item.status === "Pending" ? 'warning' : item.status === "Approved" ? 'success' : 'danger'}>
+                                        {item.status}
+                                        </Badge>
+                                        </td>
+                                        
                                         <td><div   className="btn btn-success-soft btn-sm mr-1">
                                         <i className="far fa-eye"></i>
                                       </div></td>
