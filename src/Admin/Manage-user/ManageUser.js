@@ -100,28 +100,28 @@ function ManageUser() {
 
 
   //fetch records
-  const fetchBeneficiaries = async () => {
-    setIsLoading(true);
-    try {
-      const response = await axios.get('https://api-sme.promixaccounting.com/api/v1/users/fetch-all', { headers });
+  // const fetchBeneficiaries = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const response = await axios.get('https://api-sme.promixaccounting.com/api/v1/users/fetch-all', { headers });
 
-      // console.log(response);
-      const results = response.data?.data;
-      setTableData(results);
-      // console.log(results);
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        // Redirect to login page if unauthorized
-        navigate('/login');
-      } else {
-      const errorStatus = error.response?.data?.message;
-      console.log(errorStatus);
-      setTableData([]);
-    }
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  //     // console.log(response);
+  //     const results = response.data?.data;
+  //     setTableData(results);
+  //     // console.log(results);
+  //   } catch (error) {
+  //     if (error.response && error.response.status === 401) {
+  //       // Redirect to login page if unauthorized
+  //       navigate('/login');
+  //     } else {
+  //     const errorStatus = error.response?.data?.message;
+  //     console.log(errorStatus);
+  //     setTableData([]);
+  //   }
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   const fetchRole = async () => {
     setRoleLoading(true);
@@ -141,52 +141,52 @@ function ManageUser() {
 
 
 
-  useEffect(() => {
-    if (bearer) {
-      fetchBeneficiaries();
-      fetchRole();
+  // useEffect(() => {
+  //   if (bearer) {
+  //     fetchBeneficiaries();
+  //     fetchRole();
 
-    }
-  }, [bearer]);
+  //   }
+  // }, [bearer]);
 
-  //create beneficiary
-  const createUser = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.post(
-        'https://api-sme.promixaccounting.com/api/v1/users/create-new',
-        {
-          name: fullName,
-          email: email,
-          phone_no: phone,
-          role: selectedRole
+  // create beneficiary
+  // const createUser = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const response = await axios.post(
+  //       'https://api-sme.promixaccounting.com/api/v1/users/create-new',
+  //       {
+  //         name: fullName,
+  //         email: email,
+  //         phone_no: phone,
+  //         role: selectedRole
          
-        },
-        { headers }
-      );
-      console.log(response)
-      fetchBeneficiaries();
-      handleClose();
-      // return
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: response.data.message,
-      });
-      console.log(response.data);
+  //       },
+  //       { headers }
+  //     );
+  //     console.log(response)
+  //     fetchBeneficiaries();
+  //     handleClose();
+  //     // return
+  //     Swal.fire({
+  //       icon: 'success',
+  //       title: 'Success',
+  //       text: response.data.message,
+  //     });
+  //     console.log(response.data);
 
-    } catch (error) {
-      const errorStatus = error.message;
-      Swal.fire({
-        icon: 'error',
-        title: 'Failed',
-        text: errorStatus,
-      });
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  //   } catch (error) {
+  //     const errorStatus = error.message;
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'Failed',
+  //       text: errorStatus,
+  //     });
+  //     console.log(error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   //format date
   function formatDate(dateString) {
@@ -233,68 +233,68 @@ useEffect(() => {
 
 
   //delete function
-  const handleTrashClick = async (id) => {
-    try {
-      const response = await axios.get(`https://payroll.patna.ng/api/admin/users/destroy?id=${id}`, { headers });
-      fetchBeneficiaries();
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: response.data.message,
-      });
-      setTrashClicked(true);
-    } catch (error) {
-      const errorStatus = error.response?.data?.message;
-      Swal.fire({
-        icon: 'error',
-        title: 'Failed',
-        text: errorStatus,
-      });
-      console.log(errorStatus);
-    }
-  };
+  // const handleTrashClick = async (id) => {
+  //   try {
+  //     const response = await axios.get(`https://payroll.patna.ng/api/admin/users/destroy?id=${id}`, { headers });
+  //     fetchBeneficiaries();
+  //     Swal.fire({
+  //       icon: 'success',
+  //       title: 'Success',
+  //       text: response.data.message,
+  //     });
+  //     setTrashClicked(true);
+  //   } catch (error) {
+  //     const errorStatus = error.response?.data?.message;
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'Failed',
+  //       text: errorStatus,
+  //     });
+  //     console.log(errorStatus);
+  //   }
+  // };
 
   //update function
-  const editUser = async (id) => {
-    setLoading(true);
+//   const editUser = async (id) => {
+//     setLoading(true);
 
-    try {
-      const response = await axios.post(
-        'https://api-sme.promixaccounting.com/api/v1/users/update-user',
-        {
-          name: fullName1,
-          id: selectedId, 
-          email: email1,
-          phone_no: phone1,
-          role: selectedRole1,
-          user_id: selectedUser
-        },
-        { headers }
-      );
+//     try {
+//       const response = await axios.post(
+//         'https://api-sme.promixaccounting.com/api/v1/users/update-user',
+//         {
+//           name: fullName1,
+//           id: selectedId, 
+//           email: email1,
+//           phone_no: phone1,
+//           role: selectedRole1,
+//           user_id: selectedUser
+//         },
+//         { headers }
+//       );
 
-      fetchBeneficiaries();
-handleClose1();
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: response.data.message,
-      });
+//       fetchBeneficiaries();
+// handleClose1();
+//       Swal.fire({
+//         icon: 'success',
+//         title: 'Success',
+//         text: response.data.message,
+//       });
 
-      // console.log(response.data);
-    } catch (error) {
-      const errorStatus = error.response?.data?.message || 'An error occurred';
+//       // console.log(response.data);
+//     } catch (error) {
+//       const errorStatus = error.response?.data?.message || 'An error occurred';
 
-      Swal.fire({
-        icon: 'error',
-        title: 'Failed',
-        text: errorStatus,
-      });
+//       Swal.fire({
+//         icon: 'error',
+//         title: 'Failed',
+//         text: errorStatus,
+//       });
 
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+//       console.error(error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
 
   const handleIdChange = (e) =>{
     setSelectedId(e.target.value)
@@ -337,8 +337,8 @@ handleClose1();
       handleShow1={handleShow1}
       handleClose={handleClose}
       handleClose1={handleClose1}
-      createUser={createUser}
-      editUser={editUser}
+      // createUser={createUser}
+      // editUser={editUser}
       isLoading={isLoading}
       selectedRole={selectedRole}
       loading={loading}
@@ -358,7 +358,7 @@ handleClose1();
       handlePrevPage={handlePrevPage}
       handleNextPage={handleNextPage}
       handleEyeClick={handleEyeClick}
-      handleTrashClick={handleTrashClick}
+      // handleTrashClick={handleTrashClick}
       fullName={fullName}
       setFullName={setFullName}
       address={address}

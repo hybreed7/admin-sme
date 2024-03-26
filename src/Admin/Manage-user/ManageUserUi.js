@@ -57,7 +57,7 @@ function ManageUserUi({
   tableData,
 }) {
   return (
-    <div style={{ marginTop: '8rem' }}>
+    <div style={{ marginTop: '10rem' }}>
       <div className="wrapper">
         {/* <!-- Sidebar  --> */}
 
