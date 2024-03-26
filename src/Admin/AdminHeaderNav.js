@@ -143,7 +143,7 @@ export const AdminHeaderNav = () => {
             sidebar toggle<span></span>
           </div>
 
-          <div className="d-flex" style={{ justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+          <div className="d-flex newNavLogo">
             {/* <div style={{ display: 'flex', justifyContent: 'space-between' }}> */}
               <NavLink to={'/admin'} className="navbar-brand">
                 <img src={Logo} className={classes.Logo} style={{ height: 125, width: 200 }} />
@@ -170,10 +170,7 @@ export const AdminHeaderNav = () => {
                     <span>{email}</span>
                   </div>
 
-                  {/* <NavLink to={'/admin_onboarding'} href="#" className="dropdown-item"><i className="typcn typcn-user-outline"></i> My Profile</NavLink>
-                  <NavLink to={'/EditProfile'} href="#" className="dropdown-item"><i className="typcn typcn-edit"></i> Edit Profile</NavLink>
-                  <NavLink to={'/manage_user'} className="dropdown-item"><i className="typcn typcn-user-outline"></i> Manage User</NavLink> */}
-                  {/* <NavLink to={'#'} href="#" className="dropdown-item"><i className="typcn typcn-arrow-shuffle"></i> Activity Logs</NavLink> */}
+                  
                   <NavLink to={'/ChangePassword'} href="#" className="dropdown-item"><i className="typcn typcn-cog-outline"></i> Change Password</NavLink>
                   <NavLink style={{cursor: "pointer"}} onClick={() => handleLogout()} className="dropdown-item"><i className="typcn typcn-key-outline"></i> Sign Out</NavLink>
                 </div>
@@ -215,18 +212,18 @@ export const AdminHeaderNav = () => {
                     </li>
 
                     {/* {isAdmin && ( */}
-  <li className="nav-item dropdown">
-    <NavLink to={'#'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <i className="fa-solid fa-gear"></i> Admin
-    </NavLink>
-    <ul className="dropdown-menu">
-      <li><NavLink to={"/role"} className="dropdown-item">Manage Roles</NavLink></li>
-      <li><NavLink to={"/approval_level"} className="dropdown-item">Approval Levels</NavLink></li>
-      <li><NavLink to={"/manage_user"} className="dropdown-item">Manage User</NavLink></li>
-     
-    </ul>
-  </li>
-{/* )} */}
+                      <li className="nav-item dropdown">
+                        <NavLink to={'#'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          <i className="fa-solid fa-gear"></i> Admin
+                        </NavLink>
+                        <ul className="dropdown-menu">
+                          <li><NavLink to={"/role"} className="dropdown-item">Manage Roles</NavLink></li>
+                          <li><NavLink to={"/approval_level"} className="dropdown-item">Approval Levels</NavLink></li>
+                          <li><NavLink to={"/manage_user"} className="dropdown-item">Manage User</NavLink></li>
+                        
+                        </ul>
+                      </li>
+                    {/* )} */}
 
 
 

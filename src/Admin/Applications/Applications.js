@@ -117,7 +117,7 @@ function Applications() {
     return (
 
     // <div className="fixed">
-    <div style={{ marginTop: '8rem', }}>
+    <div style={{ marginTop: '9rem', }}>
       {/* <!-- #END# Page Loader --> */}
       <div></div>
       <div className="wrapper">
