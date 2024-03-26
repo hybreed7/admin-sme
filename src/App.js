@@ -15,6 +15,8 @@ import Loans from './Admin/Loans/Loans';
 import Grants from './Admin/Grants/Grants';
 import ViewGrants from './Admin/Grants/ViewGrants';
 import ViewApplication from './Admin/Applications/ViewApplication';
+import Booking from './Admin/Registration/Registration';
+import Registration from './Admin/Registration/Registration';
 
 
 
@@ -90,6 +92,7 @@ function App() {
         {/* <Route path='/view_applicant_grant'element={<ViewGrant/>}/> */}
         <Route path='/grants'element={<Grants/>}/>
         <Route path='/loans'element={<Loans/>}/>
+        <Route path='/registration'element={<Registration/>}/>
       </Routes>
     </>
   );

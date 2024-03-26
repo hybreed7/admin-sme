@@ -13,10 +13,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swal from 'sweetalert2';
 import { InfoFooter } from '../../InfoFooter';
 import { AdminHeaderNav } from '../AdminHeaderNav';
-import classes from './Booking.module.css';
+import classes from './Registration.module.css';
 import favicon from '../../Images/faviconn.png'
 
-function Booking() {
+function Registration() {
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
   const [bearer, setBearer] = useState('');
@@ -44,6 +44,8 @@ const navigate = useNavigate();
   const [entriesPerPage, setEntriesPerPage] = useState(100);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [applicationsLoading, setApplicationsLoading] = useState(false)
+  const [applications, setApplications] = useState([]);
 
   const readData = async () => {
     try {
@@ -62,41 +64,45 @@ const navigate = useNavigate();
     readData();
   }, []);
 
+
+  const fetchApplications = async () => {
+    setApplicationsLoading(true);
+    try {
+      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/fetch-all-applications', { headers });
+      const fetchedApplication = response.data?.data;
+      setApplications(fetchedApplication);
+  
+
+
+
+      console.log(fetchedApplication);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        
+        navigate('/login');
+      } else {
+      const errorStatus = error.response?.data?.message;
+      console.log(errorStatus);
+      setApplications([]);
+    }
+    } finally {
+      setApplicationsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (bearer) {
+      fetchApplications();
+        
+    }
+  }, [bearer]);
+
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${bearer}`
   };
 
-  const fetchBooking = async () => {
-    setIsLoading(true);
-    try {
-      const response = await axios.get('https://api-sme.promixaccounting.com/api/v1/booking', { headers });
-      const results = response.data?.data;
-      setTableData(results);
-      console.log(results);
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        // Redirect to login page if unauthorized
-        navigate('/login');
-      } else {
-      const errorStatus = error.response?.data?.message;
-      console.log(errorStatus);
-      setTableData([]);
-    }
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-
-
-  useEffect(() => {
-    if (bearer) {
-      fetchBooking();
-
-    }
-  }, [bearer]);
-
+ 
   const createUser = async () => {
     setLoading(true);
 
@@ -111,7 +117,7 @@ const navigate = useNavigate();
         },
         { headers }
       );
-      fetchBooking();
+      
       handleClose();
       Swal.fire({
         icon: 'success',
@@ -155,7 +161,7 @@ const navigate = useNavigate();
   const handleTrashClick = async (id) => {
     try {
       const response = await axios.get(`https://api-sme.promixaccounting.com/api/v1/destroy?id=${id}`, { headers });
-      fetchBooking();
+     
       Swal.fire({
         icon: 'success',
         title: 'Success',
@@ -189,8 +195,7 @@ const navigate = useNavigate();
         { headers }
       );
 
-      fetchBooking();
-
+      
       Swal.fire({
         icon: 'success',
         title: 'Success',
@@ -259,7 +264,7 @@ const navigate = useNavigate();
             {/* <!--Content Header (Page header)--> */}
             <div className="content-header row align-items-center m-0">
 
-              <nav aria-label="breadcrumb" className="col-sm-4 order-sm-last mb-3 mb-sm-0 p-0 ">
+              {/* <nav aria-label="breadcrumb" className="col-sm-4 order-sm-last mb-3 mb-sm-0 p-0 ">
                 <div
                   style={{
                     marginTop: 20,
@@ -274,13 +279,13 @@ const navigate = useNavigate();
                   </Button>
                 </div>
 
-              </nav>
+              </nav> */}
               <div className="col-sm-8 header-title p-0">
                 <div className="media">
-                  <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div>
+                  {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div> */}
                   <div className="media-body">
-                    <h1 className="font-weight-bold">My Bookings</h1>
-                    <small>Create and view your bookings...</small>
+                    <h1 className="font-weight-bold">Registrations</h1>
+                    <small>View all registrations below...</small>
                   </div>
                 </div>
               </div>
@@ -331,21 +336,18 @@ const navigate = useNavigate();
 
 
 
-
-               
-
                 <div className="col-lg-12">
                   <div className="card">
                     <div className="card-body">
                       <div className="table-resposive">
                         <div className="d-flex justify-content-between align-items-center" style={{ padding: '20px 0 0 0', marginBottom: 20 }}>
                           <div className={classes.greenbtn} style={{ display: 'flex', }}>
-                            <div>
+                            {/* <div>
                               <button>Copy</button>
                               <button>Excel</button>
                               <button>PDF</button>
                               <button className={classes.diffbtn}>Column visibility</button>
-                            </div>
+                            </div> */}
                             <div>
                               <label className="d-flex justify-content-start align-items-center">
                                 Show
@@ -394,38 +396,38 @@ const navigate = useNavigate();
                               <thead style={{ whiteSpace: 'nowrap' }}>
                                 <tr>
                                   <th>S/N</th>
-                                  <th>Particulars</th>
-                                  <th>Booking Order</th>
-                                  <th>Event Date</th>
-                                  <th>Start Time</th>
-                                  <th>End Time</th>
-                                  <th>Amount</th>
-                                  <th>Status</th>
+                                  <th>Name</th>
+                                  <th>Date of birth</th>
+                                  <th>Home Address</th>
+                                  <th>Business Name</th>
+                                  <th>Bank Name</th>
+                                  {/* <th>Amount</th> */}
+                                  {/* <th>Status</th> */}
                                   <th>Action</th>
                                 </tr>
                               </thead>
                               <tbody style={{ whiteSpace: 'nowrap' }}>
-                                {displayedData.map((item, index) => (
+                                {applications.map((item, index) => (
                                   <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td>{item.particulars}</td>
-                                    <td style={{textAlign: "left"}}>{item.booking_order}</td>
-                                    <td>{item.event_date}</td>
-                                    <td>{item.start_hour}</td>
-                                    <td style={{textAlign: "left"}}>{item.end_hour}</td>
-                                    <td style={{textAlign: "right"}}>{parseFloat(item.amount).toLocaleString('en-US', {
+                                    <td>{item.user?.name}</td>
+                                    <td style={{textAlign: "left"}}>{item.user?.dob}</td>
+                                    <td>{item.user?.home_address}</td>
+                                    <td>{item.user?.company_name}</td>
+                                    {/* <td style={{textAlign: "left"}}>{item.user?.bank_name}</td> */}
+                                    {/* <td style={{textAlign: "right"}}>{parseFloat(item.amount).toLocaleString('en-US', {
                                       minimumIntegerDigits: 1,
                                       minimumFractionDigits: 2,
                                       maximumFractionDigits: 2
-                                    })}</td>
-                                    <td style={{textAlign: "left"}}>{item.status}</td>
+                                    })}</td> */}
+                                    {/* <td style={{textAlign: "left"}}>{item.status}</td> */}
                                     <td>
                                       <div onClick={() => handleEyeClick(item.id)}  className="btn btn-success-soft btn-sm mr-1">
                                         <i className="far fa-eye"></i>
                                       </div>
-                                      <div onClick={() => handleTrashClick(item.id)} className="btn btn-danger-soft btn-sm">
+                                      {/* <div onClick={() => handleTrashClick(item.id)} className="btn btn-danger-soft btn-sm">
                                         <i className="far fa-trash-alt"></i>
-                                      </div>
+                                      </div> */}
                                     </td>
                                   </tr>
                                 ))}
@@ -510,4 +512,4 @@ const navigate = useNavigate();
   );
 }
 
-export default Booking;
+export default Registration;

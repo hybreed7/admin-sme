@@ -228,6 +228,9 @@ export const AdminHeaderNav = () => {
   </li>
 {/* )} */}
 
+<li className="nav-item">
+                      <NavLink to={'/registration'} id="nav-link dropdown-toggle" style={{ paddingLeft: '0' }} className="nav-link" ><i className="fa-solid fa-gear"></i> Registration</NavLink>
+                    </li>
 
 
 
