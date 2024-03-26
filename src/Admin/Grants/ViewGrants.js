@@ -6,80 +6,33 @@ import "../assets/plugins/typicons/src/typicons.min.css";
 import "../assets/plugins/themify-icons/themify-icons.min.css";
 import "../assets/plugins/datatables/dataTables.bootstrap4.min.css";
 import { AdminHeaderNav } from '../AdminHeaderNav';
+import Pdf from '../../Images/pdf.png'
+import { useLocation } from 'react-router-dom'
 import Select from 'react-select';
 import { InfoFooter } from '../../InfoFooter';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swal from 'sweetalert2';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Button, Spinner, Form } from 'react-bootstrap';
+import { Button, Spinner, Form , Modal } from 'react-bootstrap';
 import favicon from '../../Images/faviconn.png'
 import CurrencyInput from 'react-currency-input-field';
-import classes from '../../Admin/Grants/ViewGrants.module.css'
+import classes from './ViewGrants.module.css'
 
 
 function ViewGrants() {
-
-  const [particulars, setParticulars] = useState('');
-  const [subCat, setSubcat] = useState([]);
-  const [subCat2, setSubcat2] = useState([]);
-  const [totalCharge, setTotalCharge] = useState('');
-  const [selectedaAsetAccount, setSelectedAssetAccount] = useState('');
-  const [description, setDescription] = useState('');
-  const [selectedAccount, setSelectedAccount] = useState('');
-  const [selectedService, setSelectedService] = useState('');
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [createLoading, setCreateLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [bearer, setBearer] = useState('');
+  const [description, setDescription] = useState('');
   const navigate = useNavigate();
-  const [formData, setFormData] = useState([{ items: '', unitPrice: '', qty: '', totalPrice: '' }]);
-  const [totalAmount, setTotalAmount] = useState('');
-  const [selectedDate, setSelectedDate] = useState('');
-  const [selectedTime, setSelectedTime] = useState('');
-  const [selectedTime1, setSelectedTime1] = useState('');
-  const [itemList, setItemList] = useState([]);
-  const [selectOptions1, setSelectOptions1] = useState([]);
-  const [debitAccount, setDebitAccounts] = useState([]);
-  const [revenues, setRevenues] = useState([]);
-
-  const handleDateChange = (event) => {
-    setSelectedDate(event.target.value);
-  };
-  const handleTimeChange = (event) => {
-    setSelectedTime(event.target.value);
-  };
-  const handleTimeChange1 = (event) => {
-    setSelectedTime1(event.target.value);
-  };
-
-
-  const handleAssetChange = (event) => {
-    setSelectedAssetAccount(event.target.value);
-  };
-
-  const handleAccountChange = (event) => {
-    setSelectedAccount(event.target.value);
-  };
-
-  const handleServiceChange = (event) => {
-    setSelectedService(event.target.value);
-  };
-
-
-  const calcTotalAmount1 = () => {
-    const total = formData.reduce((total, row) => total + parseFloat(row.totalPrice) || 0, 0);
-    setTotalAmount(total);
-  };
-
-  useEffect(() => {
-    calcTotalAmount1();
-  }, [formData]);
-
-
-
-
-
+  const location = useLocation();
+  const { selectedApplicant } = location.state || {};
+const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplicant) : [];
 
 
   const readData = async () => {
@@ -107,246 +60,34 @@ function ViewGrants() {
     navigate(-1);
   }
 
-  const addRow = () => {
-    const newRow = {
-      items: '', unitPrice: '', qty: '', totalPrice: ''
-    };
-    setFormData([...formData, newRow]);
-  };
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const formattedDate = `${date.getFullYear()}-${padZero(date.getMonth() + 1)}-${padZero(date.getDate())} ${padZero(date.getHours())}:${padZero(date.getMinutes())} ${date.getHours() >= 12 ? 'PM' : 'AM'}`;
+    return formattedDate;
+  }
 
-  const deleteRow = (index) => {
-    const updatedData = formData.filter((_, i) => i !== index);
-    setFormData(updatedData);
-  };
-
-  const handleItemDescriptionChange = async (selectedOption, rowIndex) => {
-    const selectedItemId = selectedOption.value;
-    const selectedItem = itemList.find(item => item.id === selectedItemId);
-    const selectedUnitPrice = selectedItem?.price || 0;
-    const stockQuantity = selectedItem?.stock?.quantity || 0;
-
-    // Update form data with selected item and unit price
-    handleFormChange(selectedOption, "items", rowIndex);
-    handleFormChange(selectedUnitPrice, "unitPrice", rowIndex);
-    handleFormChange(stockQuantity, "stockQuantity", rowIndex);
-
-    // Check and update amount based on quantity and unit price
-    const qty = formData[rowIndex]?.qty || 0;
-    handleFormChange(parseFloat(selectedUnitPrice) * parseFloat(qty), "amount", rowIndex);
-  };
-
-  const handleFormChange = (value, fieldName, rowIndex) => {
-    setFormData(prevFormData => {
-      const updatedFormData = [...prevFormData];
-      updatedFormData[rowIndex] = {
-        ...updatedFormData[rowIndex],
-        [fieldName]: value
-      };
-      // Check quantity against stock quantity and update error message
-      if (fieldName === "qty" && parseFloat(value) > parseFloat(updatedFormData[rowIndex]?.stockQuantity || 0)) {
-        updatedFormData[rowIndex].quantityError = `Quantity left: ${updatedFormData[rowIndex]?.stockQuantity}`;
-      } else {
-        updatedFormData[rowIndex].quantityError = ""; // Clear error message if quantity is within limits
-      }
-      return updatedFormData;
-    });
-  };
+  function padZero(num) {
+    return num < 10 ? `0${num}` : num;
+  }
 
 
-  const calcTotalAmount = () => {
-    const updatedFormData = formData.map(row => ({
-      ...row,
-      totalPrice: parseFloat(row.unitPrice) * parseFloat(row.qty) || 0
-    }));
-    setFormData(updatedFormData);
-  };
+ 
 
-  useEffect(() => {
-    calcTotalAmount();
-  }, [formData]);
+  
 
 
 
 
 
-  const fetchSubCat = async () => {
-    setLoading(true);
-
-    try {
-      const response = await axios.get(
-        `https://api-sme.promixaccounting.com/api/v1/get-account-by-sub-category-id?sub_category_id=${1}`,
-        {
-
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${bearer}`
-          }
-        }
-      );
-      const results = response.data?.data;
-      setSubcat(results);
-
-      //   console.log(results, "NIYIN");
-    } catch (error) {
-      const errorStatus = error.response.data.message;
-      console.error(errorStatus);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchRevenues = async () => {
-    setLoading(true);
-
-    try {
-      const response = await axios.get(
-        `https://api-sme.promixaccounting.com/api/v1/get-account-by-class-id?class_id=${4}`,
-        {
-
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${bearer}`
-          }
-        }
-      );
-      const revenueResult = response.data?.data;
-      setRevenues(revenueResult);
-
-      //   console.log(results, "NIYIN");
-    } catch (error) {
-      const errorStatus = error.response.data.message;
-      console.error(errorStatus);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchItems = async () => {
-    setIsLoading(true);
-    try {
-      const response = await axios.get('https://api-sme.promixaccounting.com/api/v1/items/fetch-all', { headers });
-      const itemss = response.data?.data;
-
-      const options1 = itemss.map((item) => ({
-        label: item.name,
-        value: item.id,
-      }));
-      setItemList(itemss);
-      setSelectOptions1(options1);
-    } catch (error) {
-      const errorStatus = error.response?.data?.message;
-      console.log(errorStatus);
-      setDebitAccounts([]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const fetchSubCat2 = async () => {
-    setLoading(true);
-
-    try {
-      const response = await axios.get(
-        `https://api-sme.promixaccounting.com/api/v1/get-account-by-category-id?category_id=${3}`,
-        {
-
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${bearer}`
-          }
-        }
-      );
-      const resultss = response.data?.data;
-      setSubcat2(resultss);
-
-      //   console.log(results, "NI");
-    } catch (error) {
-      const errorStatus = error.response.data.message;
-      console.error(errorStatus);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (bearer) {
-      fetchSubCat();
-      fetchSubCat2();
-      fetchItems();
-      fetchRevenues();
-    }
-  }, [bearer]);
+ 
+  
+ 
+  
 
 
 
-  const createBooking = async () => {
 
-    setCreateLoading(true);
-    try {
-      const quantities = formData.map((row) => row.qty).filter((id) => id !== undefined);
-      const unitPrices = formData.map((row) => row.unitPrice).filter((id) => id !== undefined);
-      const totalPrices = formData.map((row) => row.totalPrice).filter((id) => id !== undefined);
-      const stocks = formData.map((row) => row.items.value).filter((id) => id !== undefined);
-      console.log(quantities, unitPrices, totalPrices, stocks);
-      const response = await axios.post(
-        'https://api-sme.promixaccounting.com/api/v1/booking/create',
-        {
-          particulars: particulars,
-          event_date: selectedDate,
-          start_hour: selectedTime,
-          end_hour: selectedTime1,
-          end_hour: selectedTime1,
-          amount: totalCharge,
-          asset_account: selectedaAsetAccount,
-          booking_account: selectedAccount,
-          description: description,
-          product_id: stocks,
-          quantity: quantities,
-          unit_price: unitPrices,
-          amounts: totalPrices,
-          income_account: selectedService
-
-
-        },
-        { headers }
-      );
-      console.log(response.data.message)
-      setParticulars("");
-      setSelectedDate("");
-      setSelectedTime("");
-      setSelectedTime1("");
-      setTotalCharge("");
-      setSelectedAssetAccount("");
-      setSelectedAccount("");
-      setDescription("");
-      navigate('/booking')
-
-      // return
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: response.data.message,
-      });
-      console.log(response.data);
-
-    } catch (error) {
-      const errorStatus = error.response.data.message;
-      Swal.fire({
-        icon: 'error',
-        title: 'Failed',
-        text: errorStatus,
-      });
-      console.log(error);
-    } finally {
-      setCreateLoading(false);
-    }
-  };
-
-
-  const handleValueChange = (value, name, values) => {
-    setTotalCharge(value); // Update the balance state
-
-  };
+ 
 
 
 
@@ -374,123 +115,86 @@ function ViewGrants() {
 
                   <div className="col-sm-8 header-title p-0">
                     <div className="media">
-                      {/* the header */}
+                     <Button style={{borderRadius: 0, marginTop: 20}} variant='success' onClick={goBack}> Go Back</Button>
                     </div>
-
+                    <div style={{marginTop: 30}}/>
+              <div className="col-sm-8 header-title p-0">
+                <div className="media">
+                  {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div> */}
+                  <div className="media-body" >
+                    <h1 className="font-weight-bold">Details of {selectedApplicant[0].user?.name}</h1>
+                    <small>View applicant's details below...</small>
                   </div>
                 </div>
               </div>
-
+                  </div>
+                </div>
+              </div>
+              <div style={{marginTop: 30}}/>
               <div className="body-content">
-                <div className="col-lg-12">
-                  <div className="card">
+  <div className="col-lg-12">
+    <div className="card">
+      <div className="row">
+        <div className="col-lg-12">
+          <div className="card">
+            <div className="card-body">
+              <div className="card-body">
+                <p style={{ marginTop: '20px', fontWeight: '700' }}>Personal Details</p>
+                <div style={{ width: '138px', height: '3px', backgroundColor: '#2D995F', marginTop: '-15px', marginBottom: '20px' }} />
+                <table style={{ borderCollapse: 'collapse', width: '100%', textAlign: 'left', }}>
+                  <thead>
+                    <tr>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Full Name</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Email Address</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Phone Number</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Date of birth</th>
+                    </tr>
+                  </thead>
+                  <tbody className={classes.applicationTable}>
+                  {selectedApplicant.map((item, index) => (
+                                  <tr key={index}>
+               
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left',  width: "25%"}}>{item.user?.name}</td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left' , width: "25%"}}>{item.user?.email} </td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left', width: "25%" }}>{item.user?.phone_number} </td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left', width: "25%" }}>{item.user?.dob} </td>
+                    </tr>
+                  ))}
+                  </tbody>
+                </table>
+                <table style={{ borderCollapse: 'collapse', width: '100%', textAlign: 'left', }}>
+                  <thead>
+                    <tr>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Home Address</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Permanent Address</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Marital Status</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Local Government</th>
+                    </tr>
+                  </thead>
+                  <tbody className={classes.applicationTable}>
+                  {selectedApplicant.map((item, index) => (
+                                  <tr key={index}>
+               
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left', width: "25%"  }}>{item.user?.home_address}</td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left', width: "25%"}}>{item.user?.permanent_address} </td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left', width: "25%"}}>{item.user?.marital_status} </td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left', width: "25%"}}>{item.user?.local_govt} </td>
+                    </tr>
+                  ))}
+                  </tbody>
+                </table>
 
-                    <div className="row">
-                      <div className="col-lg-12">
-                        <div className="card">
-                          <div className="card-body">
-                            <div className="card-body">
-                              <small>Lara Lowson</small>
-                              <p style={{ marginTop: '20px', fontWeight: '700', }}>Personal Details</p>
-                              <div style={{ width: '138px', height: '3px', backgroundColor: '#2D995F', marginTop: '-15px', marginBottom: '20px' }} />
-                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400' }}>
-                                <div>
-                                  <p>First Name</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lara</p>
-                                </div>
-
-                                <div>
-                                  <p>Last Name</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lawson</p>
-                                </div>
-                                <div>
-                                  <p>Middle Name</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
-                                </div>
-                                <div>
-                                  <p>Email Address</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
-                                </div>
-
-                              </div>
-
-                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400', marginTop: '20px' }}>
-                                <div>
-                                  <p>Phone Number</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lara</p>
-                                </div>
-
-                                <div>
-                                  <p>Date of Birth</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lawson</p>
-                                </div>
-                                <div>
-                                  <p>Home Address</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
-                                </div>
-                                <div>
-                                  <p>Parmanent Address</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
-                                </div>
-
-                              </div>
-
-                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400', marginTop: '20px' }}>
-                                <div>
-                                  <p>Marital status</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lara</p>
-                                </div>
-
-                                <div>
-                                  <p>state of origin</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lawson</p>
-                                </div>
-                                <div>
-                                  <p>Local govt</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
-                                </div>
-                                <div>
-                                  <p>NIN</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
-                                </div>
-
-                              </div>
-
-                              <p style={{ marginTop: '20px', fontWeight: '700', }}>Next of Kin details</p>
-                              <div style={{ width: '138px', height: '3px', backgroundColor: '#2D995F', marginTop: '-15px', marginBottom: '20px' }} />
-                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400' }}>
-                                <div>
-                                  <p>Full name</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lara</p>
-                                </div>
-
-                                <div>
-                                  <p>Phone Number</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lawson</p>
-                                </div>
-                                <div>
-                                  <p>Email Address</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
-                                </div>
-                                <div>
-                                  <p>Relationship</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
-                                </div>
-
-                              </div>
-                              <div style={{ color: '#6C757D', fontSize: '12px', fontWeight: '400' }}>
-                                <p>Home Address</p>
-                                <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
-                              </div>
-
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {/* <p style={{ marginTop: '20px', fontWeight: '700' }}>Next of Kin details</p>
+                <div style={{ width: '138px', height: '3px', backgroundColor: '#2D995F', marginTop: '-15px', marginBottom: '20px' }} /> */}
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
               <div className="body-content">
                 <div className="col-lg-12">
@@ -504,59 +208,117 @@ function ViewGrants() {
 
                               <p style={{ marginTop: '30px', fontWeight: '700', }}>Business Details</p>
                               <div style={{ width: '138px', height: '3px', backgroundColor: '#2D995F', marginTop: '-15px', marginBottom: '20px' }} />
-                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400', marginTop: '-10px' }}>
-                                <div>
-                                  <p>Business name</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lara</p>
-                                </div>
-
-                                <div>
-                                  <p>Business phone number</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lawson</p>
-                                </div>
-                                <div>
-                                  <p>Business email address</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
-                                </div>
-                                <div>
-                                  <p>RC Number</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
-                                </div>
-
-                              </div>
-                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400' }}>
-                                <div>
-                                  <p>Date of commencement of business</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lara</p>
-                                </div>
-
-                                <div>
-                                  <p>Sector of business</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lawson</p>
-                                </div>
-                                <div>
-                                  <p>Ogun state Tax ID number</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
-                                </div>
-                                <div>
-                                  <p>Business address</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
-                                </div>
-
-                              </div>
-                              <div style={{ color: '#6C757D', fontSize: '12px', fontWeight: '400' }}>
-                                <p>Number of employees</p>
-                                <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
-                              </div>
+                              <table style={{ borderCollapse: 'collapse', width: '100%', textAlign: 'left', }}>
+                  <thead>
+                    <tr>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Business Name</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Business Address</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}> Business RC Number</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Business Email Address</th>
+                    </tr>
+                  </thead>
+                  <tbody className={classes.applicationTable}>
+                  {selectedApplicant.map((item, index) => (
+                                  <tr key={index}>
+               
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left',  width: "25%"}}>{item.user?.company_name}</td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left' , width: "25%"}}>{item.user?.business_address} </td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left', width: "25%" }}>{item.user?.rc_number} </td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left', width: "25%" }}></td>
+                    </tr>
+                  ))}
+                  </tbody>
+                </table>
+                              <table style={{ borderCollapse: 'collapse', width: '100%', textAlign: 'left', }}>
+                  <thead>
+                    <tr>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Date of Commencement</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Business Sector</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Ogun State Tax ID</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Business Permit ID</th>
+                    </tr>
+                  </thead>
+                  <tbody className={classes.applicationTable}>
+                  {selectedApplicant.map((item, index) => (
+                                  <tr key={index}>
+               
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left',  width: "25%"}}></td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left' , width: "25%"}}>{item.user?.sector} </td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left', width: "25%" }}>{item.user?.stin} </td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left', width: "25%" }}>{item.user?.business_premise_id}</td>
+                    </tr>
+                  ))}
+                  </tbody>
+                </table>
+                              <table style={{ borderCollapse: 'collapse', width: '100%', textAlign: 'left', }}>
+                  <thead>
+                    <tr>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Number of Employees</th>
+                    </tr>
+                  </thead>
+                  <tbody className={classes.applicationTable}>
+                  {selectedApplicant.map((item, index) => (
+                                  <tr key={index}>
+               
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left',  width: "25%"}}></td>
+                    </tr>
+                  ))}
+                  </tbody>
+                </table>
 
                             </div>
 
-                            <div style={{ marginLeft: '30px' }}>
-                              <p style={{ marginTop: '30px', fontWeight: '700' }}>Documents</p>
-                              <div style={{ width: '138px', height: '3px', backgroundColor: '#2D995F', marginTop: '-15px', marginBottom: '20px' }} />
-                            </div>
+                            <div style={{ marginLeft: '30px',alignItems: 'center' }}>
+  <p style={{  fontWeight: '700' }}>Documents</p>
+  <div style={{ width: '138px', height: '3px', backgroundColor: '#2D995F', marginTop: '-15px', marginBottom: '20px' }} />
+  <div style={{display: 'flex'}}>
+  {(selectedApplicant[0]?.type?.id === 2 && selectedApplicant[0]?.user?.bank_statement) ||
+(selectedApplicant[0]?.type?.id === 1 && selectedApplicant[0]?.user?.bank_statement_loan) ? (
+  <>
+    {selectedApplicant[0]?.type?.id === 2 && selectedApplicant[0]?.user?.bank_statement && (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px', textAlign: 'center' }}>
+        <span title={selectedApplicant[0]?.user?.bank_statement}>
+          <img
+            src={Pdf}
+            alt="PDF Icon"
+            style={{ width: '50px', height: '50px', cursor: 'pointer' }}
+            onClick={() => window.open(selectedApplicant[0]?.user?.bank_statement, '_blank')}
+          />
+          <div style={{ marginTop: '5px' }}>
+            {selectedApplicant[0]?.user?.bank_statement.length > 20
+              ? `${selectedApplicant[0]?.user?.bank_statement.substring(0, 20)}...`
+              : selectedApplicant[0]?.user?.bank_statement}
+          </div>
+        </span>
+      </div>
+    )}
+    {selectedApplicant[0]?.type?.id === 1 && selectedApplicant[0]?.user?.bank_statement_loan && (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px', textAlign: 'center' }}>
+        <span title={selectedApplicant[0]?.user?.bank_statement_loan}>
+          <img
+            src={Pdf}
+            alt="PDF Icon"
+            style={{ width: '50px', height: '50px', cursor: 'pointer' }}
+            onClick={() => window.open(selectedApplicant[0]?.user?.bank_statement_loan, '_blank')}
+          />
+          <div style={{ marginTop: '5px' }}>
+            {selectedApplicant[0]?.user?.bank_statement_loan.length > 20
+              ? `${selectedApplicant[0]?.user?.bank_statement_loan.substring(0, 20)}...`
+              : selectedApplicant[0]?.user?.bank_statement_loan}
+          </div>
+        </span>
+      </div>
+    )}
+  </>
+) : (
+  <p>No documents uploaded</p>
+)}
 
-                          </div>
+</div>
+</div>
+</div>
+
+
                         </div>
                       </div>
                     </div>
@@ -576,26 +338,27 @@ function ViewGrants() {
                               <p style={{ marginTop: '30px', fontWeight: '700', }}>Bank details</p>
                               <div style={{ width: '138px', height: '3px', backgroundColor: '#2D995F', marginTop: '-15px', marginBottom: '20px' }} />
 
-                              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', color: '#6C757D', fontSize: '12px', fontWeight: '400', marginTop: '-10px' }}>
-                                <div>
-                                  <p>Bank name</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Fidelity</p>
-                                </div>
-
-                                <div>
-                                  <p>Account number</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Lawson</p>
-                                </div>
-                                <div>
-                                  <p>Account name</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>Morenikeji</p>
-                                </div>
-                                <div>
-                                  <p>BVN</p>
-                                  <p style={{ display: 'block', color: '#343A40', fontSize: '14px', marginTop: '-15px' }}>lawson@gmail.com</p>
-                                </div>
-
-                              </div>
+                              <table style={{ borderCollapse: 'collapse', width: '100%', textAlign: 'left', }}>
+                  <thead>
+                    <tr>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Bank Name</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Account Number</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>Account Name</th>
+                      <th style={{ border: 'none', padding: '8px', textAlign: 'left' }}>BVN</th>
+                    </tr>
+                  </thead>
+                  <tbody className={classes.applicationTable}>
+                  {selectedApplicant.map((item, index) => (
+                                  <tr key={index}>
+               
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left',  width: "25%"}}>{item.user?.bank_name}</td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left' , width: "25%"}}>{item.user?.account_number} </td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left', width: "25%" }}>{item.user?.account_name} </td>
+                      <td style={{ border: 'none', padding: '8px', textAlign: 'left', width: "25%" }}>{item.user?.bvn}</td>
+                    </tr>
+                  ))}
+                  </tbody>
+                </table>
                             </div>
                           </div>
                         </div>
@@ -614,36 +377,10 @@ function ViewGrants() {
                         <div className="card">
                           <div className="card-body">
                             <div className="card-body">
-                              <table className={classes.styledTable}>
-                                <thead className={classes.tableHead}>
-                                  <th>
-                                    S/N
-                                  </th>
-                                  <th>
-                                    AMOUNT
-                                  </th>
-                                  <th>
-                                    DATE
-                                  </th>
-                                  <th>
-                                    MARK AS PAID
-                                  </th>
-                                </thead>
-                                <tr>
-                                  <td>
-                                    1
-                                  </td>
-                                  <td>
-                                    N41700
-                                  </td>
-                                  <td>
-                                    2nd April 2024
-                                  </td>
-                                  <td>
-
-                                  </td>
-                                </tr>
-                              </table>
+                            <div style={{marginTop: 30}}>
+                           <Button variant='success' style={{borderRadius: 0, }}>Approve Grant</Button>
+                           <Button onClick={handleShow} variant='danger' style={{borderRadius: 0, marginLeft: 20}}>Disapprove Grant</Button>
+                          </div>
                             </div>
                           </div>
                         </div>
@@ -652,6 +389,41 @@ function ViewGrants() {
                   </div>
                 </div>
               </div>
+              <Modal show={show} onHide={handleClose} animation={false}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Reason for Disapproving</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Form>
+                      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                          <Form.Label>Description</Form.Label>
+                          <textarea
+                          className="form-control"
+                          rows="3" 
+                          cols="50"
+                          placeholder="Enter reason here..."
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        />
+                      </Form.Group>
+                    </Form>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button style={{borderRadius: 0, }} variant="danger" onClick={handleClose}>
+                      Cancel
+                    </Button>
+                    <Button variant='success' style={{borderRadius: 0, }} >
+                    {isLoading ? (
+                      <>
+                      <Spinner  size='sm' /> 
+                      <span style={{ marginLeft: '5px' }}>Processing, Please wait...</span>
+                    </>
+                ) : (
+                "Disapprove Payment"
+                      )}
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
 
             </div>
 
