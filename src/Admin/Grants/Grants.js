@@ -120,12 +120,12 @@ const navigate = useNavigate();
   const handleView = async (id) => {
    
     try {
-      const response = await axios.get(`https://api-smesupport.ogunstate.gov.ng/api/applicant/details?id=${id}`, { headers });
+      const response = await axios.get(`https://api-smesupport.ogunstate.gov.ng/api/grant-details?id=${id}`, { headers });
       const applyInfo = response.data?.data;
       
     
   
-     navigate('/view_applicant_grant', {state: {selectedApplicant: applyInfo} });
+     navigate('/view_applicant_grant1', {state: {selectedApplicant: applyInfo} });
       setEyeClicked(true);
     } catch (error) {
       const errorStatus = error.response?.data?.message;

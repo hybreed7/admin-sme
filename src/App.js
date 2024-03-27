@@ -22,6 +22,9 @@ import ViewRegistration from './Admin/Registration/ViewRegistration';
 import Role from './Admin/Manage-Role/Role';
 import ManageLevel from './Admin/Manage-level/ManageLevel';
 import ManageUser from './Admin/Manage-user/ManageUser';
+import ViewLoan1 from './Admin/Loans/ViewLoan1';
+import ViewRegistration1 from './Admin/Registration/ViewRegistration1';
+import ViewGrant1 from './Admin/Grants/ViewGrant1';
 
 
 
@@ -92,13 +95,16 @@ function App() {
         <Route path='/applications'element={<Applications/>}/>
         <Route path='/view_application'element={<ViewApplication/>}/>
         <Route path='/view_applicant_loan'element={<ViewLoan/>}/>
+        <Route path='/view_applicant_loan1'element={<ViewLoan1/>}/>
         <Route path='/view_applicant_grant'element={<ViewGrants/>}/>
+        <Route path='/view_applicant_grant1'element={<ViewGrant1/>}/>
         <Route path='/admin_home'element={<AdminHome/>}/>
         {/* <Route path='/view_applicant_grant'element={<ViewGrant/>}/> */}
         <Route path='/grants'element={<Grants/>}/>
         <Route path='/loans'element={<Loans/>}/>
         <Route path='/registration'element={<Registration/>}/>
         <Route path='/view_applicant'element={<ViewRegistration/>}/>
+        <Route path='/view_applicant1'element={<ViewRegistration1/>}/>
         <Route path='/role'element={<Role/>}/>
         <Route path='/approval_level'element={<ManageLevel/>}/>
         <Route path='/manage_user'element={<ManageUser/>}/>

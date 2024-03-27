@@ -235,7 +235,7 @@ function Role() {
 
                 {/* <!--Content Header (Page header)--> */}
                 <div className="content-header row align-items-center m-0">
-                {(isAdmin || permittedHeaders.includes('create-role')) && (
+                {/* {(isAdmin || permittedHeaders.includes('create-role')) && ( */}
                   <nav aria-label="breadcrumb" className="col-sm-4 order-sm-last mb-3 mb-sm-0 p-0 ">
                     <div
                       style={{
@@ -251,10 +251,10 @@ function Role() {
                 </Button>
                     </div>
                   </nav>
-)}
+{/* )} */}
                   <div className="col-sm-8 header-title p-0">
                     <div className="media">
-                      <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div>
+                      {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div> */}
                       <div className="media-body">
                         <h1 className="font-weight-bold">Roles & Permission</h1>
                         <small>Create and view your roles...</small>
