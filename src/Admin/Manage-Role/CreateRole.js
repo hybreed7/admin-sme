@@ -173,7 +173,7 @@ function CreateRole() {
 
 
   return (
-    <div style={{ marginTop: '8rem', }}>
+    <div style={{ marginTop: '12rem', }}>
       <AdminHeaderNav />
       <div className='newBody'>
         <div className='newWidth'>
@@ -193,8 +193,8 @@ function CreateRole() {
 
                   <div className="col-sm-8 header-title p-0">
                     <div className="media">
-                      <div className="header-icon text-success mr-3"><i className=""><img src={favicon} style={{ height: 30, width: 30 }} alt="favicon" /></i></div>
-                      <div className="media-body" style={{ display: 'flex', justifyContent: "space-between", alignItems: "center" }}>
+                      {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} style={{ height: 30, width: 30 }} alt="favicon" /></i></div> */}
+                      <div className="media-body" style={{ display: 'flex', justifyContent: "space-between", alignItems: "center",}}>
                         <div>
                           <h1 className="font-weight-bold">Create New Role </h1>
                           <small>Complete the respective fields ....</small>

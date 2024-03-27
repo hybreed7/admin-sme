@@ -541,9 +541,9 @@ function Role() {
                           <tbody style={{ whiteSpace: 'nowrap' }}>
                             {displayedData.map((item, index) => (
                               <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>{item.name}</td>
-                                <td>{formatDate(item.created_at)}</td>
+                                <td style={{textAlign:'left'}}>{index + 1}</td>
+                                <td style={{textAlign:'left'}}>{item.name}</td>
+                                <td style={{textAlign:'left'}}>{formatDate(item.created_at)}</td>
                                 <td>
                                 {/* {(isAdmin || permittedHeaders.includes('update-role')) && ( */}
                                   <div onClick={() => handleEyeClick(item.id)} className="btn btn-success-soft btn-sm mr-1">
