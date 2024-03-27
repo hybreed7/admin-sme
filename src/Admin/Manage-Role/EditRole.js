@@ -16,6 +16,9 @@ import { Button, Spinner, Form } from 'react-bootstrap';
 import favicon from '../../Images/faviconn.png'
 import CurrencyInput from 'react-currency-input-field';
 import ToggleSlider from './ToggleSlider';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+
 
 function EditRole() {
 
@@ -65,7 +68,7 @@ function EditRole() {
   const fetchPermission = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get('https://api-sme.promixaccounting.com/api/v1/role/permissions', { headers });
+      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/role/permissions', { headers });
       const data = response.data?.data;
       const permissionId = data.map(item => item.id);
       setPermId(permissionId);
@@ -140,7 +143,7 @@ function EditRole() {
       // console.log(role, selectedToggle, selectedRoles.id, "here");
     try {
       const response = await axios.post(
-        'https://api-sme.promixaccounting.com/api/v1/role/update',
+        'https://api-smesupport.ogunstate.gov.ng/api/role/update',
         {
           name: role,
           permission: selectedToggle,
@@ -152,20 +155,12 @@ function EditRole() {
         }}
       );
   
+      toast.success(response.data.message);
       navigate('/role');
   
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: response.data.message,
-      });
     } catch (error) {
       const errorStatus = error.response?.data?.message || 'An error occurred';
-      Swal.fire({
-        icon: 'error',
-        title: 'Failed',
-        text: errorStatus,
-      });
+      toast.error(errorStatus);
       console.error(error);
     } finally {
       setRoleLoading(false);
@@ -180,13 +175,13 @@ function EditRole() {
 
 
   return (
-    <div style={{ marginTop: '8rem', }}>
+    <div style={{ marginTop: '12rem', }}>
       <AdminHeaderNav />
       <div className='newBody'>
         <div className='newWidth'>
           <div className="wrapper">
             {/* <!-- Sidebar  --> */}
-
+            <ToastContainer />
 
             {/* <!-- Page Content  --> */}
             <div className="content-wrapper">
@@ -200,11 +195,11 @@ function EditRole() {
 
                   <div className="col-sm-8 header-title p-0">
                     <div className="media">
-                      <div className="header-icon text-success mr-3"><i className=""><img src={favicon} style={{ height: 30, width: 30 }} alt="favicon" /></i></div>
+                      {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} style={{ height: 30, width: 30 }} alt="favicon" /></i></div> */}
                       <div className="media-body" style={{ display: 'flex', justifyContent: "space-between", alignItems: "center" }}>
                         <div>
-                          <h1 className="font-weight-bold">Create New Role </h1>
-                          <small>Complete the respective fields ....</small>
+                          <h1 className="font-weight-bold">Update Role </h1>
+                          <small>Complete the respective fields . ...</small>
                         </div>
                         <div style={{ marginBottom: 30 }}>
                           <Button variant='success' onClick={goBack}><i className="fa-solid fa-arrow-left"></i> Go Back</Button>

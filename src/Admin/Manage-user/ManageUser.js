@@ -4,6 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swal from 'sweetalert2';
 import ManageUserUi from './ManageUserUi';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -100,33 +102,33 @@ function ManageUser() {
 
 
   //fetch records
-  // const fetchBeneficiaries = async () => {
-  //   setIsLoading(true);
-  //   try {
-  //     const response = await axios.get('https://api-sme.promixaccounting.com/api/v1/users/fetch-all', { headers });
+  const fetchBeneficiaries = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/fetch-admin-user', { headers });
 
-  //     // console.log(response);
-  //     const results = response.data?.data;
-  //     setTableData(results);
-  //     // console.log(results);
-  //   } catch (error) {
-  //     if (error.response && error.response.status === 401) {
-  //       // Redirect to login page if unauthorized
-  //       navigate('/login');
-  //     } else {
-  //     const errorStatus = error.response?.data?.message;
-  //     console.log(errorStatus);
-  //     setTableData([]);
-  //   }
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+      // console.log(response);
+      const results = response.data?.data;
+      setTableData(results);
+      // console.log(results);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        // Redirect to login page if unauthorized
+        navigate('/login');
+      } else {
+      const errorStatus = error.response?.data?.message;
+      console.log(errorStatus);
+      setTableData([]);
+    }
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const fetchRole = async () => {
     setRoleLoading(true);
     try {
-      const response = await axios.get('https://api-sme.promixaccounting.com/api/v1/role/get-roles', { headers });
+      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/role/get-roles', { headers });
       const roleList = response.data?.data;
       // console.log(results);
       setRoless(roleList);
@@ -141,52 +143,45 @@ function ManageUser() {
 
 
 
-  // useEffect(() => {
-  //   if (bearer) {
-  //     fetchBeneficiaries();
-  //     fetchRole();
+  useEffect(() => {
+    if (bearer) {
+      fetchBeneficiaries();
+      fetchRole();
 
-  //   }
-  // }, [bearer]);
+    }
+  }, [bearer]);
 
-  // create beneficiary
-  // const createUser = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const response = await axios.post(
-  //       'https://api-sme.promixaccounting.com/api/v1/users/create-new',
-  //       {
-  //         name: fullName,
-  //         email: email,
-  //         phone_no: phone,
-  //         role: selectedRole
+
+
+  const createUser = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        'https://api-smesupport.ogunstate.gov.ng/api/create-admin-user',
+        {
+          name: fullName,
+          email: email,
+          phone_number: phone,
+          role: selectedRole
          
-  //       },
-  //       { headers }
-  //     );
-  //     console.log(response)
-  //     fetchBeneficiaries();
-  //     handleClose();
-  //     // return
-  //     Swal.fire({
-  //       icon: 'success',
-  //       title: 'Success',
-  //       text: response.data.message,
-  //     });
-  //     console.log(response.data);
+        },
+        { headers }
+      );
+      console.log(response)
+      fetchBeneficiaries();
+      handleClose();
+      // return
+      toast.success(response.data.message);
+      console.log(response.data);
 
-  //   } catch (error) {
-  //     const errorStatus = error.message;
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Failed',
-  //       text: errorStatus,
-  //     });
-  //     console.log(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+    } catch (error) {
+      const errorStatus = error.message;
+      toast.error(errorStatus);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   //format date
   function formatDate(dateString) {
@@ -205,11 +200,11 @@ function ManageUser() {
     const foundUser = tableData.find(item => item.id === id);
 
     if (foundUser) {
-        const { name, email, phone_no, roles } = foundUser;
+        const { name, email, phone_number, roles } = foundUser;
         setSelectedUser(id);
         setFullName1(name || '');
         setEmail1(email || '');
-        setPhone1(phone_no || '');
+        setPhone1(phone_number || '');
         setAddress(address || '');
 
         // Check if roles is not undefined and has at least one element
@@ -254,47 +249,48 @@ useEffect(() => {
   //   }
   // };
 
-  //update function
-//   const editUser = async (id) => {
-//     setLoading(true);
 
-//     try {
-//       const response = await axios.post(
-//         'https://api-sme.promixaccounting.com/api/v1/users/update-user',
-//         {
-//           name: fullName1,
-//           id: selectedId, 
-//           email: email1,
-//           phone_no: phone1,
-//           role: selectedRole1,
-//           user_id: selectedUser
-//         },
-//         { headers }
-//       );
+  const editUser = async (id) => {
+    setLoading(true);
 
-//       fetchBeneficiaries();
-// handleClose1();
-//       Swal.fire({
-//         icon: 'success',
-//         title: 'Success',
-//         text: response.data.message,
-//       });
+    try {
+      const response = await axios.post(
+        'https://api-smesupport.ogunstate.gov.ng/api/create-admin-user',
+        {
+          name: fullName1,
+          id: selectedId, 
+          email: email1,
+          phone_number: phone1,
+          role: selectedRole1,
+        
+        },
+        { headers }
+      );
 
-//       // console.log(response.data);
-//     } catch (error) {
-//       const errorStatus = error.response?.data?.message || 'An error occurred';
+      fetchBeneficiaries();
+handleClose1();
+      toast.success(response.data.message);
 
-//       Swal.fire({
-//         icon: 'error',
-//         title: 'Failed',
-//         text: errorStatus,
-//       });
+      // console.log(response.data);
+    } catch (error) {
+      let errorMessage = 'An error occurred. Please try again.';
+      if (error.response && error.response.data && error.response.data.message) {
+          if (typeof error.response.data.message === 'string') {
+              errorMessage = error.response.data.message;
+          } else if (Array.isArray(error.response.data.message)) {
+              errorMessage = error.response.data.message.join('; ');
+          } else if (typeof error.response.data.message === 'object') {
+              errorMessage = JSON.stringify(error.response.data.message);
+          }
+      }
 
-//       console.error(error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
+      toast.error(errorMessage);
+
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleIdChange = (e) =>{
     setSelectedId(e.target.value)
@@ -337,8 +333,9 @@ useEffect(() => {
       handleShow1={handleShow1}
       handleClose={handleClose}
       handleClose1={handleClose1}
-      // createUser={createUser}
-      // editUser={editUser}
+      createUser={createUser}
+      ToastContainer={ToastContainer}
+      editUser={editUser}
       isLoading={isLoading}
       selectedRole={selectedRole}
       loading={loading}

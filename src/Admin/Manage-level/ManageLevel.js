@@ -81,34 +81,34 @@ function ManageLevel() {
     'Authorization': `Bearer ${bearer}`
   };
 
-  // const fetchRole = async () => {
-  //   setRoleLoading(true);
-  //   try {
-  //     const response = await axios.get('https://api-sme.promixaccounting.com/api/v1/role/get-roles', { headers });
-  //     const results = response.data?.data;
-  //     // console.log(results);
-  //     setTableData(results);
-  //   } catch (error) {
-  //         if (error.response && error.response.status === 401) {
-  //           // Redirect to login page if unauthorized
-  //           navigate('/login');
-  //         } else {
-  //         const errorStatus = error.response?.data?.message;
-  //         console.log(errorStatus);
-  //         setTableData([]);
-  //       }
-  //   } finally {
-  //     setRoleLoading(false);
-  //   }
-  // };
+  const fetchLevels = async () => {
+    setRoleLoading(true);
+    try {
+      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/approval_level', { headers });
+      const results = response.data?.data?.modules;
+      console.log(results);
+      setTableData(results);
+    } catch (error) {
+          if (error.response && error.response.status === 401) {
+            // Redirect to login page if unauthorized
+            navigate('/login');
+          } else {
+          const errorStatus = error.response?.data?.message;
+          console.log(errorStatus);
+          setTableData([]);
+        }
+    } finally {
+      setRoleLoading(false);
+    }
+  };
 
   
 
-  // useEffect(() => {
-  //   if (bearer) {
-  //     fetchRole();
-  //   }
-  // }, [bearer]);
+  useEffect(() => {
+    if (bearer) {
+      fetchLevels();
+    }
+  }, [bearer]);
 
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -121,9 +121,9 @@ function ManageLevel() {
   }
 
   
-  const filteredData = tableData.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  // const filteredData = tableData.filter(item => item.name?.name?.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
-  const totalPages = Math.ceil(filteredData.length / entriesPerPage);
+  const totalPages = Math.ceil(tableData.length / entriesPerPage);
 
   const handlePrevPage = () => {
     setCurrentPage(Math.max(currentPage - 1, 1));
@@ -133,10 +133,10 @@ function ManageLevel() {
     setCurrentPage(Math.min(currentPage + 1, totalPages));
   };
 
-  const totalEntries = filteredData.length;
+  const totalEntries = tableData.length;
   const startIndexx = (currentPage - 1) * entriesPerPage + 1;
   const endIndexx = Math.min(startIndexx + entriesPerPage - 1, totalEntries);
-  const displayedData = filteredData.slice(startIndexx - 1, endIndexx);
+  // const displayedData = filteredData.slice(startIndexx - 1, endIndexx);
 
 
   const handleEyeClick = async (roleId) => {
@@ -176,7 +176,7 @@ function ManageLevel() {
   };
 
   const handleCreate = () => {
-    navigate('/create_role');
+    navigate('/create_level');
   };
 
   const handleTrashClick = async (id) => {
@@ -247,17 +247,17 @@ function ManageLevel() {
                       }}
                     >
                       <Button variant="success" onClick={handleCreate}>
-                  Create New Role
+                  Create New Level
                 </Button>
                     </div>
                   </nav>
-{/* // )} */}
+{/* )} */}
                   <div className="col-sm-8 header-title p-0">
                     <div className="media">
-                      <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div>
+                      {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div> */}
                       <div className="media-body">
-                        <h1 className="font-weight-bold">Manage Levels</h1>
-                        <small>Create and view your levels...</small>
+                        <h1 className="font-weight-bold">Manage Approval Levels</h1>
+                        <small>Create and view your approval levels...</small>
                       </div>
                     </div>
                   </div>
@@ -524,7 +524,7 @@ function ManageLevel() {
 
 
                             {roleLoading ? (
-                        <p>Fetching Roles...</p>
+                        <p>Fetching Levels...</p>
                       ) : (
                               <div className="table-responsive">
                                 <table className="table display table-bordered table-striped table-hover bg-white m-0 card-table">
@@ -538,22 +538,22 @@ function ManageLevel() {
                             </tr>
                           </thead>
                           <tbody style={{ whiteSpace: 'nowrap' }}>
-                            {displayedData.map((item, index) => (
+                            {tableData.map((item, index) => (
                               <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>{item.name}</td>
-                                <td>{formatDate(item.created_at)}</td>
+                                <td style={{textAlign:'left'}}>{index + 1}</td>
+                                <td style={{textAlign:'left'}}>{item.name?.name}</td>
+                                <td style={{textAlign:'left'}}>{formatDate(item.name?.created_at)}</td>
                                 <td>
-                                {(isAdmin || permittedHeaders.includes('update-role')) && (
+                                {/* {(isAdmin || permittedHeaders.includes('update-role')) && ( */}
                                   <div onClick={() => handleEyeClick(item.id)} className="btn btn-success-soft btn-sm mr-1">
                                     <i className="far fa-eye"></i>
                                   </div>
-)}
-{(isAdmin || permittedHeaders.includes('delete-role')) && (
+{/* )} */}
+{/* {(isAdmin || permittedHeaders.includes('delete-role')) && ( */}
                                   <div onClick={() => handleTrashClick(item.id)} className="btn btn-danger-soft btn-sm">
                                     <i className="far fa-trash-alt"></i>
                                   </div>
-)}
+{/* )} */}
                                 </td>
                               </tr>
                             ))}

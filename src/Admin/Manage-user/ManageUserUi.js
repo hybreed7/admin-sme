@@ -11,6 +11,7 @@ function ManageUserUi({
   roless,
   handleRoleChange1,
   handleShow,
+  ToastContainer,
   handleShow1,
   handleClose,
   handleClose1,
@@ -61,7 +62,7 @@ function ManageUserUi({
       <div className="wrapper">
         {/* <!-- Sidebar  --> */}
 
-
+<ToastContainer />
         {/* <!-- Page Content  --> */}
         <div className="content-wrapper">
           <div className="main-content">
@@ -91,7 +92,7 @@ function ManageUserUi({
 {/* )} */}
                   <div className="col-sm-8 header-title p-0">
                     <div className="media">
-                      <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div>
+                      {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div> */}
                       <div className="media-body">
                         <h1 className="font-weight-bold">Manage Users</h1>
                         <small>Create and update your users...</small>
@@ -298,26 +299,26 @@ function ManageUserUi({
                                   <tbody style={{ whiteSpace: 'nowrap' }}>
                                     {displayedData.map((item, index) => (
                                       <tr key={index}>
-                                        <td>{index + 1}</td>
-                                        <td>{item.name}</td>
-                                        <td>{item.email}</td>
-                                        <td>{item.phone_no}</td>
+                                        <td style={{textAlign: "left"}}>{index + 1}</td>
+                                        <td style={{textAlign: "left"}}>{item.name}</td>
+                                        <td style={{textAlign: "left"}}>{item.email}</td>
+                                        <td style={{textAlign: "left"}}>{item.phone_number}</td>
                                         <td>
   {item.roles?.map((role, index) => (
     <span key={index}>{role.name}</span>
   ))}
 </td>
                                         <td>
-                                        {(isAdmin || permittedHeaders.includes('update-user')) && (
+                                        {/* {(isAdmin || permittedHeaders.includes('update-user')) && ( */}
                                           <div onClick={() => handleEyeClick(item.id)} className="btn btn-success-soft btn-sm mr-1">
                                             <i className="far fa-eye"></i>
                                           </div>
-)}
-{(isAdmin || permittedHeaders.includes('delete-user')) && (
+{/* )} */}
+{/* {(isAdmin || permittedHeaders.includes('delete-user')) && ( */}
                                           <div onClick={() => handleTrashClick(item.id)} className="btn btn-danger-soft btn-sm">
                                             <i className="far fa-trash-alt"></i>
                                           </div>
-)}
+{/* )} */}
                                         </td>
                                       </tr>
                                     ))}

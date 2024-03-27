@@ -68,7 +68,7 @@ const navigate = useNavigate();
   const fetchApplications = async () => {
     setApplicationsLoading(true);
     try {
-      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/fetch-all-applications', { headers });
+      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/applicant/fetch-all', { headers });
       const fetchedApplication = response.data?.data;
       setApplications(fetchedApplication);
   console.log(fetchedApplication);
@@ -125,7 +125,7 @@ const navigate = useNavigate();
      
     
   
-     navigate('/view_applicant', {state: {selectedApplicant: applyInfo} });
+     navigate('/view_applicant1', {state: {selectedApplicant: applyInfo} });
       setEyeClicked(true);
     } catch (error) {
       const errorStatus = error.response?.data?.message;
@@ -156,7 +156,7 @@ const navigate = useNavigate();
 
  
 
-  const filteredData = applications.filter(item => item.user?.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredData = applications.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const totalPages = Math.ceil(filteredData.length / entriesPerPage);
 
@@ -342,10 +342,10 @@ const navigate = useNavigate();
                                 {displayedData.map((item, index) => (
                                   <tr key={index}>
                                     <td style={{textAlign: "left"}}>{index + 1}</td>
-                                    <td style={{textAlign: "left"}}>{item.user?.name}</td>
-                                    <td style={{textAlign: "left"}}>{item.user?.dob}</td>
-                                    <td style={{textAlign: "left"}}>{item.user?.home_address}</td>
-                                    <td style={{textAlign: "left"}}>{item.user?.company_name}</td>
+                                    <td style={{textAlign: "left"}}>{item.name}</td>
+                                    <td style={{textAlign: "left"}}>{item.dob}</td>
+                                    <td style={{textAlign: "left"}}>{item.home_address}</td>
+                                    <td style={{textAlign: "left"}}>{item.company_name}</td>
                                     {/* <td style={{textAlign: "left"}}>{item.user?.bank_name}</td> */}
                                     {/* <td style={{textAlign: "right"}}>{parseFloat(item.amount).toLocaleString('en-US', {
                                       minimumIntegerDigits: 1,
