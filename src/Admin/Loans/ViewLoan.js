@@ -35,6 +35,32 @@ function ViewLoan() {
 const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplicant) : [];
 
 
+
+const approveLoan = async (id) => {
+  try {
+    setIsLoading(true);
+    
+    // Make an API call to approve the loan
+    const response = await axios.post(
+      `https://api-smesupport.ogunstate.gov.ng/api/approve-application?id=${id}`,
+       // No request body in this case
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${bearer}`
+        }
+      }
+    );
+      
+    console.log(response.data); // Log the response data for debugging
+  } catch (error) {
+    // Handle error
+    console.error('Error approving loan:', error);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
   const readData = async () => {
     try {
       const value = await AsyncStorage.getItem('userToken');
@@ -69,28 +95,6 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
   function padZero(num) {
     return num < 10 ? `0${num}` : num;
   }
-
-
- 
-
-  
-
-
-
-
-
- 
-  
- 
-  
-
-
-
-
- 
-
-
-
 
 
 
@@ -378,7 +382,16 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
                           <div className="card-body">
                             <div className="card-body">
                             <div style={{marginTop: 30}}>
-                           <Button variant='success' style={{borderRadius: 0, }}>Approve Loan</Button>
+                            <Button variant='success' style={{ borderRadius: 0 }} onClick={approveLoan}>
+                              {isLoading ? (
+                                <>
+                                  <Spinner size='sm' /> 
+                                  <span style={{ marginLeft: '5px' }}>Processing, Please wait...</span>
+                                </>
+                              ) : (
+                                "Approve Loan"
+                              )}
+                            </Button>
                            <Button onClick={handleShow} variant='danger' style={{borderRadius: 0, marginLeft: 20}}>Disapprove Loan</Button>
                           </div>
                             </div>

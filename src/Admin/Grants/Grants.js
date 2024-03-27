@@ -273,7 +273,7 @@ const navigate = useNavigate();
                     <div className="card-body">
                       <div className="table-resposive">
                         <div className="d-flex justify-content-between align-items-center" style={{ padding: '20px 0 0 0', marginBottom: 20 }}>
-                          <div className={classes.greenbtn} style={{ display: 'flex', }}>
+                          <div className={classes.greenbtn}>
                             <div>
                               <button>Copy</button>
                               <button>Excel</button>
@@ -281,7 +281,7 @@ const navigate = useNavigate();
                               <button className={classes.diffbtn}>Column visibility</button>
                             </div>
                             <div>
-                              <label className="d-flex justify-content-start align-items-center">
+                              <label className="d-flex justify-content-start align-items-center" style={{margin:'0'}}>
                                 Show
                                 <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" className="custom-select custom-select-sm form-control form-control-sm" value={entriesPerPage}
                                   onChange={(e) => {
