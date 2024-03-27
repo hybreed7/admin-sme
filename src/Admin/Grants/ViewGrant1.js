@@ -5,6 +5,8 @@ import "../assets/plugins/fontawesome/css/all.min.css";
 import "../assets/plugins/typicons/src/typicons.min.css";
 import "../assets/plugins/themify-icons/themify-icons.min.css";
 import "../assets/plugins/datatables/dataTables.bootstrap4.min.css";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 import { AdminHeaderNav } from '../AdminHeaderNav';
 // import Footer from '../../Pages/Footer/Footer';
 import { InfoFooter } from '../../InfoFooter';
@@ -12,7 +14,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swal from 'sweetalert2';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Button, Spinner, Form, Accordion, Badge, Modal } from 'react-bootstrap';
+import { Button, Spinner, Form, Accordion, Badge, Modal, Toast } from 'react-bootstrap';
 import favicon from '../../Images/faviconn.png'
 import { useLocation } from 'react-router-dom';
 
@@ -81,13 +83,15 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
   // const handlePrintInvoice = () => {
   //   navigate('/print_voucher', { state: { selectedVoucher } });
   // };
-
   const handleApprove = async () => {
-  
     setLoading(true);
+    console.log(selectedApplicant[0].id);
     try {
-      const response = await axios.get(
-        `https://api-sme.promixaccounting.com/api/v1/payment_voucher/approve_voucher?id=${selectedApplicant.id}`,
+      const response = await axios.post(
+        'https://api-smesupport.ogunstate.gov.ng/api/approve-application',
+        {
+          id: selectedApplicant[0].id,
+        },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -95,35 +99,29 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
           },
         }
       );
-      // console.log(response.data.message)
-      navigate('/payment_voucher')
-      // return
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: response.data.message,
-      });
+  
+      // Display success message
+      toast.success(response.data.message);
       console.log(response.data);
   
     } catch (error) {
       const errorStatus = error.response.data.message;
-      Swal.fire({
-        icon: 'error',
-        title: 'Failed',
-        text: errorStatus,
-      });
+      toast.error(errorStatus);
       console.log(error);
     } finally {
       setLoading(false);
     }
   };
-
+  
   const handleDisApprove = async () => {
- 
     setIsLoading(true);
     try {
-      const response = await axios.get(
-        `https://api-sme.promixaccounting.com/api/v1/payment_voucher/disapprove_voucher?id=${selectedApplicant.id}&description=${description}`,
+      const response = await axios.post(
+        'https://api-smesupport.ogunstate.gov.ng/api/disapprove-application',
+        {
+          id: selectedApplicant[0].id,
+          description: description
+        },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -131,23 +129,23 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
           },
         }
       );
-      // console.log(response.data.message)
-      navigate('/payment_voucher')
-      // return
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: response.data.message,
-      });
+  
+      // Display success message
+      toast.success(response.data.message);
       console.log(response.data);
   
     } catch (error) {
-      const errorStatus = error.response.data.message;
-      Swal.fire({
-        icon: 'error',
-        title: 'Failed',
-        text: errorStatus,
-      });
+      let errorMessage = 'An error occurred. Please try again.';
+      if (error.response && error.response.data && error.response.data.message) {
+          if (typeof error.response.data.message === 'string') {
+              errorMessage = error.response.data.message;
+          } else if (Array.isArray(error.response.data.message)) {
+              errorMessage = error.response.data.message.join('; ');
+          } else if (typeof error.response.data.message === 'object') {
+              errorMessage = JSON.stringify(error.response.data.message);
+          }
+      }
+      toast.error(errorMessage);
       console.log(error);
     } finally {
       setIsLoading(false);
@@ -163,7 +161,7 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
           <div className="wrapper">
             {/* <!-- Sidebar  --> */}
 
-
+<ToastContainer />
             {/* <!-- Page Content  --> */}
             <div className="content-wrapper">
               <Modal show={show} onHide={handleClose} animation={false}>
@@ -196,7 +194,7 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
                       <span style={{ marginLeft: '5px' }}>Processing, Please wait...</span>
     </>
   ) : (
-                "Disapprove Payment"
+                "Disapprove Grant"
                       )}
                     </Button>
                   </Modal.Footer>

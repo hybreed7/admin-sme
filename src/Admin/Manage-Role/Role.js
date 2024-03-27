@@ -81,34 +81,34 @@ function Role() {
     'Authorization': `Bearer ${bearer}`
   };
 
-  // const fetchRole = async () => {
-  //   setRoleLoading(true);
-  //   try {
-  //     const response = await axios.get('https://api-sme.promixaccounting.com/api/v1/role/get-roles', { headers });
-  //     const results = response.data?.data;
-  //     // console.log(results);
-  //     setTableData(results);
-  //   } catch (error) {
-  //         if (error.response && error.response.status === 401) {
-  //           // Redirect to login page if unauthorized
-  //           navigate('/login');
-  //         } else {
-  //         const errorStatus = error.response?.data?.message;
-  //         console.log(errorStatus);
-  //         setTableData([]);
-  //       }
-  //   } finally {
-  //     setRoleLoading(false);
-  //   }
-  // };
+  const fetchRole = async () => {
+    setRoleLoading(true);
+    try {
+      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/role/get-roles', { headers });
+      const results = response.data?.data;
+      // console.log(results);
+      setTableData(results);
+    } catch (error) {
+          if (error.response && error.response.status === 401) {
+            // Redirect to login page if unauthorized
+            navigate('/login');
+          } else {
+          const errorStatus = error.response?.data?.message;
+          console.log(errorStatus);
+          setTableData([]);
+        }
+    } finally {
+      setRoleLoading(false);
+    }
+  };
 
   
 
-  // useEffect(() => {
-  //   if (bearer) {
-  //     fetchRole();
-  //   }
-  // }, [bearer]);
+  useEffect(() => {
+    if (bearer) {
+      fetchRole();
+    }
+  }, [bearer]);
 
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -544,16 +544,16 @@ function Role() {
                                 <td>{item.name}</td>
                                 <td>{formatDate(item.created_at)}</td>
                                 <td>
-                                {(isAdmin || permittedHeaders.includes('update-role')) && (
+                                {/* {(isAdmin || permittedHeaders.includes('update-role')) && ( */}
                                   <div onClick={() => handleEyeClick(item.id)} className="btn btn-success-soft btn-sm mr-1">
                                     <i className="far fa-eye"></i>
                                   </div>
-)}
-{(isAdmin || permittedHeaders.includes('delete-role')) && (
+{/* )} */}
+{/* {(isAdmin || permittedHeaders.includes('delete-role')) && ( */}
                                   <div onClick={() => handleTrashClick(item.id)} className="btn btn-danger-soft btn-sm">
                                     <i className="far fa-trash-alt"></i>
                                   </div>
-)}
+{/* )} */}
                                 </td>
                               </tr>
                             ))}

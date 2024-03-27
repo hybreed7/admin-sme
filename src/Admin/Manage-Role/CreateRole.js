@@ -16,6 +16,8 @@ import { Button, Spinner, Form } from 'react-bootstrap';
 import favicon from '../../Images/faviconn.png'
 import CurrencyInput from 'react-currency-input-field';
 import ToggleSlider from './ToggleSlider';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 function CreateRole() {
 
@@ -61,7 +63,7 @@ function CreateRole() {
   const fetchPermission = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get('https://api-sme.promixaccounting.com/api/v1/role/permissions', { headers });
+      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/role/permissions', { headers });
       const data = response.data?.data;
       const permissionId = data.map(item => item.id);
       setPermId(permissionId);
@@ -77,6 +79,7 @@ function CreateRole() {
     } catch (error) {
       const errorStatus = error.response?.data?.message;
       console.error(errorStatus);
+      toast.error(errorStatus);
       setPermissions([]);
     } finally {
       setIsLoading(false);
@@ -139,7 +142,7 @@ function CreateRole() {
       
 
         const response = await axios.post(
-            'https://api-sme.promixaccounting.com/api/v1/role/create',
+            'https://api-smesupport.ogunstate.gov.ng/api/role/create',
             {
               name: role,
               permission: selectedToggle
@@ -148,24 +151,15 @@ function CreateRole() {
             { headers }
         );
 
-      //  console.log(response, "heeee");
+        toast.success(response.data.message);
         
         navigate('/role');
 
-        Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: response.data.message,
-        });
-
+      
         
     } catch (error) {
         const errorStatus = error.response.data.message;
-        Swal.fire({
-            icon: 'error',
-            title: 'Failed',
-            text: errorStatus,
-        });
+       toast.error(errorStatus);
         console.log(error);
     } finally {
       setRoleLoading(false);
@@ -185,7 +179,7 @@ function CreateRole() {
         <div className='newWidth'>
           <div className="wrapper">
             {/* <!-- Sidebar  --> */}
-
+<ToastContainer />
 
             {/* <!-- Page Content  --> */}
             <div className="content-wrapper">
