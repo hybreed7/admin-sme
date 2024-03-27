@@ -26,6 +26,7 @@ import ViewLoan1 from './Admin/Loans/ViewLoan1';
 import ViewRegistration1 from './Admin/Registration/ViewRegistration1';
 import ViewGrant1 from './Admin/Grants/ViewGrant1';
 import CreateRole from './Admin/Manage-Role/CreateRole';
+import EditRole from './Admin/Manage-Role/EditRole';
 
 
 
@@ -100,6 +101,7 @@ function App() {
         <Route path='/view_applicant_grant'element={<ViewGrants/>}/>
         <Route path='/view_applicant_grant1'element={<ViewGrant1/>}/>
         <Route path='/create_role'element={<CreateRole/>}/>
+        <Route path='/edit_role'element={<EditRole/>}/>
         <Route path='/admin_home'element={<AdminHome/>}/>
         {/* <Route path='/view_applicant_grant'element={<ViewGrant/>}/> */}
         <Route path='/grants'element={<Grants/>}/>

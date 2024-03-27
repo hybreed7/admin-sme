@@ -142,7 +142,7 @@ function Role() {
   const handleEyeClick = async (roleId) => {
    
     try {
-      const response = await axios.get(`https://api-sme.promixaccounting.com/api/v1/role?role_id=${roleId}`, { headers });
+      const response = await axios.get(`https://api-smesupport.ogunstate.gov.ng/api/role?role_id=${roleId}`, { headers });
       const roless = response.data?.data;
 
       const permissionRoles = roless.permissions.map(item => item.id);
