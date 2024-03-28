@@ -349,7 +349,7 @@ const navigate = useNavigate();
 
 
                         {applicationsLoading ? (
-                          <p>Fetching all registrations...</p>
+                          <p>Fetching all loan applications...</p>
                         ) : (
                           <div className="table-responsive">
                             <table className="table display table-bordered table-striped table-hover bg-white m-0 card-table">
@@ -361,6 +361,11 @@ const navigate = useNavigate();
                                   <th>Date of Application</th>
                                   <th>Amount</th>
                                   <th>Approval Status</th>
+                                  <th>Approved by</th>
+                                  <th>Approved Date</th>
+                                  <th>Disbursement Status</th>
+                                  <th>Disbursed by</th>
+                                  <th>Disbursement Date</th>
                                   <th>Action</th>
                                 </tr>
                               </thead>
@@ -375,9 +380,16 @@ const navigate = useNavigate();
                                       minimumFractionDigits: 2,
                                       maximumFractionDigits: 2
                                     })}</td>
-                                    <td > <Badge bg={item.status === "Pending" ? 'warning' : item.status === "Approved" ? 'success' : 'danger'}>
-                        {item.status}
+                                    <td > <Badge bg={item.approval_status === "Pending" ? 'warning' : item.approval_status === "Approved" ? 'success' : 'danger'}>
+                        {item.approval_status}
                     </Badge></td>
+                    <td>{item.approved_by?.name}</td>
+                    <td>{item.approved_date}</td>
+                    <td > <Badge bg={item.disbursement_status === "Awaiting" ? 'warning' : item.disbursement_status === "Disbursed" ? 'success' : 'danger'}>
+                        {item.disbursement_status}
+                    </Badge></td>
+                    <td>{item.disbursed_by?.name}</td>
+                    <td>{item.disbursed_date}</td>
                                     <td style={{whiteSpace: "nowrap"}}>
                                       <div onClick={() => handleView(item.id)}  className="btn btn-success-soft btn-sm mr-1">
                                         <i className="far fa-eye"></i>

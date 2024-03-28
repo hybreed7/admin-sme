@@ -6,8 +6,6 @@ import "../assets/plugins/typicons/src/typicons.min.css";
 import "../assets/plugins/themify-icons/themify-icons.min.css";
 import "../assets/plugins/datatables/dataTables.bootstrap4.min.css";
 import { AdminHeaderNav } from '../AdminHeaderNav';
-import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
 // import Footer from '../../Pages/Footer/Footer';
 import { InfoFooter } from '../../InfoFooter';
 import axios from 'axios';
@@ -17,38 +15,34 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { Button, Spinner, Form, Accordion, Badge, Modal } from 'react-bootstrap';
 import favicon from '../../Images/faviconn.png'
 import { useLocation } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 
 
-function ViewLoan1() {
+function ViewLoanApprovals1() {
   const location = useLocation();
   const { selectedApplicant } = location.state || {};
-  const { user } = selectedApplicant || {};
-
-const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplicant) : [];
-
   const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [bearer, setBearer] = useState('');
-  const [adminRolee, setAdminRolee] = useState('');
   const [description, setDescription] = useState('');
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
+  
+
+
+
 
 
   const readData = async () => {
     try {
       const value = await AsyncStorage.getItem('userToken');
-      const valuedRole = await AsyncStorage.getItem('adminRole');
 
       if (value !== null) {
         setBearer(value);
-      }
-
-      if (valuedRole !== null) {
-        setAdminRolee(valuedRole);
       }
     } catch (e) {
       alert('Failed to fetch the input from storage');
@@ -77,7 +71,7 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
     setLoading(true);
     try {
       const response = await axios.post(
-        'https://api-smesupport.ogunstate.gov.ng/api/approve-application',
+        'https://api-smesupport.ogunstate.gov.ng/api/onging-application',
         {
           id: selectedApplicant.id,
         },
@@ -88,11 +82,11 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
           },
         }
       );
-  
+  navigate('/approval_loans')
       // Display success message
       toast.success(response.data.message);
       console.log(response.data);
-      navigate('/loans')
+  
     } catch (error) {
       const errorStatus = error.response.data.message;
       toast.error(errorStatus);
@@ -101,16 +95,13 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
       setLoading(false);
     }
   };
-  
+
   const handleDisApprove = async () => {
+ 
     setIsLoading(true);
     try {
-      const response = await axios.post(
-        'https://api-smesupport.ogunstate.gov.ng/api/disapprove-application',
-        {
-          id: selectedApplicant.id,
-          description: description
-        },
+      const response = await axios.get(
+        `https://api-sme.promixaccounting.com/api/v1/payment_voucher/disapprove_voucher?id=${selectedApplicant.id}&description=${description}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -118,31 +109,38 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
           },
         }
       );
-  
-      // Display success message
-      toast.success(response.data.message);
+      // console.log(response.data.message)
+      navigate('/payment_voucher')
+      // return
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: response.data.message,
+      });
       console.log(response.data);
   
     } catch (error) {
-      let errorMessage = 'An error occurred. Please try again.';
-      if (error.response && error.response.data && error.response.data.message) {
-          if (typeof error.response.data.message === 'string') {
-              errorMessage = error.response.data.message;
-          } else if (Array.isArray(error.response.data.message)) {
-              errorMessage = error.response.data.message.join('; ');
-          } else if (typeof error.response.data.message === 'object') {
-              errorMessage = JSON.stringify(error.response.data.message);
-          }
-      }
-      toast.error(errorMessage);
+      const errorStatus = error.response.data.message;
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed',
+        text: errorStatus,
+      });
       console.log(error);
     } finally {
       setIsLoading(false);
     }
   };
-  
 
- console.log(selectedApplicant);
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const formattedDate = `${date.getFullYear()}-${padZero(date.getMonth() + 1)}-${padZero(date.getDate())} ${padZero(date.getHours())}:${padZero(date.getMinutes())} ${date.getHours() >= 12 ? 'PM' : 'AM'}`;
+    return formattedDate;
+  }
+
+  function padZero(num) {
+    return num < 10 ? `0${num}` : num;
+  }
   
 
   return (
@@ -153,7 +151,7 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
           <div className="wrapper">
             {/* <!-- Sidebar  --> */}
 
-            <ToastContainer />
+
             {/* <!-- Page Content  --> */}
             <div className="content-wrapper">
               <Modal show={show} onHide={handleClose} animation={false}>
@@ -186,7 +184,7 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
                       <span style={{ marginLeft: '5px' }}>Processing, Please wait...</span>
     </>
   ) : (
-                "Disapprove Loan"
+                "Disapprove Payment"
                       )}
                     </Button>
                   </Modal.Footer>
@@ -203,7 +201,7 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
                       {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} style={{ height: 30, width: 30 }} alt="favicon" /></i></div> */}
                       <div className="media-body" style={{ display: 'flex', justifyContent: "space-between", alignItems: "center" }}>
                         <div>
-                          <h1 className="font-weight-bold">Details of {user?.name} </h1>
+                          <h1 className="font-weight-bold">Details of {selectedApplicant.user?.name} </h1>
                           <small> View applicant's details below...</small>
                         </div>
                         <div style={{ marginBottom: 30,  }}>
@@ -243,37 +241,37 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
     <tbody>
       <tr>
         <td style={{width: 300, fontWeight: "bold", textAlign: "left"}}>Full Name</td>
-        <td style={{textAlign: "left"}}>{user?.name}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.name}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Email Address</td>
-        <td style={{textAlign: "left"}}>{user?.email}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.email}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Phone Number</td>
-        <td style={{textAlign: "left"}}>{user?.phone_number}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.phone_number}</td>
       </tr>
       
      
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Date of birth</td>
-        <td style={{textAlign: "left"}}>{user?.dob}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.dob}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Home Address</td>
-        <td style={{textAlign: "left"}}>{user?.home_address}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.home_address}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Permanent Address</td>
-        <td style={{textAlign: "left"}}>{user?.permanent_address}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.permanent_address}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Marital Status</td>
-        <td style={{textAlign: "left"}}>{user?.marital_status}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.marital_status}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Local Government</td>
-        <td style={{textAlign: "left"}}>{user?.localgovt?.name}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.localgovt?.name}</td>
       </tr>
     </tbody>
   </table>
@@ -288,45 +286,45 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
     <tbody>
       <tr>
         <td style={{width: 300, fontWeight: "bold", textAlign: "left"}}>Business Name</td>
-        <td style={{textAlign: "left"}}>{user?.company_name}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.company_name}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Business Address</td>
-        <td style={{textAlign: "left"}}>{user?.business_address}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.business_address}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Business Rc Number</td>
-        <td style={{textAlign: "left"}}>{user?.rc_number}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.rc_number}</td>
       </tr>
       
      
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Business Email Address</td>
-        <td style={{textAlign: "left"}}>{user?.business_email}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.business_email}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Date of Commencement</td>
-        <td style={{textAlign: "left"}}>{user?.date_of_commencement}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.date_of_commencement}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Business Sector</td>
-        <td style={{textAlign: "left"}}>{user?.sector}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.sector}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Marital Status</td>
-        <td style={{textAlign: "left"}}>{user?.marital_status}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.marital_status}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Ogun State Tax ID</td>
-        <td style={{textAlign: "left"}}>{user?.stin}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.stin}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Business Permit ID</td>
-        <td style={{textAlign: "left"}}>{user?.business_premise_id}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.business_premise_id}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Number of Employees</td>
-        <td style={{textAlign: "left"}}>{user?.no_of_employees}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.no_of_employees}</td>
       </tr>
     </tbody>
   </table>
@@ -344,6 +342,7 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
 </Accordion.Body>
 
 
+
 </Accordion.Item>
 <Accordion.Item eventKey="3">
         <Accordion.Header>Bank Details</Accordion.Header>
@@ -353,21 +352,21 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
     <tbody>
       <tr>
         <td style={{width: 300, fontWeight: "bold", textAlign: "left"}}>Bank Name</td>
-        <td style={{textAlign: "left"}}>{user?.bank_name}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.bank_name}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Account Number</td>
-        <td style={{textAlign: "left"}}>{user?.account_number}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.account_number}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Account Name</td>
-        <td style={{textAlign: "left"}}>{user?.account_name}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.account_name}</td>
       </tr>
       
      
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>BVN</td>
-        <td style={{textAlign: "left"}}>{user?.bvn}</td>
+        <td style={{textAlign: "left"}}>{selectedApplicant.user?.bvn}</td>
       </tr>
     </tbody>
   </table>
@@ -376,37 +375,30 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
         </Accordion.Item>
 
 
+
     </Accordion>
                               
-
-                              
-                              
-
     <div style={{justifyContent: "flex-start"}} class="modal-footer">
                                 
-                                {selectedApplicant.approval_status !== "Approved" && selectedApplicant.approval_order === adminRolee && (
-  <>
-    <Button style={{borderRadius: 0}} variant="success" onClick={handleApprove}>
-      {loading ? (
-        <>
-          <Spinner size='sm' />
-          <span style={{ marginLeft: '5px' }}>Approving, Please wait...</span>
-        </>
-      ) : (
-        "Approve Loan"
-      )}
-    </Button>
-    <Button style={{borderRadius: 0}} variant="danger" onClick={handleShow}>
-        Disapprove Loan
-    </Button>
-  </>
+                               
+    {selectedApplicant.disbursement_status !== "Disbursed" && (
+  <Button style={{borderRadius: 0}} variant="success" onClick={handleApprove}>
+    {loading ? (
+      <>
+        <Spinner size='sm' />
+        <span style={{ marginLeft: '5px' }}>Approving, Please wait...</span>
+      </>
+    ) : (
+      "Disburse Loan"
+    )}
+  </Button>
 )}
 
+</div>
+                              
+                              
 
-                                {/* <Button variant="success" onClick={handlePrintInvoice}>
-                                  Print Payment Voucher
-                                </Button> */}
-                              </div>
+   
 
                             </div>
                           </div>
@@ -416,7 +408,64 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
                   </div>
                 </div>
               </div>
+              {/* <div className="body-content">
+                <div className="col-lg-12">
+                  <div className="card">
 
+                    <div className="row">
+                      <div className="col-lg-12">
+                        <div className="card">
+                          <div className="card-body">
+                            <div className="card-body">
+                            <div className="table-responsive">
+                            <table className="table display table-bordered table-striped table-hover bg-white m-0 card-table">
+
+                              <thead style={{ }}>
+                                <tr>
+                                  <th>S/N</th>
+                                  <th>Amount</th>
+                                  <th>Date</th>
+                                  <th>Type</th>
+                                  <th>Mark as Paid</th>
+                                </tr>
+                              </thead>
+                              <tbody style={{ textAlign: "left" }}>
+  {selectedApplicant.map((item, index) => (
+    <tr key={index}>
+      <td style={{ textAlign: "left" }}>{index + 1}</td>
+      <td style={{ textAlign: "right" }}>
+        {parseFloat(item.amount).toLocaleString("en-US", {
+          minimumIntegerDigits: 1,
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+      </td>
+      <td style={{ textAlign: "left" }}>{formatDate(item.created_at)}</td>
+      <td style={{ textAlign: "left" }}>{item.type?.name}</td>
+      <td style={{ textAlign: "center" }}>
+        <Form>
+          <Form.Check
+            type="switch"
+            id={`custom-switch-${index}`}
+            label=""
+           
+          />
+        </Form>
+      </td>
+    </tr>
+  ))}
+</tbody>
+
+                            </table>
+                          </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -426,4 +475,4 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
   )
 }
 
-export default ViewLoan1;
+export default ViewLoanApprovals1;

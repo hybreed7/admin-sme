@@ -243,16 +243,28 @@ export const AdminHeaderNav = () => {
      
     </ul>
   </li>
-                    <li className="nav-item dropdown">
-                      <NavLink to={'#'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i className="fa-solid fa-file-invoice"></i> Approvals
-                      </NavLink>
-                    </li>
-                    <li className="nav-item dropdown">
-                      <NavLink to={'#'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i className="fa-solid fa-file-invoice"></i> Disbursement
-                      </NavLink>
-                    </li>
+<li className="nav-item dropdown">
+    <NavLink to={'#'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i className="fa-solid fa-gear"></i> Approvals
+    </NavLink>
+    <ul className="dropdown-menu">
+      <li><NavLink to={"/approval_loans"} className="dropdown-item">Loans</NavLink></li>
+      <li><NavLink to={"/approval_grants"} className="dropdown-item">Grants</NavLink></li>
+      
+     
+    </ul>
+  </li>
+<li className="nav-item dropdown">
+    <NavLink to={'#'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i className="fa-solid fa-gear"></i> Disbursement
+    </NavLink>
+    <ul className="dropdown-menu">
+      <li><NavLink to={"/disbursed_loans"} className="dropdown-item">Loans</NavLink></li>
+      <li><NavLink to={"/disbursed_grants"} className="dropdown-item">Grants</NavLink></li>
+      
+     
+    </ul>
+  </li>
                   </ul>
                 </div>
               </ul>

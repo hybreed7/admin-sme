@@ -43,6 +43,8 @@ const togglePasswordVisibility = () => {
      const results = response.data?.data?.token;
      const permit = response.data?.data?.permissions;
      const isAdmin = response.data?.data?.user?.is_admin === "1";
+     const roles = response.data?.data?.user?.roles || [];
+    const roleIds = roles.map(role => role.id);
      const companyName = response.data?.data?.company_name;
      AsyncStorage.setItem('permissions', permit);
      AsyncStorage.setItem('admin', isAdmin);
@@ -53,6 +55,7 @@ const togglePasswordVisibility = () => {
      AsyncStorage.setItem('companyEmail', emails);
      AsyncStorage.setItem('companyPhone', phones);
      AsyncStorage.setItem('companyAddress', addresses);
+     AsyncStorage.setItem('adminRole', roleIds);
      
 
      if (location.state && location.state.from) {

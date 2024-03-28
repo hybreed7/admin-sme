@@ -29,6 +29,13 @@ import CreateRole from './Admin/Manage-Role/CreateRole';
 import EditRole from './Admin/Manage-Role/EditRole';
 import CreateLevel from './Admin/Manage-level/CreateLevels';
 import UpdateApprovalLevels from './Admin/Manage-level/UpdateApprovalLevels';
+import Approvals from './Admin/Approvals/Approvals';
+import ViewApprovals1 from './Admin/Approvals/ViewGrantApprovals1';
+import GrantApprovals from './Admin/Approvals/GrantApprovals';
+import ViewGranApprovals1 from './Admin/Approvals/ViewGrantApprovals1';
+import ViewLoanApprovals1 from './Admin/Approvals/ViewLoanApprovals1';
+import DisbursedLoan from './Admin/Disbursed/DisbursedLoan';
+import DisbursedGrant from './Admin/Disbursed/DisbursedGrant';
 
 
 
@@ -100,6 +107,7 @@ function App() {
         <Route path='/view_application'element={<ViewApplication/>}/>
         <Route path='/view_applicant_loan'element={<ViewLoan/>}/>
         <Route path='/view_applicant_loan1'element={<ViewLoan1/>}/>
+        
         <Route path='/view_applicant_grant'element={<ViewGrants/>}/>
         <Route path='/view_applicant_grant1'element={<ViewGrant1/>}/>
         <Route path='/create_role'element={<CreateRole/>}/>
@@ -107,6 +115,12 @@ function App() {
         <Route path='/update_approval_level'element={<UpdateApprovalLevels/>}/>
         <Route path='/edit_role'element={<EditRole/>}/>
         <Route path='/admin_home'element={<AdminHome/>}/>
+        <Route path='/approval_loans'element={<Approvals/>}/>
+        <Route path='/disbursed_loans'element={<DisbursedLoan/>}/>
+        <Route path='/disbursed_grants'element={<DisbursedGrant/>}/>
+        <Route path='/approval_grants'element={<GrantApprovals/>}/>
+        <Route path='/view_grant_approval1'element={<ViewGranApprovals1/>}/>
+        <Route path='/view_loan_approval1'element={<ViewLoanApprovals1/>}/>
         {/* <Route path='/view_applicant_grant'element={<ViewGrant/>}/> */}
         <Route path='/grants'element={<Grants/>}/>
         <Route path='/loans'element={<Loans/>}/>

@@ -13,13 +13,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swal from 'sweetalert2';
 import { InfoFooter } from '../../InfoFooter';
 import { AdminHeaderNav } from '../AdminHeaderNav';
-import classes from './Grants.module.css';
+import classes from './DisbursedGrant.module.css';
 import favicon from '../../Images/faviconn.png'
 import SubIcon1 from '../../smeImgs/SubIcon1.svg';
 import SubIcon2 from '../../smeImgs/SubIcon2.svg';
 import SubIcon4 from '../../smeImgs/SubIcon4.svg';
 
-function Grants() {
+function DisbursedGrant() {
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
   const [bearer, setBearer] = useState('');
@@ -68,17 +68,15 @@ const navigate = useNavigate();
   }, []);
 
 
-  const fetchApplications = async () => {
+  const fetchLoans = async () => {
     setApplicationsLoading(true);
+    
     try {
-      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/get-grants', { headers });
+      const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/disbursed-grants', { headers });
       const fetchedApplication = response.data?.data;
       setApplications(fetchedApplication);
   
-
-
-
-      
+      console.log(response.data.message);
     } catch (error) {
       if (error.response && error.response.status === 401) {
         
@@ -95,7 +93,7 @@ const navigate = useNavigate();
 
   useEffect(() => {
     if (bearer) {
-      fetchApplications();
+      fetchLoans();
         
     }
   }, [bearer]);
@@ -123,18 +121,30 @@ const navigate = useNavigate();
   const handleView = async (id) => {
    
     try {
-      const response = await axios.get(`https://api-smesupport.ogunstate.gov.ng/api/grant-details?id=${id}`, { headers });
+      const response = await axios.get(`https://api-smesupport.ogunstate.gov.ng/api/loan-details?id=${id}`, { headers });
       const applyInfo = response.data?.data;
       
-    
-  
-     navigate('/view_applicant_grant1', {state: {selectedApplicant: applyInfo} });
+   
+     navigate('/view_approvals_loan1', {state: {selectedApplicant: applyInfo} });
       setEyeClicked(true);
     } catch (error) {
       const errorStatus = error.response?.data?.message;
       console.log(errorStatus);
     }
   };
+
+  const handleEyeClick = (id) => {
+    const foundApproval = applications.find(item => item.id === id);
+
+    if (foundApproval) {
+      
+        navigate('/view_grant_approval1', { state: { selectedApplicant: foundApproval } });
+        setShow1(true);
+        setEyeClicked(true);
+    } else {
+        console.error(`level with id ${id} not found`);
+    }
+};
 
   const handleTrashClick = async (id) => {
     try {
@@ -161,6 +171,8 @@ const navigate = useNavigate();
 
   const filteredData = applications.filter(item => item.user?.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
+
+
   const totalPages = Math.ceil(filteredData.length / entriesPerPage);
 
   const handlePrevPage = () => {
@@ -176,9 +188,10 @@ const navigate = useNavigate();
   const endIndexx = Math.min(startIndexx + entriesPerPage - 1, totalEntries);
   const displayedData = filteredData.slice(startIndexx - 1, endIndexx);
 
-  const totalApplications = applications.length;
-  const pendingApplications = applications.filter(item => item.status === "Pending").length;
-  const approvedApplications = applications.filter(item => item.approval_status === "Approved").length;
+  const totalApplications = applications.filter(item => item.type === 2).length;
+const pendingApplications = applications.filter(item => item.type === 2 && item.status === "Pending").length;
+const approvedApplications = applications.filter(item => item.type === 2 && item.approval_status === "Approved").length;
+
   
 
   return (
@@ -221,8 +234,8 @@ const navigate = useNavigate();
                 <div className="media">
                   {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} className={classes.favshi} alt="favicon" /></i></div> */}
                   <div className="media-body" >
-                    <h1 className="font-weight-bold">Grant Applications</h1>
-                    <small>View all grant applications below...</small>
+                    <h1 className="font-weight-bold">Grant Disbursed</h1>
+                    <small>View all application disbursed below...</small>
                   </div>
                 </div>
               </div>
@@ -249,7 +262,7 @@ const navigate = useNavigate();
                     <div className={classes.iconCont}>
                     <img src={SubIcon1} alt='Icon' className={classes.img}/>
                     </div>
-                    <small>Total Approved</small>
+                    <small>Total Approved Applications</small>
                     <h1>{approvedApplications.toLocaleString()}</h1>
                 </div>
               </div>
@@ -352,7 +365,7 @@ const navigate = useNavigate();
 
 
                         {applicationsLoading ? (
-                          <p>Fetching all grant applications...</p>
+                          <p>Fetching all disbursed grants...</p>
                         ) : (
                           <div className="table-responsive">
                             <table className="table display table-bordered table-striped table-hover bg-white m-0 card-table">
@@ -373,17 +386,22 @@ const navigate = useNavigate();
                                 </tr>
                               </thead>
                               <tbody style={{textAlign: "left" }}>
-                                {displayedData.map((item, index) => (
-                                  <tr key={index}>
-                                    <td style={{textAlign: "left"}}>{index + 1}</td>
-                                    <td style={{textAlign: "left"}}>{item.user?.name}</td>
-                                    <td style={{textAlign: "left"}}>{formatDate(item.created_at)}</td>
-                                    <td style={{textAlign: "right"}}>{parseFloat(item.amount).toLocaleString('en-US', {
-                                      minimumIntegerDigits: 1,
-                                      minimumFractionDigits: 2,
-                                      maximumFractionDigits: 2
-                                    })}</td>
-                                    <td > <Badge bg={item.approval_status === "Pending" ? 'warning' : item.approval_status === "Approved" ? 'success' : 'danger'}>
+  {displayedData.length === 0 ? (
+    <tr>
+      <td colSpan="8" style={{textAlign: "center"}}>No grant has been approved yet</td>
+    </tr>
+  ) : (
+    displayedData.map((item, index) => (
+      <tr key={index}>
+        <td style={{textAlign: "left"}}>{index + 1}</td>
+        <td style={{textAlign: "left"}}>{item.user?.name}</td>
+        <td style={{textAlign: "left"}}>{formatDate(item.created_at)}</td>
+        <td style={{textAlign: "right"}}>{parseFloat(item.amount).toLocaleString('en-US', {
+          minimumIntegerDigits: 1,
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })}</td>
+        <td > <Badge bg={item.approval_status === "Pending" ? 'warning' : item.approval_status === "Approved" ? 'success' : 'danger'}>
                         {item.approval_status}
                     </Badge></td>
                     <td>{item.approved_by?.name}</td>
@@ -393,20 +411,22 @@ const navigate = useNavigate();
                     </Badge></td>
                     <td>{item.disbursed_by?.name}</td>
                     <td>{item.disbursed_date}</td>
-                                    <td style={{whiteSpace: "nowrap"}}>
-                                      <div onClick={() => handleView(item.id)}  className="btn btn-success-soft btn-sm mr-1">
-                                        <i className="far fa-eye"></i>
-                                      </div>
-                                      <div  className="btn btn-danger-soft btn-sm">
-                                        <i className="far fa-trash-alt"></i>
-                                      </div>
-                                      <div style={{marginLeft: 5}}  className="btn btn-primary-soft btn-sm">
-                                      <i className="fa fa-pencil"></i>  
-                                      </div>
-                                    </td>
-                                  </tr>
-                                ))}
-                              </tbody>
+        <td style={{whiteSpace: "nowrap"}}>
+          <div   className="btn btn-success-soft btn-sm mr-1">
+            <i className="far fa-eye"></i>
+          </div>
+          <div  className="btn btn-danger-soft btn-sm">
+            <i className="far fa-trash-alt"></i>
+          </div>
+          <div style={{marginLeft: 5}}  className="btn btn-primary-soft btn-sm">
+            <i className="fa fa-pencil"></i>  
+          </div>
+        </td>
+      </tr>
+    ))
+  )}
+</tbody>
+
                             </table>
                           </div>
                         )}
@@ -487,4 +507,4 @@ const navigate = useNavigate();
   );
 }
 
-export default Grants;
+export default DisbursedGrant;

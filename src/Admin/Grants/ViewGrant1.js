@@ -26,7 +26,7 @@ function ViewGrant1() {
   const { user } = selectedApplicant || {};
 
 const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplicant) : [];
-
+const [adminRolee, setAdminRolee] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [bearer, setBearer] = useState('');
@@ -38,17 +38,7 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
   
  console.log(selectedApplicant);
 
-//   useEffect(() => {
-//     if (selectedVoucher && selectedVoucher.document) {
-//         fetchDocumentFromAPI(selectedVoucher.document)
-//             .then((document) => {
-//                 setDocumentContent(document);
-//             })
-//             .catch((error) => {
-//                 console.error('Error fetching document:', error);
-//             });
-//     }
-// }, [selectedVoucher]);
+
 
 
 
@@ -57,10 +47,16 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
   const readData = async () => {
     try {
       const value = await AsyncStorage.getItem('userToken');
+      const valuedRole = await AsyncStorage.getItem('adminRole');
 
       if (value !== null) {
         setBearer(value);
       }
+
+      if (valuedRole !== null) {
+        setAdminRolee(valuedRole);
+      }
+
     } catch (e) {
       alert('Failed to fetch the input from storage');
     }
@@ -99,7 +95,7 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
           },
         }
       );
-  
+  navigate('/grants')
       // Display success message
       toast.success(response.data.message);
       console.log(response.data);
@@ -392,23 +388,23 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
 
     <div style={{justifyContent: "flex-start"}} class="modal-footer">
                                 {/* Conditionally rendering buttons based on selectedVoucher value */}
-                                {/* {selectedVoucher.approval_status === "0" && ( */}
-                                  <>
-                                    <Button style={{borderRadius: 0}} variant="success" onClick={handleApprove}>
-                                      {loading ? (
-                                        <>
-                                          <Spinner size='sm' />
-                                          <span style={{ marginLeft: '5px' }}>Approving, Please wait...</span>
-                                        </>
-                                      ) : (
-                                        "Approve Grant"
-                                      )}
-                                    </Button>
-                                    <Button style={{borderRadius: 0}} variant="danger" onClick={handleShow}>
-                                        Disapprove Grant
-                                    </Button>
-                                  </>
-                                {/* )} */}
+                              {selectedApplicant[0].approval_status !== "Approved" && selectedApplicant[0].approval_order === adminRolee && (
+  <>
+    <Button style={{borderRadius: 0}} variant="success" onClick={handleApprove}>
+      {loading ? (
+        <>
+          <Spinner size='sm' />
+          <span style={{ marginLeft: '5px' }}>Approving, Please wait...</span>
+        </>
+      ) : (
+        "Approve Grant"
+      )}
+    </Button>
+    <Button style={{borderRadius: 0}} variant="danger" onClick={handleShow}>
+        Disapprove Grant
+    </Button>
+  </>
+)}
                                 {/* <Button variant="success" onClick={handlePrintInvoice}>
                                   Print Payment Voucher
                                 </Button> */}
