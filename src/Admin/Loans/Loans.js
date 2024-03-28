@@ -15,6 +15,9 @@ import { InfoFooter } from '../../InfoFooter';
 import { AdminHeaderNav } from '../AdminHeaderNav';
 import classes from './Loans.module.css';
 import favicon from '../../Images/faviconn.png'
+import SubIcon1 from '../../smeImgs/SubIcon1.svg';
+import SubIcon2 from '../../smeImgs/SubIcon2.svg';
+import SubIcon4 from '../../smeImgs/SubIcon4.svg';
 
 function Loans() {
   const [show, setShow] = useState(false);
@@ -220,6 +223,32 @@ const navigate = useNavigate();
               </div>
             </div>
 
+            <div className="col-sm-12">
+              <div className={`${classes.gridBoxs} ${classes.gridSubgrid}`}>
+                <div className={classes.subGridDetails}>
+                    <div className={classes.iconCont}>
+                        <img src={SubIcon1} alt='Icon' className={classes.img}/>
+                    </div>
+                    <small>Total Applications</small>
+                    <h1>25,057</h1>
+                </div>
+                <div className={classes.subGridDetails}>
+                    <div className={classes.iconCont}>
+                        <img src={SubIcon2} alt='Icon'className={classes.img}/>
+                    </div>
+                    <small>Total Pending</small>
+                    <h1>25,057</h1>
+                </div>
+                <div className={classes.subGridDetails}>
+                    <div className={classes.iconCont}>
+                        <img src={SubIcon4} alt='Icon'className={classes.img}/>
+                    </div>
+                    <small>Total Approved</small>
+                    <h1>25,057</h1>
+                </div>
+              </div>
+            </div>
+
             {/* <!--/.Content Header (Page header)--> */}
             <div className="body-content">
               <div className="row">
@@ -354,7 +383,7 @@ const navigate = useNavigate();
                                         <i className="far fa-trash-alt"></i>
                                       </div>
                                       <div style={{marginLeft: 5}}  className="btn btn-primary-soft btn-sm">
-                                         Edit
+                                      <i className="fa fa-pencil"></i>  
                                       </div>
                                     </td>
                                   </tr>

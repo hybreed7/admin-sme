@@ -15,6 +15,9 @@ import { InfoFooter } from '../../InfoFooter';
 import { AdminHeaderNav } from '../AdminHeaderNav';
 import classes from './Registration.module.css';
 import favicon from '../../Images/faviconn.png'
+import SubIcon1 from '../../smeImgs/SubIcon1.svg';
+import SubIcon2 from '../../smeImgs/SubIcon2.svg';
+import SubIcon4 from '../../smeImgs/SubIcon4.svg';
 
 function Registration() {
   const [show, setShow] = useState(false);
@@ -222,6 +225,31 @@ const navigate = useNavigate();
                 </div>
               </div>
             </div>
+            <div className="col-sm-12">
+              <div className={`${classes.gridBoxs} ${classes.gridSubgrid}`}>
+                <div className={classes.subGridDetails}>
+                    <div className={classes.iconCont}>
+                        <img src={SubIcon1} alt='Icon' className={classes.img}/>
+                    </div>
+                    <small>Total Registrations</small>
+                    <h1>25,057</h1>
+                </div>
+                <div className={classes.subGridDetails}>
+                    <div className={classes.iconCont}>
+                        <img src={SubIcon2} alt='Icon'className={classes.img}/>
+                    </div>
+                    <small>Total Completed Registrations</small>
+                    <h1>25,057</h1>
+                </div>
+                <div className={classes.subGridDetails}>
+                    <div className={classes.iconCont}>
+                        <img src={SubIcon4} alt='Icon'className={classes.img}/>
+                    </div>
+                    <small>Total ...</small>
+                    <h1>25,057</h1>
+                </div>
+              </div>
+            </div>
 
             {/* <!--/.Content Header (Page header)--> */}
             <div className="body-content">
@@ -328,10 +356,10 @@ const navigate = useNavigate();
                               <thead style={{ }}>
                                 <tr>
                                   <th>S/N</th>
-                                  <th>Name</th>
-                                  <th>Date of birth</th>
-                                  <th>Home Address</th>
-                                  <th>Business Name</th>
+                                  <th>First Name</th>
+                                  <th>Last Name</th>
+                                  <th>Email</th>
+                                  <th>Phone Number</th>
                                   {/* <th>Bank Name</th> */}
                                   {/* <th>Amount</th> */}
                                   {/* <th>Status</th> */}
@@ -355,13 +383,13 @@ const navigate = useNavigate();
                                     {/* <td style={{textAlign: "left"}}>{item.status}</td> */}
                                     <td style={{whiteSpace: "nowrap"}}>
                                       <div onClick={() => handleView(item.id)}  className="btn btn-success-soft btn-sm mr-1">
-                                        <i className="far fa-eye"></i>
+                                        <i className="far fa-eye"></i>  
                                       </div>
                                       <div  className="btn btn-danger-soft btn-sm">
                                         <i className="far fa-trash-alt"></i>
                                       </div>
                                       <div style={{marginLeft: 5}}  className="btn btn-primary-soft btn-sm">
-                                         Edit
+                                      <i className="fa fa-pencil"></i>  
                                       </div>
                                     </td>
                                   </tr>
