@@ -1466,7 +1466,7 @@ table code {
 
 .user-menu .dropdown-item {
     position: relative;
-    padding: 0;
+    /* padding: 0; */
     height: 38px;
     display: -webkit-box;
     display: -ms-flexbox;

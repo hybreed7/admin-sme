@@ -318,11 +318,11 @@ function ViewRegistration1() {
      
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Business Email Address</td>
-        {/* <td style={{textAlign: "left"}}>{selectedApplicant[0].dob}</td> */}
+        <td style={{textAlign: "left"}}>{selectedApplicant[0].business_email}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Date of Commencement</td>
-        {/* <td style={{textAlign: "left"}}>{selectedApplicant[0].home_address}</td> */}
+        <td style={{textAlign: "left"}}>{selectedApplicant[0].date_of_commencement}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Business Sector</td>
@@ -342,7 +342,7 @@ function ViewRegistration1() {
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Number of Employees</td>
-        {/* <td style={{textAlign: "left"}}>{selectedApplicant[0].business_premise_id}</td> */}
+        <td style={{textAlign: "left"}}>{selectedApplicant[0].no_of_employees}</td>
       </tr>
     </tbody>
   </table>

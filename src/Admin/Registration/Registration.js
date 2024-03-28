@@ -176,7 +176,9 @@ const navigate = useNavigate();
   const endIndexx = Math.min(startIndexx + entriesPerPage - 1, totalEntries);
   const displayedData = filteredData.slice(startIndexx - 1, endIndexx);
 
- 
+  const totalApplicants = applications.length;
+  const completedRegistrations = applications.filter(item => item.home_address).length;
+  const pendingApplications = applications.filter(item => !item.home_address).length;
   
 
   return (
@@ -229,24 +231,25 @@ const navigate = useNavigate();
               <div className={`${classes.gridBoxs} ${classes.gridSubgrid}`}>
                 <div className={classes.subGridDetails}>
                     <div className={classes.iconCont}>
-                        <img src={SubIcon1} alt='Icon' className={classes.img}/>
+                    <img src={SubIcon4} alt='Icon'className={classes.img}/>
+                    
                     </div>
                     <small>Total Registrations</small>
-                    <h1>25,057</h1>
+                    <h1>{totalApplicants.toLocaleString()}</h1>
                 </div>
                 <div className={classes.subGridDetails}>
                     <div className={classes.iconCont}>
                         <img src={SubIcon2} alt='Icon'className={classes.img}/>
                     </div>
-                    <small>Total Completed Registrations</small>
-                    <h1>25,057</h1>
+                    <small>Total Pending Registrations</small>
+                    <h1>{pendingApplications.toLocaleString()}</h1>
                 </div>
                 <div className={classes.subGridDetails}>
                     <div className={classes.iconCont}>
-                        <img src={SubIcon4} alt='Icon'className={classes.img}/>
+                    <img src={SubIcon1} alt='Icon' className={classes.img}/>
                     </div>
-                    <small>Total ...</small>
-                    <h1>25,057</h1>
+                    <small>Total Completed Registrations</small>
+                    <h1>{completedRegistrations.toLocaleString()}</h1>
                 </div>
               </div>
             </div>

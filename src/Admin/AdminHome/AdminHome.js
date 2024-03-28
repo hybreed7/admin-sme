@@ -9,6 +9,7 @@ import SubIcon3 from '../../smeImgs/SubIcon3.svg';
 import SubIcon4 from '../../smeImgs/SubIcon4.svg';
 import classes from '../../Admin/AdminHome/AdminHome.module.css'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Form } from 'react-bootstrap';
 import { Chart } from "react-google-charts";
 
 export default function AdminHome() {
@@ -77,21 +78,21 @@ export default function AdminHome() {
                         <div className={classes.iconCont}>
                             <img src={SubIcon2} alt='Icon'className={classes.img}/>
                         </div>
-                        <small>Total number of Registrations</small>
+                        <small>Total number of Completed Registrations</small>
                         <h1>25,057</h1>
                     </div>
                     <div className={classes.subGridDetails}>
                         <div className={classes.iconCont}>
                             <img src={SubIcon3} alt='Icon' className={classes.img}/>
                         </div>
-                        <small>Total number of Registrations</small>
+                        <small>Total number of Applications</small>
                         <h1>25,057</h1>
                     </div>
                     <div className={classes.subGridDetails}>
                         <div className={classes.iconCont}>
                             <img src={SubIcon4} alt='Icon' className={classes.img}/>
                         </div>
-                        <small>Total number of Registrations</small>
+                        <small>Total number of Approved Applications</small>
                         <h1>25,057</h1>
                     </div>
                 </div>
@@ -100,21 +101,34 @@ export default function AdminHome() {
                 </div>
                 <div className={classes.gridBoxs} style={{padding:'26px'}}>
                     <div className={classes.head}>
-                        <h5>Grant disbursement</h5>
-                        <button >This month <i class='bx bx-chevron-down'></i></button>
+                        <h5>Applications Summary</h5>
+                        <Form.Select
+                        style={{width: "25%"}}
+        className="form-control"
+        as="select"
+        // value={selectedRole1}
+        // onChange={handleRoleChange1}
+      >
+        <option value="this_month">This month</option>
+        <option value="this_week">This week</option>
+        <option value="this_week">Today</option>
+        
+        
+      </Form.Select>
+                        {/* <button >This month <i class='bx bx-chevron-down'></i></button> */}
                     </div>
                     <div className={classes.flexChart}>
                         <div className={classes.content}>
                             <div className={classes.contDetails}>
-                                <small>Total number of Loans paid out</small>
+                                <small>Total number of Loan Applications</small>
                                 <h2>564</h2>
                             </div>
                             <div className={classes.contDetails}>
-                                <small>Total amount of expected loan repayment this month</small>
+                                <small>Total amount of expected loan repayment</small>
                                 <h2>12,067,950</h2>
                             </div>
                             <div className={classes.contDetails}>
-                                <small>Total amount of loan repayment made this month</small>
+                                <small>Total amount of loan repayment made</small>
                                 <h2>7,360,050</h2>
                             </div>
                         </div>
