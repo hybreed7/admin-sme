@@ -97,7 +97,7 @@ function CreateLevels() {
     try {
       const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/module', { headers });
       const moduleData = response.data?.data;
-      console.log(moduleData);
+      // console.log(moduleData);
       setTableData1(moduleData);
     } catch (error) {
       const errorStatus = error.response?.data?.message;
