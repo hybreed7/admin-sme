@@ -278,7 +278,7 @@ export default function AdminHome() {
                                 <h2>{applications.totalExpectedLoansRepayment}</h2>
                             </div>
                             <div className={classes.contDetails}>
-                                <small>Total amount of loan repayment made</small>
+                                <small>Total amount of loan repayment</small>
                                 <h2>{applications.totalLoansRepaymentMade}</h2>
                             </div>
                         </div>
