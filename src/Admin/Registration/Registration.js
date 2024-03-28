@@ -232,21 +232,21 @@ const navigate = useNavigate();
                         <img src={SubIcon1} alt='Icon' className={classes.img}/>
                     </div>
                     <small>Total Registrations</small>
-                    <h1>25,057</h1>
+                    <h1>6</h1>
                 </div>
                 <div className={classes.subGridDetails}>
                     <div className={classes.iconCont}>
                         <img src={SubIcon2} alt='Icon'className={classes.img}/>
                     </div>
                     <small>Total Completed Registrations</small>
-                    <h1>25,057</h1>
+                    <h1>4</h1>
                 </div>
                 <div className={classes.subGridDetails}>
                     <div className={classes.iconCont}>
                         <img src={SubIcon4} alt='Icon'className={classes.img}/>
                     </div>
-                    <small>Total ...</small>
-                    <h1>25,057</h1>
+                    <small>Total Approved Registrations</small>
+                    <h1>0</h1>
                 </div>
               </div>
             </div>
