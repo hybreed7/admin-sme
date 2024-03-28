@@ -252,13 +252,13 @@ useEffect(() => {
 
   const editUser = async (id) => {
     setLoading(true);
-
+// console.log(fullName1, selectedUser, phone1, selectedRole1, email1);
     try {
       const response = await axios.post(
-        'https://api-smesupport.ogunstate.gov.ng/api/create-admin-user',
+        'https://api-smesupport.ogunstate.gov.ng/api/update-admin-user',
         {
           name: fullName1,
-          id: selectedId, 
+          id: selectedUser, 
           email: email1,
           phone_number: phone1,
           role: selectedRole1,

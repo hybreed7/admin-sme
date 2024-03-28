@@ -37,6 +37,7 @@ function ManageLevel() {
   const [searchTerm, setSearchTerm] = useState("");
   const [permittedHeaders, setPermittedHeaders] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [selectedLevel, setSelectedLevel] = useState("");
 
   const readData = async () => {
     try {
@@ -86,7 +87,7 @@ function ManageLevel() {
     try {
       const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/approval_level', { headers });
       const results = response.data?.data?.modules;
-      console.log(results);
+      // console.log(results);
       setTableData(results);
     } catch (error) {
           if (error.response && error.response.status === 401) {
@@ -109,6 +110,21 @@ function ManageLevel() {
       fetchLevels();
     }
   }, [bearer]);
+
+  const handleEyeClick = (id) => {
+    const foundLevel = tableData.find(item => item.id === id);
+
+    if (foundLevel) {
+      
+        navigate('/update_approval_level', { state: { selectedData: foundLevel } });
+        setShow1(true);
+        setEyeClicked(true);
+    } else {
+        console.error(`level with id ${id} not found`);
+    }
+};
+
+
 
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -139,42 +155,7 @@ function ManageLevel() {
   // const displayedData = filteredData.slice(startIndexx - 1, endIndexx);
 
 
-  const handleEyeClick = async (roleId) => {
-   
-    try {
-      const response = await axios.get(`https://api-sme.promixaccounting.com/api/v1/role?role_id=${roleId}`, { headers });
-      const roless = response.data?.data;
-
-      const permissionRoles = roless.permissions.map(item => item.id);
-      console.log(permissionRoles, "permission roles");
-      setPerm(permissionRoles);
-     navigate('/edit_role', {state: {selectedPermission: permissionRoles, selectedRoles: roless} });
-      setEyeClicked(true);
-
-
-
-      const selectedRole = tableData.find((role) => role.id === roleId);
-
-      if (selectedRole) {
-        // Set the selected role's permissions as true in toggleStates1
-        const updatedToggleStates1 = Object.fromEntries(
-          permissions.map((permission) => [
-            permission.id,
-            permissionRoles.includes(permission.id),
-          ])
-        );
-
-        setToggleStates1(updatedToggleStates1);
-
-        setSelectedRoleId(roleId);
-        // setTrashClicked(true);
-      }
-    } catch (error) {
-      const errorStatus = error.response?.data?.message;
-      console.log(errorStatus);
-    }
-  };
-
+ 
   const handleCreate = () => {
     navigate('/create_level');
   };

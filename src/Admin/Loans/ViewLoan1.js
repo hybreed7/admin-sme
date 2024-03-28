@@ -37,22 +37,6 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
   const navigate = useNavigate();
 
 
-//   useEffect(() => {
-//     if (selectedVoucher && selectedVoucher.document) {
-//         fetchDocumentFromAPI(selectedVoucher.document)
-//             .then((document) => {
-//                 setDocumentContent(document);
-//             })
-//             .catch((error) => {
-//                 console.error('Error fetching document:', error);
-//             });
-//     }
-// }, [selectedVoucher]);
-
-
-
-  
-
   const readData = async () => {
     try {
       const value = await AsyncStorage.getItem('userToken');

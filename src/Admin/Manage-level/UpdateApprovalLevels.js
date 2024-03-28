@@ -11,7 +11,7 @@ import { InfoFooter } from '../../InfoFooter';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swal from 'sweetalert2';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { Button, Spinner, Form } from 'react-bootstrap';
 import favicon from '../../Images/faviconn.png'
 import CurrencyInput from 'react-currency-input-field';
@@ -19,9 +19,11 @@ import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 
 
-function CreateLevels() {
+function UpdateApprovalLevels() {
 
-  const [selectedModule, setSelectedModule] = useState('');
+  const location = useLocation();
+  const { selectedData } = location.state || {};
+  const [selectedModule, setSelectedModule] = useState(selectedData.name?.id || "");
   const [bearer, setBearer] = useState('');
   const [tableData, setTableData] = useState([]);
   const [tableData1, setTableData1] = useState([]);
@@ -29,9 +31,14 @@ function CreateLevels() {
   const [roleLoading, setRoleLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [formFields, setFormFields] = useState([{ role: '' }]);
+  const listString = selectedData?.list_of_approvers; 
+  const listArray = JSON.parse(listString);
+  const initialFormFields = listArray.map(id => ({ role: id }));
+const [formFields, setFormFields] = useState(initialFormFields);
   const [isAdmin, setIsAdmin] = useState(false);
   const [permittedHeaders, setPermittedHeaders] = useState([]);
+
+  
 
   const readData = async () => {
     try {
@@ -97,7 +104,6 @@ function CreateLevels() {
     try {
       const response = await axios.get('https://api-smesupport.ogunstate.gov.ng/api/module', { headers });
       const moduleData = response.data?.data;
-      // console.log(moduleData);
       setTableData1(moduleData);
     } catch (error) {
       const errorStatus = error.response?.data?.message;
@@ -146,12 +152,14 @@ function CreateLevels() {
 
 const createApproval = async () => {
   setRoleLoading(true);
+  console.log(formFields, );
   try {
     const response = await axios.post(
-      'https://api-smesupport.ogunstate.gov.ng/api/approval_level/create_app',
+      'https://api-smesupport.ogunstate.gov.ng/api/approval_level/update_app',
       {
-        module: selectedModule,
-        roles: formFields.map((field) => field.role),
+        module: selectedModule.toString(),
+        roles: formFields.map((field) => field.role.toString()),
+        id: selectedData.id
       },
       { headers }
     );
@@ -171,10 +179,6 @@ const createApproval = async () => {
     setRoleLoading(false);
   }
 };
-
-
-
-
 
   return (
     <div style={{ marginTop: '12rem', }}>
@@ -200,8 +204,8 @@ const createApproval = async () => {
                       {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} style={{ height: 30, width: 30 }} alt="favicon" /></i></div> */}
                       <div className="media-body" style={{ display: 'flex', justifyContent: "space-between", alignItems: "center" }}>
                         <div>
-                          <h1 className="font-weight-bold">Set New Approval Level </h1>
-                          <small>Complete the respective fields ....</small>
+                          <h1 className="font-weight-bold">Update Approval Level </h1>
+                          <small>Update the respective fields ....</small>
                         </div>
                         <div style={{ marginBottom: 30 }}>
                           <Button variant='success' onClick={goBack}><i className="fa-solid fa-arrow-left"></i> Go Back</Button>
@@ -296,7 +300,7 @@ const createApproval = async () => {
                                   <span style={{ marginLeft: '5px' }}>Processing role, Please wait...</span>
                                 </>
                               ) : (
-                                "Create your Approval"
+                                "Update Approval Level"
                               )}
                             </Button>
                             {/* <Button>Save Changes</Button> */}
@@ -322,4 +326,4 @@ const createApproval = async () => {
   )
 }
 
-export default CreateLevels;
+export default UpdateApprovalLevels;
