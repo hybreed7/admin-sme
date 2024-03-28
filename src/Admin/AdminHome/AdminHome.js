@@ -38,18 +38,19 @@ export default function AdminHome() {
       }, []);
 
       const data = [
-        // ["Task", "Hours per Day"],
-        ["Work", 11],
-        ["Eat", 2],
-        ["Commute", 2],
-        ["Watch TV", 2],
-        ["Sleep", 7], // CSS-style declaration
+        ["Task", "Hours per Day"],
+        // ["Work", 11],
+        // ["Eat", 2],
+        // ["Commute", 2],
+        ["Watch TV", 55],
+        ["Sleep", 45], // CSS-style declaration
       ];
 
        const options = {
         // title: "Loan Repayment",
         pieHole: 0.5,
         is3D: false,
+        colors: ['#2D995F', '#d3f7e4e5'], // Add your desired colors here
       };
 
   return (

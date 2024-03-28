@@ -60,6 +60,7 @@ justify-content: space-around;
     font-weight: 500;
     color: #7a7a7a;
     font-family: roboto;
+    color: #d3f7e4e5;
     
 }
 
@@ -8610,7 +8611,6 @@ value{
     justify-content: flex-start;
     align-items: center;
     margin: 20px 0;
-    /* grid-template-columns: repeat(2, 1fr); */
     gap: 19px; 
     background-color: transparent !important;
 }
