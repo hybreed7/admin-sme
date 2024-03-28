@@ -28,6 +28,9 @@ h1, h2, h3, h4, h5, h6{
     grid-template-columns: repeat(2, 1fr);
     gap: 37px;
 }
+.chartCont1{
+    padding:25px !important;
+}
 .gridBoxs{
     width: 100%;
     max-width: 785px;

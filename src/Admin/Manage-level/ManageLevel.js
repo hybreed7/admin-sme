@@ -142,13 +142,13 @@ function ManageLevel() {
   const handleEyeClick = async (roleId) => {
    
     try {
-      const response = await axios.get(`https://api-sme.promixaccounting.com/api/v1/role?role_id=${roleId}`, { headers });
+      const response = await axios.get(`https://api-smesupport.ogunstate.gov.ng/api/approval_level/update_app?role_id=${roleId}`, { headers });
       const roless = response.data?.data;
 
       const permissionRoles = roless.permissions.map(item => item.id);
       console.log(permissionRoles, "permission roles");
       setPerm(permissionRoles);
-     navigate('/edit_role', {state: {selectedPermission: permissionRoles, selectedRoles: roless} });
+     navigate('/update_level', {state: {selectedPermission: permissionRoles, selectedRoles: roless} });
       setEyeClicked(true);
 
 

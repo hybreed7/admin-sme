@@ -28,6 +28,8 @@ import ViewGrant1 from './Admin/Grants/ViewGrant1';
 import CreateRole from './Admin/Manage-Role/CreateRole';
 import EditRole from './Admin/Manage-Role/EditRole';
 import CreateLevel from './Admin/Manage-level/CreateLevels';
+import ManageApproval from './Admin/Manage Approval/ManageApproval';
+import UpdateLevels from './Admin/Manage-level/UpdateLevels';
 
 
 
@@ -114,6 +116,8 @@ function App() {
         <Route path='/role'element={<Role/>}/>
         <Route path='/approval_level'element={<ManageLevel/>}/>
         <Route path='/manage_user'element={<ManageUser/>}/>
+        <Route path='/update_level'element={<UpdateLevels/>}/>
+        
       </Routes>
     </>
   );

@@ -244,7 +244,7 @@ export const AdminHeaderNav = () => {
     </ul>
   </li>
                     <li className="nav-item dropdown">
-                      <NavLink to={'#'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <NavLink to={'/manage_approval'} id="nav-toggle" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i className="fa-solid fa-file-invoice"></i> Approvals
                       </NavLink>
                     </li>
