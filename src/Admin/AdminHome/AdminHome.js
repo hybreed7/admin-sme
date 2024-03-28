@@ -51,7 +51,7 @@ export default function AdminHome() {
         // title: "Loan Repayment",
         pieHole: 0.5,
         is3D: false,
-        colors: ['#2D995F', '#d3f7e4e5'], // Add your desired colors here
+        colors: ['#2D995F', 'gray'], // Add your desired colors here
       };
 
   return (
@@ -136,7 +136,7 @@ export default function AdminHome() {
                             <Chart
                             chartType="PieChart"
                             width="100%"
-                            height="400px"
+                            // height="400px"
                             data={data}
                             options={options}
                             />
