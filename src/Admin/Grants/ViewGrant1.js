@@ -154,7 +154,7 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
   
 
   return (
-    <div style={{ marginTop: '8rem', }}>
+    <div style={{ marginTop: '10rem', }}>
       <AdminHeaderNav />
       <div className='newBody'>
         <div className='newWidth'>
@@ -206,7 +206,7 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
 
                 <div className="content-header row align-items-center m-0">
 <div style={{marginTop: 30}} />
-                  <div className="col-sm-8 header-title p-0">
+                  <div className="col-sm-12 header-title p-0">
                     <div className="media">
                       {/* <div className="header-icon text-success mr-3"><i className=""><img src={favicon} style={{ height: 30, width: 30 }} alt="favicon" /></i></div> */}
                       <div className="media-body" style={{ display: 'flex', justifyContent: "space-between", alignItems: "center" }}>
