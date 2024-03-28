@@ -370,10 +370,10 @@ const navigate = useNavigate();
                                 {displayedData.map((item, index) => (
                                   <tr key={index}>
                                     <td style={{textAlign: "left"}}>{index + 1}</td>
-                                    <td style={{textAlign: "left"}}>{item.name}</td>
-                                    <td style={{textAlign: "left"}}>{item.dob}</td>
-                                    <td style={{textAlign: "left"}}>{item.home_address}</td>
-                                    <td style={{textAlign: "left"}}>{item.company_name}</td>
+                                    <td style={{textAlign: "left"}}>{item.first_name}</td>
+                                    <td style={{textAlign: "left"}}>{item.last_name}</td>
+                                    <td style={{textAlign: "left"}}>{item.email}</td>
+                                    <td style={{textAlign: "left"}}>{item.phone_number}</td>
                                     {/* <td style={{textAlign: "left"}}>{item.user?.bank_name}</td> */}
                                     {/* <td style={{textAlign: "right"}}>{parseFloat(item.amount).toLocaleString('en-US', {
                                       minimumIntegerDigits: 1,

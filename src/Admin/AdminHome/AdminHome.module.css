@@ -92,3 +92,7 @@ small{
 .head button i{
     font-size: 18px !important;
 }
+.flexChart{
+    display: flex;
+    justify-content: space-between;
+}
