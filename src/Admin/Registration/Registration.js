@@ -176,7 +176,9 @@ const navigate = useNavigate();
   const endIndexx = Math.min(startIndexx + entriesPerPage - 1, totalEntries);
   const displayedData = filteredData.slice(startIndexx - 1, endIndexx);
 
- 
+  const totalApplicants = applications.length;
+  const completedRegistrations = applications.filter(item => item.home_address).length;
+  const pendingApplications = applications.filter(item => !item.home_address).length;
   
 
   return (
@@ -232,21 +234,21 @@ const navigate = useNavigate();
                         <img src={SubIcon1} alt='Icon' className={classes.img}/>
                     </div>
                     <small>Total Registrations</small>
-                    <h1>6</h1>
+                    <h1>{totalApplicants.toLocaleString()}</h1>
                 </div>
                 <div className={classes.subGridDetails}>
                     <div className={classes.iconCont}>
                         <img src={SubIcon2} alt='Icon'className={classes.img}/>
                     </div>
-                    <small>Total Completed Registrations</small>
-                    <h1>4</h1>
+                    <small>Total Pending Registrations</small>
+                    <h1>{pendingApplications.toLocaleString()}</h1>
                 </div>
                 <div className={classes.subGridDetails}>
                     <div className={classes.iconCont}>
                         <img src={SubIcon4} alt='Icon'className={classes.img}/>
                     </div>
-                    <small>Total Approved Registrations</small>
-                    <h1>0</h1>
+                    <small>Total Completed Registrations</small>
+                    <h1>{completedRegistrations.toLocaleString()}</h1>
                 </div>
               </div>
             </div>
@@ -370,10 +372,10 @@ const navigate = useNavigate();
                                 {displayedData.map((item, index) => (
                                   <tr key={index}>
                                     <td style={{textAlign: "left"}}>{index + 1}</td>
-                                    <td style={{textAlign: "left"}}>{item.name}</td>
-                                    <td style={{textAlign: "left"}}>{item.dob}</td>
-                                    <td style={{textAlign: "left"}}>{item.home_address}</td>
-                                    <td style={{textAlign: "left"}}>{item.company_name}</td>
+                                    <td style={{textAlign: "left"}}>{item.first_name}</td>
+                                    <td style={{textAlign: "left"}}>{item.last_name}</td>
+                                    <td style={{textAlign: "left"}}>{item.email}</td>
+                                    <td style={{textAlign: "left"}}>{item.phone_number}</td>
                                     {/* <td style={{textAlign: "left"}}>{item.user?.bank_name}</td> */}
                                     {/* <td style={{textAlign: "right"}}>{parseFloat(item.amount).toLocaleString('en-US', {
                                       minimumIntegerDigits: 1,

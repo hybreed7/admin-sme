@@ -173,7 +173,9 @@ const navigate = useNavigate();
   const endIndexx = Math.min(startIndexx + entriesPerPage - 1, totalEntries);
   const displayedData = filteredData.slice(startIndexx - 1, endIndexx);
 
- 
+  const totalApplications = applications.length;
+  const pendingApplications = applications.filter(item => item.status === "Pending").length;
+  const approvedApplications = applications.filter(item => item.approval_status === "Approved").length;
   
 
   return (
@@ -230,21 +232,21 @@ const navigate = useNavigate();
                         <img src={SubIcon1} alt='Icon' className={classes.img}/>
                     </div>
                     <small>Total Applications</small>
-                    <h1>25,057</h1>
+                    <h1>{totalApplications.toLocaleString()}</h1>
                 </div>
                 <div className={classes.subGridDetails}>
                     <div className={classes.iconCont}>
                         <img src={SubIcon2} alt='Icon'className={classes.img}/>
                     </div>
-                    <small>Total Pending</small>
-                    <h1>25,057</h1>
+                    <small>Total Pending Applications</small>
+                    <h1>{pendingApplications.toLocaleString()}</h1>
                 </div>
                 <div className={classes.subGridDetails}>
                     <div className={classes.iconCont}>
                         <img src={SubIcon4} alt='Icon'className={classes.img}/>
                     </div>
-                    <small>Total Approved</small>
-                    <h1>25,057</h1>
+                    <small>Total Approved Applications</small>
+                    <h1>{approvedApplications.toLocaleString()}</h1>
                 </div>
               </div>
             </div>

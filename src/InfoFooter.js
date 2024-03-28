@@ -65,7 +65,8 @@ const readData = async () => {
             <footer className="footer-content">
                 <div className="footer-text d-flex align-items-center justify-content-between">
                     <div className="copy">© {currentYear} <NavLink to="https://www.brookessoftware.com/">BPSL</NavLink> </div>
-                    <div className="credit">Licensed to: <NavLink to="#">{mycompanyName}</NavLink></div>
+                    {/* <div className="credit">Licensed to: Ogun<NavLink to="#"></NavLink></div> */}
+                    <div className="credit"><NavLink to="#">Ogun-SME</NavLink> Admin Portal</div>
                 </div>
             </footer>
         </div>

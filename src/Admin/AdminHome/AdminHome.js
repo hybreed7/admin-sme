@@ -9,7 +9,8 @@ import SubIcon3 from '../../smeImgs/SubIcon3.svg';
 import SubIcon4 from '../../smeImgs/SubIcon4.svg';
 import classes from '../../Admin/AdminHome/AdminHome.module.css'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Button, Modal, Form, Spinner } from 'react-bootstrap';
+// import { Chart } from "react-google-charts";
+import { Form } from 'react-bootstrap';
 
 export default function AdminHome() {
     const [user, setUser] = useState('');
@@ -100,7 +101,7 @@ export default function AdminHome() {
       </Form.Select>
                         {/* <button >This month <i class='bx bx-chevron-down'></i></button> */}
                     </div>
-                    <div className={classes.flex}>
+                    <div className={classes.flexChart}>
                         <div className={classes.content}>
                             <div className={classes.contDetails}>
                                 <small>Total number of Loan Applications</small>

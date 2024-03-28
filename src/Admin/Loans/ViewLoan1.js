@@ -312,11 +312,11 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
      
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Business Email Address</td>
-        {/* <td style={{textAlign: "left"}}>{user?.dob}</td> */}
+        <td style={{textAlign: "left"}}>{user?.business_email}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Date of Commencement</td>
-        {/* <td style={{textAlign: "left"}}>{user?.home_address}</td> */}
+        <td style={{textAlign: "left"}}>{user?.date_of_commencement}</td>
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Business Sector</td>
@@ -336,7 +336,7 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
       </tr>
       <tr>
         <td style={{fontWeight: "bold", textAlign: "left"}}>Number of Employees</td>
-        {/* <td style={{textAlign: "left"}}>{user?.business_premise_id}</td> */}
+        <td style={{textAlign: "left"}}>{user?.no_of_employees}</td>
       </tr>
     </tbody>
   </table>
