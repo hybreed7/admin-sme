@@ -9,8 +9,8 @@ import SubIcon3 from '../../smeImgs/SubIcon3.svg';
 import SubIcon4 from '../../smeImgs/SubIcon4.svg';
 import classes from '../../Admin/AdminHome/AdminHome.module.css'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { Chart } from "react-google-charts";
 import { Form } from 'react-bootstrap';
+import { Chart } from "react-google-charts";
 
 export default function AdminHome() {
     const [user, setUser] = useState('');
@@ -37,6 +37,21 @@ export default function AdminHome() {
       useEffect(() => {
         readData();
       }, []);
+
+      const data = [
+        // ["Task", "Hours per Day"],
+        ["Work", 11],
+        ["Eat", 2],
+        ["Commute", 2],
+        ["Watch TV", 2],
+        ["Sleep", 7], // CSS-style declaration
+      ];
+
+       const options = {
+        // title: "Loan Repayment",
+        pieHole: 0.5,
+        is3D: false,
+      };
 
   return (
     <div style={{ marginTop: '10rem', }}>
@@ -117,7 +132,13 @@ export default function AdminHome() {
                             </div>
                         </div>
                         <div className={classes.flexChart}>
-
+                            <Chart
+                            chartType="PieChart"
+                            width="100%"
+                            height="400px"
+                            data={data}
+                            options={options}
+                            />
                         </div>
                     </div>
                 </div>

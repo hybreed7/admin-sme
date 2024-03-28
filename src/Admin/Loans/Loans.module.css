@@ -8385,7 +8385,7 @@ pre .arg {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 10px;
+    margin: 20px 0;
     /* grid-template-columns: repeat(2, 1fr); */
     gap: 19px; 
     background-color: transparent !important;
