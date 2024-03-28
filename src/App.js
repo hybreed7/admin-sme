@@ -130,6 +130,8 @@ function App() {
         <Route path='/role'element={<Role/>}/>
         <Route path='/approval_level'element={<ManageLevel/>}/>
         <Route path='/manage_user'element={<ManageUser/>}/>
+        {/* <Route path='/update_level'element={<UpdateLevels/>}/> */}
+        
       </Routes>
     </>
   );
