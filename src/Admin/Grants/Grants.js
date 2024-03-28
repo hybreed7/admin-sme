@@ -232,7 +232,8 @@ const navigate = useNavigate();
               <div className={`${classes.gridBoxs} ${classes.gridSubgrid}`}>
                 <div className={classes.subGridDetails}>
                     <div className={classes.iconCont}>
-                        <img src={SubIcon1} alt='Icon' className={classes.img}/>
+                    <img src={SubIcon4} alt='Icon'className={classes.img}/>
+                        
                     </div>
                     <small>Total Applications</small>
                     <h1>{totalApplications.toLocaleString()}</h1>
@@ -246,7 +247,7 @@ const navigate = useNavigate();
                 </div>
                 <div className={classes.subGridDetails}>
                     <div className={classes.iconCont}>
-                        <img src={SubIcon4} alt='Icon'className={classes.img}/>
+                    <img src={SubIcon1} alt='Icon' className={classes.img}/>
                     </div>
                     <small>Total Approved</small>
                     <h1>{approvedApplications.toLocaleString()}</h1>
