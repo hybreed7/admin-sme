@@ -274,12 +274,12 @@ export default function AdminHome() {
                                 <h2>{applications.monthlyLoanApp}</h2>
                             </div>
                             <div className={classes.contDetails}>
-                                <small>Total amount of expected loan repayment</small>
-                                <h2>{applications.totalExpectedLoansRepayment}</h2>
-                            </div>
+    <small>Total amount of expected loan repayment</small>
+    <h2>{Number(applications.totalExpectedLoansRepayment).toLocaleString('en-US', { style: 'currency', currency: 'NGN', minimumFractionDigits: 2 })}</h2>
+</div>
                             <div className={classes.contDetails}>
                                 <small>Total amount of loan repayment</small>
-                                <h2>{applications.totalLoansRepaymentMade}</h2>
+                                <h2>{Number(applications.totalLoansRepaymentMade).toLocaleString('en-US', { style: 'currency', currency: 'NGN', minimumFractionDigits: 2 })}</h2>
                             </div>
                         </div>
                         <div className={classes.flexChart}>

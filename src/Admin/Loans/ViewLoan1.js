@@ -142,7 +142,7 @@ const selectedApplicantArray = selectedApplicant ? Object.values(selectedApplica
   };
   
 
- console.log(selectedApplicant);
+
   
 
   return (
